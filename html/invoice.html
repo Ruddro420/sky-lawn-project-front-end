@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Invoice</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        .invoice-container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-header h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+        .invoice-header p {
+            font-size: 14px;
+            color: #666;
+        }
+        .invoice-meta {
+            margin-bottom: 20px;
+        }
+        .invoice-meta th {
+            text-align: left;
+            font-weight: bold;
+            padding-right: 20px;
+        }
+        .invoice-table {
+            margin-top: 20px;
+        }
+        .invoice-table th, .invoice-table td {
+            text-align: center;
+        }
+        .invoice-signature {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .signature-line {
+            margin-top: 60px;
+            border-top: 1px solid #333;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .invoice-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+        </div>
+<hr>
+        <div class="invoice-meta mb-4 mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Invoice No:</strong> INV-00123</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p><strong>Date:</strong> 2025-01-11</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Customer Name:</strong> John Doe</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p><strong>Room Number:</strong> 205</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Check-in Date:</strong> 2025-01-09</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p><strong>Check-out Date:</strong> 2025-01-11</p>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="invoice-table">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Service/Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Deluxe Room</td>
+                        <td>2 Nights</td>
+                        <td>$100</td>
+                        <td>$200</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Breakfast</td>
+                        <td>2</td>
+                        <td>$20</td>
+                        <td>$40</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
+                        <td>$240</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Tax (10%)</strong></td>
+                        <td>$24</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Total</strong></td>
+                        <td><strong>$264</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="invoice-signature">
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <p>Guest Signature</p>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line"></div>
+                <p>Manager Signature</p>
+            </div>
+        </div>
+
+        <div class="invoice-footer">
+            <p>Thank you for staying with us!</p>
+            <p>Visit Again</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
