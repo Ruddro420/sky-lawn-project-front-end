@@ -1,17 +1,28 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
+  const [roomOpen, setRoomOpen] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+
+  const hangleToggleRoom =()=>{
+    setRoomOpen((open)=> !open);
+  };
+
+  const handleToggleAnalytics= ()=>{
+    setAnalytics((open)=> !open);
+  }
     return (
         <div>
             <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
             <div className="app-brand demo">
-              <a href="index.html" className="app-brand-link">
+              <NavLink to='/' className="app-brand-link">
                 <span className="app-brand-logo demo">
                   <img width="180px" src="https://skylawnhotel.com/wp-content/uploads/2024/06/logo-sky-1.jpg" alt="" srcSet="" />
                 </span>
-              </a>
+              </NavLink>
 
-              <a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <a className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                 <i className="bx bx-chevron-left bx-sm align-middle"></i>
               </a>
             </div>
@@ -26,11 +37,11 @@ const Sidebar = () => {
                   <div data-i18n="Analytics">Dashboard</div>
                 </NavLink>
               </li>
-              <li className="menu-item">
-              <a href="javascript:void(0);" className="menu-link menu-toggle">
+              <li className={`menu-item ${roomOpen ? "open": ""}`}>
+              <NavLink to='#'  onClick={hangleToggleRoom}  className="menu-link menu-toggle">
                 <i className="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Hotel Room</div>
-              </a>
+              </NavLink>
 
               <ul className="menu-sub">
                 <li className="menu-item">
@@ -39,78 +50,77 @@ const Sidebar = () => {
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <a href="layouts-without-navbar.html" className="menu-link">
+                  <NavLink to='/room' className="menu-link">
                     <div data-i18n="Without navbar">Room</div>
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
               <li className="menu-item">
-                <a href="index.html" className="menu-link">
+                <NavLink to='/pre-booking'  className="menu-link">
                   <i className="menu-icon tf-icons bx bx-cart"></i>
                   <div data-i18n="Analytics">Pre-Booking</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="index.html" className="menu-link">
+                <NavLink to='/customer-register' className="menu-link">
                   <i className="menu-icon tf-icons bx bx-lock"></i>
                   <div data-i18n="Analytics">Customer Register</div>
-                </a>
+                </NavLink>
               </li>
 
 
 
-              <li className="menu-item">
-                <a href="javascript:void(0);" className="menu-link menu-toggle">
+              <li className={`menu-item ${analytics ? "open" : ""}`}>
+                <NavLink to='#' onClick={handleToggleAnalytics}  className="menu-link menu-toggle">
                   <i className="menu-icon tf-icons bx bx-abacus"></i>
                   <div data-i18n="Layouts">Analytics</div>
-                </a>
+                </NavLink>
 
                 <ul className="menu-sub">
                   <li className="menu-item">
-                    <a href="layouts-without-menu.html" className="menu-link">
+                    <NavLink to="/overviews"  className="menu-link">
                       <div data-i18n="Without menu">Overviews</div>
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="menu-item">
-                    <a href="layouts-without-menu.html" className="menu-link">
+                    <NavLink to='/report' className="menu-link">
                       <div data-i18n="Without menu">Report</div>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
 
               <li className="menu-item">
-                <a href="index.html" className="menu-link">
+                <NavLink to='/account-settings' className="menu-link">
                   <i className="menu-icon tf-icons bx bx-sort-up"></i>
                   <div data-i18n="Analytics">Account Settings</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="index.html" className="menu-link">
+                <NavLink to='/settings' className="menu-link">
                   <i className="menu-icon tf-icons bx bx-chip"></i>
                   <div data-i18n="Analytics">Settings</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="index.html" className="menu-link">
+                <NavLink to='/user-register' className="menu-link">
                   <i className="menu-icon tf-icons bx bx-user-circle"></i>
                   <div data-i18n="Analytics">User Register</div>
-                </a>
+                </NavLink>
               </li>
 
 
 
 
               <li className="menu-item">
-                <a
-                  href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                  target="_blank"
+                <NavLink to='/support'
+                  
                   className="menu-link"
                 >
                   <i className="menu-icon tf-icons bx bx-support"></i>
                   <div data-i18n="Support">Support</div>
-                </a>
+                </NavLink>
               </li>
               {/* <!-- <li class="menu-item">
               <a

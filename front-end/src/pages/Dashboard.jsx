@@ -1,8 +1,11 @@
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="content-wrapper">
+            <div className="container-xxl flex-grow-1 container-p-y">
+                <h6>Dashboard</h6>
+            </div>
+            <div className="content-backdrop fade"></div>
         </div>
     );
 };
