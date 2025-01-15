@@ -1,43 +1,62 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const RoomCategory = () => {
     const [category, setCategory] = useState([])
+    const [getCategory, setGetCategory] = useState()
+    const [load, setLoad] = useState(true)
+
+    // post data
+    const addCategory = (e) => {
+        e.preventDefault();
+        axios.post('http://192.168.0.116:8000/api/room-category/add', {
+            name: getCategory,
+        })
+            .then(function (response) {
+                toast.success('Successfully created!');
+                setLoad(false)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     // get data
     useEffect(() => {
         axios.get('http://192.168.0.116:8000/api/room-category')
             .then(function (response) {
                 setCategory(response.data);
+                setLoad(true)
             })
             .catch(function (error) {
                 console.log(error);
             })
     }, [])
-    console.log(category);
+
 
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="row">
-                    <div className="col-xl">
+                    <div className="col-12">
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Add Category</h5>
                                 {/*  <small className="text-muted float-end">Default label</small> */}
                             </div>
                             <div className="card-body">
-                                <form>
+                                <form onSubmit={addCategory}>
                                     <div className="mb-3">
                                         <label className="form-label" htmlFor="basic-default-fullname">Category Name</label>
-                                        <input type="text" className="form-control" id="basic-default-fullname" placeholder="Aparajita" />
+                                        <input onChange={(e) => setGetCategory(e.target.value)} type="text" className="form-control" id="basic-default-fullname" placeholder="Aparajita" />
                                     </div>
                                     <button type="submit" className="btn btn-primary">Send</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl">
+                    <div className="col-12">
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Room Category</h5>
@@ -54,20 +73,23 @@ const RoomCategory = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="table-border-bottom-0">
-                                                <tr>
-                                                    <td><i className="fab fa-angular fa-lg text-danger"></i> Angular Project</td>
-                                                    <td>
-                                                        <button className="btn btn-sm btn-primary">Edit</button>
-                                                        <button className="btn btn-sm btn-success ms-2">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><i className="fab fa-react fa-lg text-info"></i> React Project</td>
-                                                    <td>
-                                                        <button className="btn btn-sm btn-primary">Edit</button>
-                                                        <button className="btn btn-sm btn-success ms-2">Delete</button>
-                                                    </td>
-                                                </tr>
+
+                                                {
+                                                    load && category.map(item => {
+                                                        return (
+                                                            <>
+                                                                <tr>
+                                                                    <td><i className="fab fa-angular fa-lg text-danger"></i> {item.name}</td>
+                                                                    <td>
+                                                                        <button className="btn btn-sm btn-primary">Edit</button>
+                                                                        <button className="btn btn-sm btn-success ms-2">Delete</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+
                                             </tbody>
                                         </table>
                                     </div>

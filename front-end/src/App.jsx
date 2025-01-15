@@ -1,4 +1,5 @@
 
+import { Toaster } from "react-hot-toast"
 import MainLayout from "./Layout/MainLayout"
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <MainLayout />
+      <Toaster />
     </>
   )
 }
