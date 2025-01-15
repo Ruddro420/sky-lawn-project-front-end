@@ -1,13 +1,12 @@
 
-import './App.css'
-import Dashboard from './pages/dashboard/Dashboard'
-
+import MainLayout from "./Layout/MainLayout"
 
 function App() {
 
+
   return (
     <>
-      <Dashboard></Dashboard>
+      <MainLayout />
     </>
   )
 }
