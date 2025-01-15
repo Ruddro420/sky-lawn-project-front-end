@@ -6,11 +6,8 @@ const FooterContent = () => {
             <div className="content-footer footer bg-footer-theme">
                 <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                     <div className="mb-2 mb-md-0">
-                        ©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        , made with  by
+                        ©2025
+                         made with  by
                         <a href="https://themeselection.com" target="_blank" className="footer-link fw-bolder">Inspired Digital</a>
                     </div>
                     <div>
