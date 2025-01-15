@@ -7,7 +7,12 @@ const MainLayout = () => {
     return (
         <div className="layout-wrapper layout-content-navbar">
             <div className="layout-container">
-                <Sidebar />
+                <div
+                    className="layout-menu bg-menu-theme h-100 overflow-auto"
+                    style={{ width: "250px", minWidth: "250px", maxWidth: "250px" }}
+                >
+                    <Sidebar></Sidebar>
+                </div>
                 <div className="layout-page">
                     <TopNav />
                     <Outlet />
