@@ -3,15 +3,16 @@ import MainLayout from "../Layout/MainLayout";
 import Dashboard from "../pages/Dashboard";
 import RoomCategory from "../pages/RoomCategory";
 
-import CustomerRegister from "../component/CustomerRegister";
-import OverViews from "../component/OverViews";
-import Report from "../component/Report";
-import AccountSettings from "../component/AccountSettings";
-import Settings from "../component/Settings";
-import UserRegister from "../component/UserRegister";
-import Support from "../component/Support";
+import CustomerRegister from "../pages/CustomerRegister";
+import OverViews from "../pages/OverViews";
+import Report from "../pages/Report";
+import AccountSettings from "../pages/AccountSettings";
+import Settings from "../pages/Settings";
+import UserRegister from "../pages/UserRegister";
+import Support from "../pages/Support";
 import CreateRoom from "../pages/CreateRoom";
 import PreBooking from "../pages/PreBooking";
+import MainContent from "../component/MainContent";
 
 const Router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const Router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Dashboard />
+                element: <MainContent />
             },
             {
                 path: '/room-category',
