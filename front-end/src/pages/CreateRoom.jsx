@@ -8,12 +8,13 @@ const CreateRoom = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const [category, setCategory] = useState([]);
+    const [room, setRoom] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const fetchCategories = () => {
         setLoading(true);
         axios
-            .get("http://192.168.1.9:8000/api/room-category")
+            .get("http://192.168.0.115:8000/api/room-category")
             .then((response) => {
                 setCategory(response.data);
                 setLoading(false);
@@ -28,28 +29,52 @@ const CreateRoom = () => {
     useEffect(() => {
         fetchCategories();
     }, []);
-    // get form data
-    const onSubmit = (data) =>{
-        console.log(data);
-        
+
+    // get room details
+    const fetchRoom = () => {
+        setLoading(true);
         axios
-            .post("http://192.168.1.9:8000/api/room/add", { 
+            .get("http://192.168.0.115:8000/api/room/data")
+            .then((response) => {
+                setRoom(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+    };
+
+    // Fetch room fetch
+    useEffect(() => {
+        fetchRoom();
+    }, []);
+    // get form data
+    const onSubmit = (data) => {
+        console.log(data);
+
+        axios
+            .post("http://192.168.0.115:8000/api/room/add", {
                 room_number: data.room_number,
                 room_name: data.room_name,
                 room_category_id: data.room_category_id,
                 price: data.price,
                 feature: data.feature,
-             })
+            })
             .then(() => {
                 toast.success("Room added successfully!");
                 //setGetCategory("");
                 fetchCategories(); // Refresh the category list
+                fetchRoom();
             })
             .catch((error) => {
                 console.log(error);
                 toast.error("Failed to add room!");
             });
     }
+
+    console.log(room);
+
 
     return (
         <div>
@@ -157,11 +182,59 @@ const CreateRoom = () => {
                         {/* Categories Table */}
                         <div className="col-12">
                             <div className="card mb-4">
-                                <div className="card-header d-flex justify-content-between align-items-center">
+                                {/* <div className="card-header d-flex justify-content-between align-items-center">
                                     <h5 className="mb-0">Room Details</h5>
-                                </div>
+                                </div> */}
                                 <div className="card-body">
+                                    {/* Categories Table */}
+                                    <div className="col-12">
+                                        <div className="card mb-4">
+                                            <div className="card-header d-flex justify-content-between align-items-center">
+                                                <h5 className="mb-0">Room Details</h5>
+                                            </div>
+                                            <div className="card-body">
+                                                {loading ? (
+                                                    <p>Loading...</p>
+                                                ) : (
+                                                    <div className="table-responsive text-nowrap">
+                                                        {
+                                                            category.length == 0 ? <div className="alert alert-warning" role="alert">
+                                                                No Data Found
+                                                            </div> : <table className="table order-4">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Number</th>
+                                                                        <th>Name</th>
+                                                                        <th>Category</th>
+                                                                        <th>Price</th>
+                                                                        <th>Features</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
 
+                                                                <tbody className="table-border-bottom-0">
+                                                                    {room.map((item, index) => (
+                                                                        <tr key={index}>
+                                                                            <td>{item.room_number} </td>
+                                                                            <td>{item.room_name} </td>
+                                                                            <td>{item.category.name} </td>
+                                                                            <td>{item.price} </td>
+                                                                            <td>{item.feature} </td>
+                                                                            <td>
+                                                                                <button className="btn btn-success">Edit</button>
+                                                                                <button className="btn btn-danger ms-2">Delete</button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        }
+
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
