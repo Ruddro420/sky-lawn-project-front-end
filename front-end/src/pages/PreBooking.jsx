@@ -1,98 +1,5 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
-
-const CreateRoom = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
-    const [category, setCategory] = useState([]);
-    const [room, setRoom] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchCategories = () => {
-        setLoading(true);
-        axios
-            .get("http://192.168.0.115:8000/api/room-category")
-            .then((response) => {
-                setCategory(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
-    };
-
-    // Fetch categories on component load
-    useEffect(() => {
-        fetchCategories();
-    }, []);
-
-    // get room details
-    const fetchRoom = () => {
-        setLoading(true);
-        axios
-            .get("http://192.168.0.115:8000/api/room/data")
-            .then((response) => {
-                setRoom(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
-    };
-
-    // Fetch room fetch
-    useEffect(() => {
-        fetchRoom();
-    }, []);
-    // get form data
-    const onSubmit = (data) => {
-        console.log(data);
-
-        axios
-            .post("http://192.168.0.115:8000/api/room/add", {
-                room_number: data.room_number,
-                room_name: data.room_name,
-                room_category_id: data.room_category_id,
-                price: data.price,
-                feature: data.feature,
-            })
-            .then(() => {
-                toast.success("Room added successfully!");
-                //setGetCategory("");
-                fetchCategories(); // Refresh the category list
-                fetchRoom();
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error("Failed to add room!");
-            });
-    }
-
-    console.log(room);
-
-    // Delete a category
-    const deleteRoom = (id) => {
-        if (window.confirm("Are you sure you want to delete this category?")) {
-            axios
-                .get(`http://192.168.0.115:8000/api/room/delete/${id}`)
-                .then(() => {
-                    toast.success("Room deleted successfully!");
-                    fetchCategories(); // Refresh the category list
-                    fetchRoom();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    toast.error("Failed to delete room!");
-                });
-        }
-    };
-
-
+const PreBooking = () => {
     return (
         <div>
             <div className="content-wrapper">
@@ -209,7 +116,7 @@ const CreateRoom = () => {
                                             <div className="card-header d-flex justify-content-between align-items-center">
                                                 <h5 className="mb-0">Room Details</h5>
                                             </div>
-                                            <div className="card-body">
+                                            {/* <div className="card-body">
                                                 {loading ? (
                                                     <p>Loading...</p>
                                                 ) : (
@@ -249,7 +156,7 @@ const CreateRoom = () => {
 
                                                     </div>
                                                 )}
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
@@ -263,4 +170,4 @@ const CreateRoom = () => {
     );
 };
 
-export default CreateRoom;
+export default PreBooking;
