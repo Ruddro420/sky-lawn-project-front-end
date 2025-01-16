@@ -1,13 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const PreBooking = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-     const [category, setCategory] = useState([]);
-     const [loading, setLoading] = useState(true);
+    const [selectedRoomPrice, setSelectedRoomPrice] = useState("");
+    const [selectPerson, setSelectPerson] = useState(2);
+    const { register, handleSubmit } = useForm();
+    const [category, setCategory] = useState([]);
+    const [roomNumber, setRoomNumber] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-     const fetchCategories = () => {
+    const fetchCategories = () => {
         setLoading(true);
         axios
             .get("http://192.168.0.115:8000/api/room-category")
@@ -20,14 +24,57 @@ const PreBooking = () => {
                 setLoading(false);
             });
     };
+    // get room number
+    const fetchRoomNumber = () => {
+        setLoading(true);
+        axios
+            .get("http://192.168.0.115:8000/api/room/data")
+            .then((response) => {
+                setRoomNumber(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+    };
     // Fetch categories on component load
-        useEffect(() => {
-            fetchCategories();
-        }, []);
+    useEffect(() => {
+        fetchCategories();
+        fetchRoomNumber();
+    }, []);
 
-     const onSubmit = (data) => {
-        console.log(data);
-     }
+    const onSubmit = (data) => {
+        axios
+            .post("http://192.168.0.115:8000/api/prebook/add", {
+                date_time: data.date_time,
+                name: data.name,
+                room_number: data.room_number,
+                room_category: data.room_category,
+                room_price: data.room_price,
+                nationality: data.nationality,
+                company: data.company,
+                phone: data.phone,
+                person: data.person,
+                duration_day: data.duration_day,
+                booking_by: data.booking_by,
+            })
+            .then(() => {
+                toast.success("Pre Booking added successfully!");
+                fetchCategories();
+                fetchRoomNumber();
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error("Failed to add booking!");
+            });
+    }
+    /* Select room by price */
+    const handleRoomSelection = (roomId) => {
+        const selectedRoom = roomNumber.find(room => room.id === parseInt(roomId));
+        setSelectedRoomPrice(selectedRoom ? selectedRoom.price : "");
+    };
+
     return (
         <div>
             <div className="content-wrapper">
@@ -45,42 +92,72 @@ const PreBooking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Room Number
+                                                        Check in Date & Time
                                                     </label>
                                                     <input
-                                                        {...register("room_number", { required: true })}
-                                                        name="room_number"
-                                                        type="number"
+                                                        {...register("date_time", { required: true })}
+                                                        name="date_time"
+                                                        type="datetime-local"
                                                         className="form-control"
                                                         id="basic-default-fullname"
-                                                        placeholder="Room Number"
+                                                        placeholder="Booking by reference"
                                                     />
                                                 </div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Room Name
+                                                        Person Name
                                                     </label>
                                                     <input
-                                                        {...register("room_name", { required: true })}
-                                                        name="room_name"
+                                                        {...register("name", { required: true })}
+                                                        name="name"
                                                         type="text"
                                                         className="form-control"
                                                         id="basic-default-fullname"
-                                                        placeholder="Room Name"
+                                                        placeholder="Person Name"
                                                     />
                                                 </div>
                                             </div>
+                                            <div className="col-lg-6">
+                                                <div className="mb-3">
+                                                    <label className="form-label" htmlFor="basic-default-fullname">
+                                                        Room Number
+                                                    </label>
+                                                    {
+                                                        <select
+                                                            {...register("room_number", { required: true })}
+                                                            className="form-control"
+                                                            name="room_number"
+                                                            onChange={(e) => {
+                                                                handleRoomSelection(e.target.value);
+                                                            }}
+                                                            id="">
+                                                            <option value="">Select Room Number</option>
+                                                            {
+                                                                roomNumber.map(item => {
+                                                                    return (
+                                                                        <>
+                                                                            <option key={item.id} value={item.id}>{item.room_number}</option>
+                                                                        </>
+                                                                    )
+                                                                })
+                                                            }
+
+                                                        </select>
+                                                    }
+                                                </div>
+                                            </div>
+
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Select Room Category
                                                     </label>
                                                     <select
-                                                        {...register("room_category_id", { required: true })}
+                                                        {...register("room_category", { required: true })}
                                                         className="form-control"
-                                                        name="room_category_id"
+                                                        name="room_category"
                                                         id="">
                                                         <option value="">Select Room Category</option>
                                                         {
@@ -96,21 +173,7 @@ const PreBooking = () => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Room Price / 2 Person
-                                                    </label>
-                                                    <input
-                                                        {...register("price", { required: true })}
-                                                        name="price"
-                                                        type="number"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Room Price"
-                                                    />
-                                                </div>
-                                            </div>
+
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
@@ -129,11 +192,11 @@ const PreBooking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                    Company Name
+                                                        Company Name
                                                     </label>
                                                     <input
-                                                        {...register("company_name", { required: true })}
-                                                        name="company_name"
+                                                        {...register("company", { required: true })}
+                                                        name="company"
                                                         type="text"
                                                         className="form-control"
                                                         id="basic-default-fullname"
@@ -144,11 +207,11 @@ const PreBooking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                    Mobile
+                                                        Mobile
                                                     </label>
                                                     <input
-                                                        {...register("mobile", { required: true })}
-                                                        name="mobile"
+                                                        {...register("phone", { required: true })}
+                                                        name="phone"
                                                         type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
@@ -159,7 +222,7 @@ const PreBooking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                       Person
+                                                        Person
                                                     </label>
                                                     <input
                                                         {...register("person", { required: true })}
@@ -168,17 +231,21 @@ const PreBooking = () => {
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Person"
+                                                        onChange={(e) => {
+                                                            setSelectPerson(e.target.value);
+                                                        }}
+                                                        value={selectPerson}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                    Duration Of Stay
+                                                        Duration Of Stay
                                                     </label>
                                                     <input
-                                                        {...register("duration_of_stay", { required: true })}
-                                                        name="duration_of_stay"
+                                                        {...register("duration_day", { required: true })}
+                                                        name="duration_day"
                                                         type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
@@ -189,26 +256,28 @@ const PreBooking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                    Check in Date & Time
+                                                        Price - <span className="text-danger">
+                                                            {selectPerson<2 ? selectedRoomPrice - 500 : parseInt(selectedRoomPrice) + 500} ৳ </span>
                                                     </label>
                                                     <input
-                                                        {...register("checkin_datetime", { required: true })}
-                                                        name="checkin_datetime"
-                                                        type="datetime-local"
+                                                        {...register("room_price", { required: true })}
+                                                        name="room_price"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
-                                                        placeholder="Booking by reference"
+                                                        placeholder={selectedRoomPrice}
+
                                                     />
                                                 </div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                    Booking by reference
+                                                        Booked by
                                                     </label>
                                                     <input
-                                                        {...register("booking_by_reference", { required: true })}
-                                                        name="booking_by_reference"
+                                                        {...register("booking_by", { required: true })}
+                                                        name="booking_by"
                                                         type="text"
                                                         className="form-control"
                                                         id="basic-default-fullname"

@@ -51,7 +51,6 @@ const CreateRoom = () => {
     }, []);
     // get form data
     const onSubmit = (data) => {
-        console.log(data);
 
         axios
             .post("http://192.168.0.115:8000/api/room/add", {
