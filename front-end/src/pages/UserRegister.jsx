@@ -1,6 +1,31 @@
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 
 const UserRegister = () => {
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data)
+        axios
+            .post("http://192.168.0.115:8000/api/user/add", {
+
+                name: data.name,
+                email: data.email,
+                password: data.password
+
+
+            })
+            .then(() => {
+                toast.success("user added successfully!");
+
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error("failed to user add");
+            });
+    }
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -13,47 +38,60 @@ const UserRegister = () => {
                         <h4 className="mb-2">User Register here 🚀</h4>
                         <p className="mb-4">Make your app management easy and fun!</p>
 
-                        <form id="formAuthentication" className="mb-3" action="index.html" method="POST">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+
+
                             <div className="mb-3">
-                                <label htmlFor="username" className="form-label">Username</label>
+                                <label className="form-label" htmlFor="name-default-fullname">
+                                    User Name
+                                </label>
                                 <input
+                                    {...register("name", { required: true })}
+                                    name="name"
                                     type="text"
                                     className="form-control"
-                                    id="username"
-                                    name="username"
-                                    placeholder="Enter your username"
-                                    autoFocus
+                                    id="name-default-fullname"
+                                    placeholder="User Name"
                                 />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email</label>
-                                <input type="text" className="form-control" id="email" name="email" placeholder="Enter your email" />
+                                <label className="form-label" htmlFor="email-default-fullname">
+                                    Email
+                                </label>
+                                <input
+                                    {...register("email", { required: true })}
+                                    name="email"
+                                    type="email"
+                                    className="form-control"
+                                    id="email-default-fullname"
+                                    placeholder="Email"
+                                />
                             </div>
-                            <div className="mb-3 form-password-toggle">
-                                <label className="form-label" htmlFor="password">Password</label>
-                                <div className="input-group input-group-merge">
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        className="form-control"
-                                        name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password"
-                                    />
-                                    <span className="input-group-text cursor-pointer"><i className="bx bx-hide"></i></span>
-                                </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="password-default-fullname">
+                                    Password
+                                </label>
+                                <input
+                                    {...register("password", { required: true })}
+                                    name="password"
+                                    type="password"
+                                    className="form-control"
+                                    id="password-default-fullname"
+                                    placeholder="password"
+                                />
                             </div>
-
                             <div className="mb-3">
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
                                     <label className="form-check-label" htmlFor="terms-conditions">
                                         I agree to
-                                        <a href="javascript:void(0);">privacy policy & terms</a>
+                                        <a>privacy policy & terms</a>
                                     </label>
                                 </div>
                             </div>
-                            <button className="btn btn-primary d-grid w-100">Sign up</button>
+
+
+                            <input type="submit" className="btn btn-primary" />
                         </form>
 
                         <p className="text-center">
