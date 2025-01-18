@@ -13,6 +13,7 @@ import Support from "../pages/Support";
 import CreateRoom from "../pages/CreateRoom";
 import PreBooking from "../pages/PreBooking";
 import MainContent from "../component/MainContent";
+import Login from "../pages/Login";
 
 const Router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ const Router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: '/login',
+        element: <Login />,
+    }
 
 ])
 
