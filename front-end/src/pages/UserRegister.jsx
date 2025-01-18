@@ -8,6 +8,7 @@ const UserRegister = () => {
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
+    const [visibility, setVisibility] = useState({});
 
     const onSubmit = (data) => {
         axios
@@ -45,9 +46,9 @@ const UserRegister = () => {
     useEffect(() => {
         fetchCategories();
     }, []);
-    
-     // Delete a category
-     const deleteData = (id) => {
+
+    // Delete a category
+    const deleteData = (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             axios
                 .get(`http://192.168.0.115:8000/api/user/delete/${id}`)
@@ -60,6 +61,10 @@ const UserRegister = () => {
                     toast.error("Failed to delete !");
                 });
         }
+    };
+
+    const toggleVisibility = (index) => {
+        setVisibility((prev) => ({ ...prev, [index]: !prev[index] }));
     };
     return (
         <div className="content-wrapper">
@@ -122,43 +127,48 @@ const UserRegister = () => {
                             <div className="card-body">
                                 <h5>User Details</h5>
                                 <div className="col-12">
-                                        <div className=" mb-4">
-                                            <div className="">
-                                                {loading ? (
-                                                    <p>Loading...</p>
-                                                ) : (
-                                                    <div className="table-responsive text-nowrap border">
-                                                        {
-                                                            users.length == 0 ? <div className="alert alert-warning" role="alert">
-                                                                No Data Found
-                                                            </div> : <table className="table order-4">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Email</th>
-                                                                        <th>Password</th>
-                                                                        <th>Actions</th>
+                                    <div className=" mb-4">
+                                        <div className="">
+                                            {loading ? (
+                                                <p>Loading...</p>
+                                            ) : (
+                                                <div className="table-responsive text-nowrap border">
+                                                    {
+                                                        users.length == 0 ? <div className="alert alert-warning" role="alert">
+                                                            No Data Found
+                                                        </div> : <table className="table order-4">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Email</th>
+                                                                    <th>Password</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody className="table-border-bottom-0">
+                                                                {users.map((item, index) => (
+                                                                    <tr key={index}>
+                                                                        <td>{item.email} </td>
+                                                                        <td>{visibility[index] ? item.password : "••••••••••••••••"}
+                                                                            <i
+                                                                                className={`bx ${visibility[index] ? "bx-show" : "bx-hide"} ms-2`}
+                                                                                onClick={() => toggleVisibility(index)}
+                                                                            ></i>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button onClick={() => { deleteData(item.id) }} className="btn btn-danger ms-2">Delete</button>
+                                                                        </td>
                                                                     </tr>
-                                                                </thead>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    }
 
-                                                                <tbody className="table-border-bottom-0">
-                                                                    {users.map((item, index) => (
-                                                                        <tr key={index}>
-                                                                            <td>{item.email} </td>
-                                                                            <td>{item.password} </td>
-                                                                            <td>
-                                                                                <button onClick={()=>{deleteData(item.id)}}  className="btn btn-danger ms-2">Delete</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    ))}
-                                                                </tbody>
-                                                            </table>
-                                                        }
-
-                                                    </div>
-                                                )}
-                                            </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
