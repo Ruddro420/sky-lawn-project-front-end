@@ -216,7 +216,7 @@ const CreateRoom = () => {
                                                         {
                                                             category.length == 0 ? <div className="alert alert-warning" role="alert">
                                                                 No Data Found
-                                                            </div> : <table className="table order-4">
+                                                            </div> : <table className="table order-4 border">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Number</th>

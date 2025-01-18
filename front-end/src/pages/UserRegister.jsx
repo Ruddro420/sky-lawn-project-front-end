@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 
 const UserRegister = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [visibility, setVisibility] = useState({});
@@ -15,16 +15,16 @@ const UserRegister = () => {
             .post("http://192.168.0.115:8000/api/user/add", {
                 name: data.name,
                 email: data.email,
-                password: data.password
+                password: data.password,
             })
             .then(() => {
                 toast.success("user added successfully!");
                 fetchCategories();
-
+                reset()
             })
             .catch((error) => {
                 console.log(error);
-                toast.error("failed to user add");
+                toast.error("Something Went Wrong or Email already Exits");
             });
     }
     // Fetch categories
@@ -63,6 +63,7 @@ const UserRegister = () => {
         }
     };
 
+    // visibility
     const toggleVisibility = (index) => {
         setVisibility((prev) => ({ ...prev, [index]: !prev[index] }));
     };
@@ -112,7 +113,7 @@ const UserRegister = () => {
                                             name="password"
                                             type="password"
                                             className="form-control"
-                                            id="password-default-fullname"
+                                           
                                             placeholder="password"
                                         />
                                     </div>
