@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div>
       <aside id="layout-menu"
         className="layout-menu menu-vertical bg-menu-theme position-fixed w-20 h-100"
-        >
+      >
         <div className="app-brand demo">
           <NavLink to='/' className="app-brand-link">
             <span className="app-brand-logo demo py-3">
@@ -33,8 +33,10 @@ const Sidebar = () => {
 
         <ul className="menu-inner py-1">
 
-          <li className="menu-item active">
-            <NavLink to='/' className="menu-link">
+          <li className="menu-item">
+            <NavLink to='/' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </NavLink>
@@ -47,25 +49,33 @@ const Sidebar = () => {
 
             <ul className="menu-sub">
               <li className="menu-item">
-                <NavLink to='/room-category' className="menu-link">
+                <NavLink to='/room-category' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+                }}>
                   <div data-i18n="Without menu">Category</div>
                 </NavLink>
               </li>
               <li className="menu-item">
-                <NavLink to='/room' className="menu-link">
+                <NavLink to='/room' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+                }}>
                   <div data-i18n="Without navbar">Room</div>
                 </NavLink>
               </li>
             </ul>
           </li>
           <li className="menu-item">
-            <NavLink to='/pre-booking' className="menu-link">
+            <NavLink to='/pre-booking' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-cart"></i>
               <div data-i18n="Analytics">Pre-Booking</div>
             </NavLink>
           </li>
           <li className="menu-item">
-            <NavLink to='/customer-register' className="menu-link">
+            <NavLink to='/customer-register' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-lock"></i>
               <div data-i18n="Analytics">Customer Register</div>
             </NavLink>
@@ -81,12 +91,16 @@ const Sidebar = () => {
 
             <ul className="menu-sub">
               <li className="menu-item">
-                <NavLink to="/overviews" className="menu-link">
+                <NavLink to="/overviews" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link bg-body text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without menu">Overviews</div>
                 </NavLink>
               </li>
               <li className="menu-item">
-                <NavLink to='/report' className="menu-link">
+                <NavLink to='/report' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link bg-body text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without menu">Report</div>
                 </NavLink>
               </li>
@@ -94,19 +108,25 @@ const Sidebar = () => {
           </li>
 
           <li className="menu-item">
-            <NavLink to='/account-settings' className="menu-link">
+            <NavLink to='/account-settings' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-sort-up"></i>
               <div data-i18n="Analytics">Account Settings</div>
             </NavLink>
           </li>
           <li className="menu-item">
-            <NavLink to='/settings' className="menu-link">
+            <NavLink to='/settings' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-chip"></i>
               <div data-i18n="Analytics">Settings</div>
             </NavLink>
           </li>
           <li className="menu-item">
-            <NavLink to='/user-register' className="menu-link">
+            <NavLink to='/user-register' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-user-circle"></i>
               <div data-i18n="Analytics">User Register</div>
             </NavLink>
@@ -118,22 +138,14 @@ const Sidebar = () => {
           <li className="menu-item">
             <NavLink to='/support'
 
-              className="menu-link"
+              className={({ isActive }) => {
+                return isActive ? "menu-link bg-body active-link text-primary " : "menu-link";
+              }}
             >
               <i className="menu-icon tf-icons bx bx-support"></i>
               <div data-i18n="Support">Support</div>
             </NavLink>
           </li>
-          {/* <!-- <li class="menu-item">
-              <a
-                href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentation</div>
-              </a>
-            </li> --{'>'} */}
         </ul>
       </aside>
     </div>
