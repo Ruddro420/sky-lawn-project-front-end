@@ -131,6 +131,14 @@ const Sidebar = () => {
               <div data-i18n="Analytics">User Register</div>
             </NavLink>
           </li>
+          <li className="menu-item">
+            <NavLink to='/invoice' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
+              <i className="menu-icon tf-icons bx bx-user-circle"></i>
+              <div data-i18n="Analytics">Invoice</div>
+            </NavLink>
+          </li>
 
 
 

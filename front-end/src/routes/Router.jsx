@@ -15,6 +15,7 @@ import PreBooking from "../pages/PreBooking";
 import MainContent from "../component/MainContent";
 import Login from "../pages/Login";
 import PrivateRoutes from "./PrivateRoutes";
+import Invoice from "../pages/Invoice";
 
 
 const Router = createBrowserRouter([
@@ -67,6 +68,10 @@ const Router = createBrowserRouter([
             {
                 path: '/support',
                 element: <Support />
+            },
+            {
+                path: '/invoice',
+                element: <Invoice />
             },
         ]
     },
