@@ -1,5 +1,9 @@
+import { NavLink } from "react-router-dom";
 
 const TopNav = () => {
+  const handleLogout=()=>{
+    localStorage.removeItem("isLoggedIn");
+  }
     return (
         <div>
                <nav
@@ -64,7 +68,7 @@ const TopNav = () => {
                           </div>
                         </a>
                       </li>
-                      <li>
+                      {/* <li>
                         <div className="dropdown-divider"></div>
                       </li>
                       <li>
@@ -90,12 +94,12 @@ const TopNav = () => {
                       </li>
                       <li>
                         <div className="dropdown-divider"></div>
-                      </li>
+                      </li> */}
                       <li>
-                        <a className="dropdown-item" href="auth-login-basic.html">
+                        <NavLink to="/login" className="dropdown-item">
                           <i className="bx bx-power-off me-2"></i>
-                          <span className="align-middle">Log Out</span>
-                        </a>
+                          <span onClick={handleLogout} className="align-middle">Log Out</span>
+                        </NavLink>
                       </li>
                     </ul>
                   </li>

@@ -14,11 +14,15 @@ import CreateRoom from "../pages/CreateRoom";
 import PreBooking from "../pages/PreBooking";
 import MainContent from "../component/MainContent";
 import Login from "../pages/Login";
+import PrivateRoutes from "./PrivateRoutes";
+
 
 const Router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout />,
+        element:
+            <PrivateRoutes><MainLayout /></PrivateRoutes>
+        ,
         children: [
             {
                 path: '/',
@@ -42,7 +46,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/overviews',
-                element: <OverViews/>
+                element: <OverViews />
             },
             {
                 path: '/report',

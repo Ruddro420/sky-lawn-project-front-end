@@ -5,41 +5,48 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
-    let navigate = useNavigate();
+    const navigate = useNavigate(); 
 
     const onSubmit = (data) => {
-        //console.log(data);
-
         axios
             .post("http://192.168.0.115:8000/api/user/check", {
                 email: data.email,
                 password: data.password,
             })
             .then((response) => {
-                if (response.status == 'success') {
-                    toast(response.data.message)
-                    navigate('/')
-                    reset()
+                
+                if (response.data.status === "success") { 
+                    localStorage.setItem("isLoggedIn", "true");
+                    toast.success(response.data.message);
+                    reset(); 
+                    navigate("/"); 
                 } else {
-                    toast(response.data.message)
-                    navigate('/login')
+                    toast.error(response.data.message); 
                 }
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error); 
                 toast.error("Something Went Wrong");
             });
-    }
+    };
 
     return (
         <div className="container-xxl">
             <div className="authentication-wrapper authentication-basic container-p-y d-flex align-items-center justify-content-center vh-100">
                 <div className="card" style={{ width: "400px" }}>
                     <div className="card-body">
-                        <h4 className="mb-2 text-center">Login Here! </h4>
-                        <form onSubmit={handleSubmit(onSubmit)} id="formAuthentication" className="mb-3" action="index.html" method="POST">
+                        <h4 className="mb-2 text-center">Login Here!</h4>
+                        <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            id="formAuthentication"
+                            className="mb-3"
+                            action="index.html"
+                            method="POST"
+                        >
                             <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email or Username</label>
+                                <label htmlFor="email" className="form-label">
+                                    Email or Username
+                                </label>
                                 <input
                                     {...register("email", { required: true })}
                                     type="email"
@@ -52,7 +59,9 @@ const Login = () => {
                             </div>
                             <div className="mb-3 form-password-toggle">
                                 <div className="d-flex justify-content-between">
-                                    <label className="form-label" htmlFor="password">Password</label>
+                                    <label className="form-label" htmlFor="password">
+                                        Password
+                                    </label>
                                 </div>
                                 <div className="input-group input-group-merge">
                                     <input
@@ -64,11 +73,13 @@ const Login = () => {
                                         aria-describedby="password"
                                         required
                                     />
-                                    <span className="input-group-text cursor-pointer"><i className="bx bx-hide"></i></span>
+                                    <span className="input-group-text cursor-pointer">
+                                        <i className="bx bx-hide"></i>
+                                    </span>
                                 </div>
                             </div>
                             <div className="mb-3">
-                                <input type="submit" className="btn btn-primary" />
+                                <input type="submit" className="btn btn-primary" value="Login" />
                             </div>
                         </form>
                     </div>
