@@ -69,11 +69,24 @@ const PreBooking = () => {
                 toast.error("Failed to add booking!");
             });
     }
+
+
     /* Select room by price */
     const handleRoomSelection = (roomId) => {
         const selectedRoom = roomNumber.find(room => room.id === parseInt(roomId));
         setSelectedRoomPrice(selectedRoom ? selectedRoom.price : "");
     };
+
+    const calculateRoomPrice = () => {
+        const basePrice = parseFloat(selectedRoomPrice) || 0; // স্ট্রিং থেকে সংখ্যা রূপান্তর
+        if (selectPerson == 1) {
+            return (basePrice - 500).toFixed(2); // দশমিক সংখ্যা ঠিক রাখুন
+        } else if (selectPerson > 2) {
+            return (basePrice + (selectPerson - 2) * 1000).toFixed(2); // অতিরিক্ত ব্যক্তির জন্য দাম যোগ
+        }
+        return basePrice.toFixed(2);
+    };
+    
 
     return (
         <div>
@@ -257,7 +270,7 @@ const PreBooking = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Price - <span className="text-danger">
-                                                            {selectPerson<2 ? selectedRoomPrice - 500 : parseInt(selectedRoomPrice) + 500} ৳ </span>
+                                                            {calculateRoomPrice()} ৳ </span>
                                                     </label>
                                                     <input
                                                         {...register("room_price", { required: true })}
@@ -265,7 +278,7 @@ const PreBooking = () => {
                                                         type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
-                                                        placeholder={selectedRoomPrice}
+                                                        placeholder={calculateRoomPrice()} 
 
                                                     />
                                                 </div>
