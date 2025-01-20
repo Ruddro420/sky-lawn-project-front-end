@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 const Support = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
+  const [delete, setDelete] = useState()
   const { register, handleSubmit, reset, } = useForm();
   const onSubmit = (data) => {
     axios
@@ -47,6 +48,23 @@ const Support = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Delete a category
+  const deleteRoom = (id) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      axios
+        .get(`http://192.168.0.115:8000/api/delete/${id}`)
+        .then(() => {
+          toast.success("Room deleted successfully!");
+          setData(response.data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Failed to delete room!");
+        });
+    }
+  };
   return (
     <div className="content-wrapper">
       <div className="container-xxl flex-grow-1 container-p-y">
