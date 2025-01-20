@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PreBookingDetails = () => {
 
@@ -46,6 +47,11 @@ const PreBookingDetails = () => {
     useEffect(() => {
         fetchRoom();
     }, []);
+    const navigate = useNavigate()
+    // booking data
+    const booking = (data) =>{
+        navigate(`/booking/${data}`)
+    }
     return (
         <div>
             <div className="content-wrapper">
@@ -90,7 +96,7 @@ const PreBookingDetails = () => {
                                                                     <td>{item.duration_day} </td>
                                                                     <td>{item.booking_by} </td>
                                                                     <td>
-                                                                        <button className="btn btn-success">Edit</button>
+                                                                        <button onClick={()=>booking(item.id)} className="btn btn-success">Booking</button>
                                                                         {/*  <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button> */}
                                                                     </td>
                                                                 </tr>

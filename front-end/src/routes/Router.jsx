@@ -16,6 +16,7 @@ import MainContent from "../component/MainContent";
 import Login from "../pages/Login";
 import PrivateRoutes from "./PrivateRoutes";
 import PreBookingDetails from "../pages/PreBookingDetails";
+import Booking from "../pages/Booking";
 
 
 const Router = createBrowserRouter([
@@ -72,6 +73,10 @@ const Router = createBrowserRouter([
             {
                 path: '/pre-booking-details',
                 element: <PreBookingDetails />
+            },
+            {
+                path: '/booking/:data',
+                element: <Booking />
             },
         ]
     },
