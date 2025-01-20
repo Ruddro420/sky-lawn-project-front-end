@@ -77,7 +77,15 @@ const Sidebar = () => {
               return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
             }}>
               <i className="menu-icon tf-icons bx bx-lock"></i>
-              <div data-i18n="Analytics">Customer Register</div>
+              <div data-i18n="Analytics">Customer Booking</div>
+            </NavLink>
+          </li>
+          <li className="menu-item">
+            <NavLink to='/customer-register' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
+              <i className="menu-icon tf-icons bx bx-lock"></i>
+              <div data-i18n="Analytics">Booking Details</div>
             </NavLink>
           </li>
 
@@ -106,23 +114,6 @@ const Sidebar = () => {
               </li>
             </ul>
           </li>
-
-          <li className="menu-item">
-            <NavLink to='/account-settings' className={({ isActive }) => {
-              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
-            }}>
-              <i className="menu-icon tf-icons bx bx-sort-up"></i>
-              <div data-i18n="Analytics">Account Settings</div>
-            </NavLink>
-          </li>
-          <li className="menu-item">
-            <NavLink to='/settings' className={({ isActive }) => {
-              return isActive ? "menu-link active-link text-primary " : "menu-link";
-            }}>
-              <i className="menu-icon tf-icons bx bx-chip"></i>
-              <div data-i18n="Analytics">Settings</div>
-            </NavLink>
-          </li>
           <li className="menu-item">
             <NavLink to='/user-register' className={({ isActive }) => {
               return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
@@ -131,10 +122,6 @@ const Sidebar = () => {
               <div data-i18n="Analytics">User Register</div>
             </NavLink>
           </li>
-
-
-
-
           <li className="menu-item">
             <NavLink to='/support'
 
@@ -144,6 +131,14 @@ const Sidebar = () => {
             >
               <i className="menu-icon tf-icons bx bx-support"></i>
               <div data-i18n="Support">Support</div>
+            </NavLink>
+          </li>
+          <li className="menu-item">
+            <NavLink to='/account-settings' className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
+            }}>
+              <i className="menu-icon tf-icons bx bx-sort-up"></i>
+              <div data-i18n="Analytics">Account Settings</div>
             </NavLink>
           </li>
         </ul>

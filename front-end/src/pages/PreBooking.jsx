@@ -29,7 +29,7 @@ const PreBooking = () => {
     const fetchRoomNumber = () => {
         setLoading(true);
         axios
-            .get("http://192.168.0.115:8000/api/room/data")
+            .get("http://192.168.0.115:8000/api/room/available-room")
             .then((response) => {
                 setRoomNumber(response.data);
                 setLoading(false);
@@ -79,17 +79,17 @@ const PreBooking = () => {
     };
 
     const calculateRoomPrice = () => {
-        const basePrice = parseFloat(selectedRoomPrice) || 0; // স্ট্রিং থেকে সংখ্যা রূপান্তর
+        const basePrice = parseFloat(selectedRoomPrice) || 0; 
         if (selectPerson == 1) {
-            return (basePrice - 500).toFixed(2); // দশমিক সংখ্যা ঠিক রাখুন
+            return (basePrice - 500).toFixed(2); 
         } else if (selectPerson > 2) {
-            return (basePrice + (selectPerson - 2) * 1000).toFixed(2); // অতিরিক্ত ব্যক্তির জন্য দাম যোগ
+            return (basePrice + (selectPerson - 2) * 1000).toFixed(2); 
         }
         return basePrice.toFixed(2);
     };
 
     const handleCheck = () => {
-        setShowForm(true); // Show the rest of the form when the "Check" button is clicked
+        setShowForm(true); 
     };
 
 
@@ -107,7 +107,7 @@ const PreBooking = () => {
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="row">
-                                            <div className="w-full">
+                                            <div className="w-full mb-5">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Check in Date & Time
@@ -314,66 +314,6 @@ const PreBooking = () => {
                                         </div>
 
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Categories Table */}
-                        <div className="col-12">
-                            <div className="card mb-4">
-                                <div className="card-header d-flex justify-content-between align-items-center">
-                                    <h5 className="mb-0">Pre Booking Details</h5>
-                                </div>
-                                <div className="card-body">
-                                    Pre Booking Table
-                                    {/* <div className="col-12">
-                                        <div className="card mb-4">
-                                            <div className="card-header d-flex justify-content-between align-items-center">
-                                                <h5 className="mb-0">Room Details</h5>
-                                            </div>
-                                            <div className="card-body">
-                                                {loading ? (
-                                                    <p>Loading...</p>
-                                                ) : (
-                                                    <div className="table-responsive text-nowrap">
-                                                        {
-                                                            category.length == 0 ? <div className="alert alert-warning" role="alert">
-                                                                No Data Found
-                                                            </div> : <table className="table order-4">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Number</th>
-                                                                        <th>Name</th>
-                                                                        <th>Category</th>
-                                                                        <th>Price</th>
-                                                                        <th>Features</th>
-                                                                        <th>Actions</th>
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody className="table-border-bottom-0">
-                                                                    {room.map((item, index) => (
-                                                                        <tr key={index}>
-                                                                            <td>{item.room_number} </td>
-                                                                            <td>{item.room_name} </td>
-                                                                            <td>{item.category.name} </td>
-                                                                            <td>{item.price} </td>
-                                                                            <td>{item.feature} </td>
-                                                                            <td>
-                                                                                <button className="btn btn-success">Edit</button>
-                                                                                <button onClick={()=>{deleteRoom(item.id)}} className="btn btn-danger ms-2">Delete</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    ))}
-                                                                </tbody>
-                                                            </table>
-                                                        }
-
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
