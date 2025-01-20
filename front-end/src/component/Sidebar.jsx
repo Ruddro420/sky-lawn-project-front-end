@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   const [roomOpen, setRoomOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
+  const [details, setDetails] = useState(false);
 
   const hangleToggleRoom = () => {
     setRoomOpen((open) => !open);
@@ -11,6 +12,9 @@ const Sidebar = () => {
 
   const handleToggleAnalytics = () => {
     setAnalytics((open) => !open);
+  }
+  const handleToggleDetails = () => {
+    setDetails((open) => !open);
   }
   return (
     <div>
@@ -80,13 +84,28 @@ const Sidebar = () => {
               <div data-i18n="Analytics">Customer Booking</div>
             </NavLink>
           </li>
-          <li className="menu-item">
-            <NavLink to='/pre-booking-details' className={({ isActive }) => {
-              return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
-            }}>
-              <i className="menu-icon tf-icons bx bx-lock"></i>
-              <div data-i18n="Analytics">Booking Details</div>
+          <li className={`menu-item ${details ? "open" : ""}`}>
+            <NavLink to='#' onClick={handleToggleDetails} className="menu-link menu-toggle">
+              <i className="menu-icon tf-icons bx bx-layout"></i>
+              <div data-i18n="Layouts">Booking Details</div>
             </NavLink>
+
+            <ul className="menu-sub">
+              <li className="menu-item">
+                <NavLink to="/pre-booking-details" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link bg-body text-primary " : "menu-link";
+                }}>
+                  <div data-i18n="Without menu">Pre Booking Details</div>
+                </NavLink>
+              </li>
+              <li className="menu-item">
+                <NavLink to='/booking-details' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link bg-body text-primary " : "menu-link";
+                }}>
+                  <div data-i18n="Without menu">Booking Details</div>
+                </NavLink>
+              </li>
+            </ul>
           </li>
 
 

@@ -32,7 +32,7 @@ const Support = () => {
       });
   }
   // fetch support
-  const fetchData = () => {
+  const fetchData = () => { 
     setLoading(true);
     axios
       .get("http://192.168.0.115:8000/api/suport-data")

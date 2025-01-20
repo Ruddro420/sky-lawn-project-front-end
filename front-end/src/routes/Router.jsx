@@ -17,7 +17,7 @@ import Login from "../pages/Login";
 import PrivateRoutes from "./PrivateRoutes";
 import PreBookingDetails from "../pages/PreBookingDetails";
 import Booking from "../pages/Booking";
-
+import BookingDetails from "../pages/BookingDetails";
 
 const Router = createBrowserRouter([
     {
@@ -78,6 +78,12 @@ const Router = createBrowserRouter([
                 path: '/booking/:data',
                 element: <Booking />
             },
+            
+            {
+                path: '/booking-details',
+                element: <BookingDetails />
+            },
+            
         ]
     },
     {
