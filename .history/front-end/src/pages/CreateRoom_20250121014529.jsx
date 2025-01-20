@@ -102,7 +102,7 @@ const CreateRoom = () => {
     const handleChange = (e) => {
         e.preventDefault()
         axios
-            .post(`${BASE_URL}/room/update/status`, {
+            .post("http://192.168.0.115:8000/api/room/update/status", {
                 id: getRoom.id,
                 status: status,
             })

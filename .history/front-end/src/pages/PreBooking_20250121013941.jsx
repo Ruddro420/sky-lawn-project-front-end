@@ -13,13 +13,10 @@ const PreBooking = () => {
     const [showForm, setShowForm] = useState(false);
     const [selectedRoomCat, setSelectedRoomCat] = useState("");
 
-    // fetch data
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
     const fetchCategories = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room-category`)
+            .get("http://192.168.0.115:8000/api/room-category")
             .then((response) => {
                 setCategory(response.data);
                 setLoading(false);
@@ -33,7 +30,7 @@ const PreBooking = () => {
     const fetchRoomNumber = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room/available-room`)
+            .get("http://192.168.0.115:8000/api/room/available-room")
             .then((response) => {
                 setRoomNumber(response.data);
                 setLoading(false);
@@ -53,7 +50,7 @@ const PreBooking = () => {
         console.log(data);
 
         axios
-            .post(`${BASE_URL}/prebook/add`, {
+            .post("http://192.168.0.115:8000/api/prebook/add", {
                 date_time: data.date_time,
                 name: data.name,
                 room_number: data.room_number,

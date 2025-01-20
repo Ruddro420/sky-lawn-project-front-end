@@ -8,14 +8,12 @@ const RoomCategory = () => {
     const [editCategoryId, setEditCategoryId] = useState(null); // ID of the category being edited
     const [editCategoryName, setEditCategoryName] = useState(""); // Input for editing a category
     const [loading, setLoading] = useState(true); // Loader for fetching data
-     // fetch data
-     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     // Fetch categories
     const fetchCategories = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room-category`)
+            .get("http://192.168.1.9:8000/api/room-category")
             .then((response) => {
                 setCategory(response.data);
                 setLoading(false);
@@ -39,7 +37,7 @@ const RoomCategory = () => {
             return;
         }
         axios
-            .post(`${BASE_URL}/room-category/add`, { name: getCategory })
+            .post("http://192.168.1.9:8000/api/room-category/add", { name: getCategory })
             .then(() => {
                 toast.success("Category added successfully!");
                 setGetCategory("");
@@ -59,7 +57,7 @@ const RoomCategory = () => {
 
     const saveCategoryEdit = () => {
         axios
-            .put(`${BASE_URL}/room-category/${editCategoryId}`, { name: editCategoryName })
+            .put(`http://192.168.1.9:8000/api/room-category/${editCategoryId}`, { name: editCategoryName })
             .then(() => {
                 toast.success("Category updated successfully!");
                 setEditCategoryId(null);
@@ -76,7 +74,7 @@ const RoomCategory = () => {
     const deleteCategory = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             axios
-                .get(`${BASE_URL}/room-category/delete/${id}`)
+                .get(`http://192.168.1.9:8000/api/room-category/delete/${id}`)
                 .then(() => {
                     toast.success("Category deleted successfully!");
                     fetchCategories(); // Refresh the category list
@@ -135,7 +133,7 @@ const RoomCategory = () => {
                                         {
                                             category.length == 0 ? <div className="alert alert-warning" role="alert">
                                                 No Data Found
-                                            </div> : <table className="table order-4 border">
+                                            </div> : <table className="table order-4">
                                                 <thead>
                                                     <tr>
                                                         <th>Name</th>

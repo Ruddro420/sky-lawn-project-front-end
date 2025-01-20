@@ -38,7 +38,7 @@ const CreateRoom = () => {
     const fetchRoom = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room/data`)
+            .get("http://192.168.0.115:8000/api/room/data")
             .then((response) => {
                 setRoom(response.data);
                 setLoading(false);
@@ -56,7 +56,7 @@ const CreateRoom = () => {
     // get form data
     const onSubmit = (data) => {
         axios
-            .post(`${BASE_URL}/room/add`, {
+            .post("http://192.168.0.115:8000/api/room/add", {
                 room_number: data.room_number,
                 room_name: data.room_name,
                 room_category_id: data.room_category_id,
@@ -79,7 +79,7 @@ const CreateRoom = () => {
     const deleteRoom = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             axios
-                .get(`${BASE_URL}/room/delete/${id}`)
+                .get(`http://192.168.0.115:8000/api/room/delete/${id}`)
                 .then(() => {
                     toast.success("Room deleted successfully!");
                     fetchCategories(); // Refresh the category list
@@ -102,7 +102,7 @@ const CreateRoom = () => {
     const handleChange = (e) => {
         e.preventDefault()
         axios
-            .post(`${BASE_URL}/room/update/status`, {
+            .post("http://192.168.0.115:8000/api/room/update/status", {
                 id: getRoom.id,
                 status: status,
             })

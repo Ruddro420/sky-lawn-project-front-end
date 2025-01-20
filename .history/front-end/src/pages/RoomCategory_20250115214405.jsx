@@ -8,14 +8,12 @@ const RoomCategory = () => {
     const [editCategoryId, setEditCategoryId] = useState(null); // ID of the category being edited
     const [editCategoryName, setEditCategoryName] = useState(""); // Input for editing a category
     const [loading, setLoading] = useState(true); // Loader for fetching data
-     // fetch data
-     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     // Fetch categories
     const fetchCategories = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room-category`)
+            .get("http://192.168.1.9:8000/api/room-category")
             .then((response) => {
                 setCategory(response.data);
                 setLoading(false);
@@ -39,7 +37,7 @@ const RoomCategory = () => {
             return;
         }
         axios
-            .post(`${BASE_URL}/room-category/add`, { name: getCategory })
+            .post("http://192.168.1.9:8000/api/room-category/add", { name: getCategory })
             .then(() => {
                 toast.success("Category added successfully!");
                 setGetCategory("");
@@ -52,14 +50,14 @@ const RoomCategory = () => {
     };
 
     // Edit a category
-    /* const editCategory = (id, name) => {
+    const editCategory = (id, name) => {
         setEditCategoryId(id);
         setEditCategoryName(name);
-    }; */
+    };
 
     const saveCategoryEdit = () => {
         axios
-            .put(`${BASE_URL}/room-category/${editCategoryId}`, { name: editCategoryName })
+            .put(`http://192.168.1.9:8000/api/room-category/${editCategoryId}`, { name: editCategoryName })
             .then(() => {
                 toast.success("Category updated successfully!");
                 setEditCategoryId(null);
@@ -76,7 +74,7 @@ const RoomCategory = () => {
     const deleteCategory = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             axios
-                .get(`${BASE_URL}/room-category/delete/${id}`)
+                .delete(`http://192.168.1.9:8000/api/room-category/delete/${id}`)
                 .then(() => {
                     toast.success("Category deleted successfully!");
                     fetchCategories(); // Refresh the category list
@@ -132,57 +130,57 @@ const RoomCategory = () => {
                                     <p>Loading...</p>
                                 ) : (
                                     <div className="table-responsive text-nowrap">
-                                        {
-                                            category.length == 0 ? <div className="alert alert-warning" role="alert">
-                                                No Data Found
-                                            </div> : <table className="table order-4 border">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody className="table-border-bottom-0">
-                                                    {category.map((item, index) => (
-                                                        <tr key={index}>
-                                                            <td>
-                                                                {editCategoryId === item.id ? (
-                                                                    <input
-                                                                        type="text"
-                                                                        value={editCategoryName}
-                                                                        onChange={(e) => setEditCategoryName(e.target.value)}
-                                                                        className="form-control"
-                                                                    />
-                                                                ) : (
-                                                                    <span>{item.name}</span>
-                                                                )}
-                                                            </td>
-                                                            <td>
-                                                                {editCategoryId === item.id ? (
+                                        <table className="table order-4">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-border-bottom-0">
+                                                {category.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td>
+                                                            {editCategoryId === item.id ? (
+                                                                <input
+                                                                    type="text"
+                                                                    value={editCategoryName}
+                                                                    onChange={(e) => setEditCategoryName(e.target.value)}
+                                                                    className="form-control"
+                                                                />
+                                                            ) : (
+                                                                <span>{item.name}</span>
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {editCategoryId === item.id ? (
+                                                                <button
+                                                                    className="btn btn-sm btn-success"
+                                                                    onClick={saveCategoryEdit}
+                                                                >
+                                                                    Save
+                                                                </button>
+                                                            ) : (
+                                                                <>
                                                                     <button
-                                                                        className="btn btn-sm btn-success"
-                                                                        onClick={saveCategoryEdit}
+                                                                        className="btn btn-sm btn-primary"
+                                                                        onClick={() => editCategory(item.id, item.name)}
                                                                     >
-                                                                        Save
+                                                                        Edit
                                                                     </button>
-                                                                ) : (
-                                                                    <>
-                                                                        <button
-                                                                            className="btn btn-sm btn-danger ms-2"
-                                                                            onClick={() => deleteCategory(item.id)}
-                                                                        >
-                                                                            Delete
-                                                                        </button>
-                                                                    </>
-                                                                )}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        }
-
+                                                                    <button
+                                                                        className="btn btn-sm btn-danger ms-2"
+                                                                        onClick={() => deleteCategory(item.id)}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                </>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 )}
                             </div>
@@ -196,3 +194,4 @@ const RoomCategory = () => {
 };
 
 export default RoomCategory;
+s

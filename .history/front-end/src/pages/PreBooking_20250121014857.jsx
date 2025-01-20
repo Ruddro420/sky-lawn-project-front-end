@@ -33,7 +33,7 @@ const PreBooking = () => {
     const fetchRoomNumber = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/room/available-room`)
+            .get("http://192.168.0.115:8000/api/room/available-room")
             .then((response) => {
                 setRoomNumber(response.data);
                 setLoading(false);
@@ -53,7 +53,7 @@ const PreBooking = () => {
         console.log(data);
 
         axios
-            .post(`${BASE_URL}/prebook/add`, {
+            .post("http://192.168.0.115:8000/api/prebook/add", {
                 date_time: data.date_time,
                 name: data.name,
                 room_number: data.room_number,

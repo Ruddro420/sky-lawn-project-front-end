@@ -34,7 +34,7 @@ const PreBookingDetails = () => {
     const fetchRoom = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/prebook-data`)
+            .get("http://192.168.0.115:8000/api/prebook-data")
             .then((response) => {
                 setRoom(response.data);
                 setLoading(false);

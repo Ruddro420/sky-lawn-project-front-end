@@ -10,13 +10,12 @@ const Booking = () => {
     const [loading, setLoading] = useState(true);
     const { register, handleSubmit, setValue } = useForm();
     const { data } = useParams();
-    // fetch data
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    
 
     // Fetch preBooking data from API
     const fetchRoom = () => {
         axios
-            .get(`${BASE_URL}/prebook-data/show/${data}`)
+            .get(`http://192.168.0.115:8000/api/prebook-data/show/${data}`)
             .then((response) => {
                 setPreBook(response.data);
                 // Set form values dynamically

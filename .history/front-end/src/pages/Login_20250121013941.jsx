@@ -6,14 +6,11 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
-     // fetch data
-     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const onSubmit = (data) => {
-        
 
         axios
-            .post(`${BASE_URL}/user/check`, {
+            .post("http://192.168.0.115:8000/api/user/check", {
                 email: data.email,
                 password: data.password,
             })

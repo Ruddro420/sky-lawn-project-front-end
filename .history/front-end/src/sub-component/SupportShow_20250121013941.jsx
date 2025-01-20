@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const SupportShow = ({ data, loading, deleteRoom }) => {
+const SupportShow = ({ data, loading ,deleteRoom}) => {
     return (
         <div>
             {/* Pree - Booking Details */}

@@ -5,16 +5,14 @@ import toast from "react-hot-toast";
 
 
 const UserRegister = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [visibility, setVisibility] = useState({});
-    // fetch data
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const onSubmit = (data) => {
         axios
-            .post(`${BASE_URL}/user/add`, {
+            .post("http://192.168.0.115:8000/api/user/add", {
                 name: data.name,
                 email: data.email,
                 password: data.password,
@@ -33,7 +31,7 @@ const UserRegister = () => {
     const fetchCategories = () => {
         setLoading(true);
         axios
-            .get(`${BASE_URL}/user`)
+            .get("http://192.168.0.115:8000/api/user")
             .then((response) => {
                 setUsers(response.data.data);
                 setLoading(false);
@@ -53,7 +51,7 @@ const UserRegister = () => {
     const deleteData = (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             axios
-                .get(`${BASE_URL}/user/delete/${id}`)
+                .get(`http://192.168.0.115:8000/api/user/delete/${id}`)
                 .then(() => {
                     toast.success("Deleted successfully!");
                     fetchCategories(); // Refresh the category list
@@ -115,7 +113,7 @@ const UserRegister = () => {
                                             name="password"
                                             type="password"
                                             className="form-control"
-
+                                           
                                             placeholder="password"
                                         />
                                     </div>

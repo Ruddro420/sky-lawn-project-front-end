@@ -10,13 +10,9 @@ const Support = () => {
   const [data, setData] = useState();
   //const [delete, setDelete] = useState()
   const { register, handleSubmit, reset, } = useForm();
- // fetch data
- const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-
   const onSubmit = (data) => {
     axios
-      .post(`${BASE_URL}/suport/add`, {
+      .post("http://192.168.0.115:8000/api/suport/add", {
         name: data.name,
         subject: data.subject,
         phone: data.phone,
@@ -39,7 +35,7 @@ const Support = () => {
   const fetchData = () => { 
     setLoading(true);
     axios
-      .get(`${BASE_URL}/suport-data`)
+      .get("http://192.168.0.115:8000/api/suport-data")
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -59,7 +55,7 @@ const Support = () => {
     
     if (window.confirm("Are you sure you want to delete this ?")) {
       axios
-        .get(`${BASE_URL}/suport/delete/${id}`)
+        .get(`http://192.168.0.115:8000/api/suport/delete/${id}`)
         .then(() => {
           toast.success("Delete successfully!");
           //setData(response.data.data);

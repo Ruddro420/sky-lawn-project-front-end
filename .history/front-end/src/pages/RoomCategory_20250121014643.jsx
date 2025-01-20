@@ -39,7 +39,7 @@ const RoomCategory = () => {
             return;
         }
         axios
-            .post(`${BASE_URL}/room-category/add`, { name: getCategory })
+            .post("http://192.168.0.115:8000/api/room-category/add", { name: getCategory })
             .then(() => {
                 toast.success("Category added successfully!");
                 setGetCategory("");
@@ -59,7 +59,7 @@ const RoomCategory = () => {
 
     const saveCategoryEdit = () => {
         axios
-            .put(`${BASE_URL}/room-category/${editCategoryId}`, { name: editCategoryName })
+            .put(`http://192.168.0.115:8000/api/room-category/${editCategoryId}`, { name: editCategoryName })
             .then(() => {
                 toast.success("Category updated successfully!");
                 setEditCategoryId(null);
@@ -76,7 +76,7 @@ const RoomCategory = () => {
     const deleteCategory = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
             axios
-                .get(`${BASE_URL}/room-category/delete/${id}`)
+                .get(`http://192.168.0.115:8000/api/room-category/delete/${id}`)
                 .then(() => {
                     toast.success("Category deleted successfully!");
                     fetchCategories(); // Refresh the category list
