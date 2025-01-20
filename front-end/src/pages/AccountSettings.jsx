@@ -57,11 +57,12 @@ const AccountSettings = () => {
                         name="firstName"
                         value={userData?.name}
                         autoFocus
+                        readOnly
                       />
                     </div>
                     <div className="mb-3 col-md-6">
                       <label htmlFor="lastName" className="form-label">Email</label>
-                      <input className="form-control" type="text" name="lastName" id="lastName" value={userData?.email} />
+                      <input className="form-control" type="text" name="lastName" id="lastName" value={userData?.email} readOnly/>
                     </div>
                     <div className="mb-3 col-md-12">
                       <label htmlFor="organization" className="form-label">Password</label>
@@ -71,18 +72,19 @@ const AccountSettings = () => {
                         id="organization"
                         name="organization"
                         value={userData?.password}
+                        readOnly
                       />
                     </div>
                   </div>
-                  <div className="mt-2">
+                  {/* <div className="mt-2">
                     <button type="submit" className="btn btn-primary me-2">Save changes</button>
                     <button type="reset" className="btn btn-outline-secondary">Cancel</button>
-                  </div>
+                  </div> */}
                 </form>
               </div>
               {/* <!-- /Account --> */}
             </div>
-            <div className="card">
+            {/* <div className="card">
               <h5 className="card-header">Delete Account</h5>
               <div className="card-body">
                 <div className="mb-3 col-12 mb-0">
@@ -106,7 +108,7 @@ const AccountSettings = () => {
                   <button type="submit" className="btn btn-danger deactivate-account">Deactivate Account</button>
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

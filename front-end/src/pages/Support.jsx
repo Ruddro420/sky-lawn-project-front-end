@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const Support = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  const [delete, setDelete] = useState()
+  //const [delete, setDelete] = useState()
   const { register, handleSubmit, reset, } = useForm();
   const onSubmit = (data) => {
     axios
@@ -51,13 +51,16 @@ const Support = () => {
 
   // Delete a category
   const deleteRoom = (id) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
+    console.log(id);
+    
+    if (window.confirm("Are you sure you want to delete this ?")) {
       axios
-        .get(`http://192.168.0.115:8000/api/delete/${id}`)
+        .get(`http://192.168.0.115:8000/api/suport/delete/${id}`)
         .then(() => {
-          toast.success("Room deleted successfully!");
-          setData(response.data.data);
+          toast.success("Delete successfully!");
+          //setData(response.data.data);
           setLoading(false);
+          fetchData()
         })
         .catch((error) => {
           console.log(error);
@@ -143,7 +146,7 @@ const Support = () => {
           <div className="col">
             {/* Show Support */}
             <div className="col-xxl">
-              <SupportShow loading={loading} data={data} />
+              <SupportShow loading={loading} data={data} deleteRoom={deleteRoom}/>
             </div>
           </div>
         </div>
