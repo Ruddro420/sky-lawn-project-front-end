@@ -224,6 +224,7 @@ const CreateRoom = () => {
                                                                         <th>Category</th>
                                                                         <th>Price</th>
                                                                         <th>Features</th>
+                                                                        <th>Status</th>
                                                                         <th>Actions</th>
                                                                     </tr>
                                                                 </thead>
@@ -236,6 +237,7 @@ const CreateRoom = () => {
                                                                             <td>{item.category.name} </td>
                                                                             <td>{item.price} </td>
                                                                             <td>{item.feature} </td>
+                                                                            <td>{item.status} </td>
                                                                             <td>
                                                                                 <button className="btn btn-success">Edit</button>
                                                                                 <button onClick={()=>{deleteRoom(item.id)}} className="btn btn-danger ms-2">Delete</button>

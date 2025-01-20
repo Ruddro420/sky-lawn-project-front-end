@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
+
         axios
             .post("http://192.168.0.115:8000/api/user/check", {
                 email: data.email,
@@ -15,17 +16,19 @@ const Login = () => {
             })
             .then((response) => {
                 
-                if (response.data.status === "success") { 
+                if (response.data.status === "success") {
                     localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userData", JSON.stringify(response.data.data));
+                    console.log(response.data.data);
                     toast.success(response.data.message);
-                    reset(); 
-                    navigate("/"); 
+                    reset();
+                    navigate("/");
                 } else {
-                    toast.error(response.data.message); 
+                    toast.error(response.data.message);
                 }
             })
             .catch((error) => {
-                console.error(error); 
+                console.error(error);
                 toast.error("Something Went Wrong");
             });
     };
