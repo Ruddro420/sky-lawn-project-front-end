@@ -81,7 +81,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li className="menu-item">
-            <NavLink to='/customer-register' className={({ isActive }) => {
+            <NavLink to='/pre-booking-details' className={({ isActive }) => {
               return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
             }}>
               <i className="menu-icon tf-icons bx bx-lock"></i>
