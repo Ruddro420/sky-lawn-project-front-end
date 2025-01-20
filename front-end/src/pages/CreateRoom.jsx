@@ -10,6 +10,8 @@ const CreateRoom = () => {
     const [category, setCategory] = useState([]);
     const [room, setRoom] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [getRoom, setGetRoom] = useState('');
+    const [status, setStatus] = useState()
 
     const fetchCategories = () => {
         setLoading(true);
@@ -51,7 +53,6 @@ const CreateRoom = () => {
     }, []);
     // get form data
     const onSubmit = (data) => {
-
         axios
             .post("http://192.168.0.115:8000/api/room/add", {
                 room_number: data.room_number,
@@ -72,8 +73,6 @@ const CreateRoom = () => {
             });
     }
 
-    console.log(room);
-
     // Delete a category
     const deleteRoom = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
@@ -90,6 +89,33 @@ const CreateRoom = () => {
                 });
         }
     };
+
+    // edit room
+    const editRoom = (id) => {
+        const data = room.find(item => item.id == id)
+        setGetRoom(data);
+
+    }
+    // change edit
+    const handleChange = (e) => {
+        e.preventDefault()
+        axios
+            .post("http://192.168.0.115:8000/api/room/update/status", {
+                id:getRoom.id,
+                status: status,
+            })
+            .then(() => {
+                toast.success("Update Successfully!");
+                //setGetCategory("");
+                fetchCategories();
+                fetchRoom();
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error("Failed to add room!");
+            });
+    }
+
 
 
     return (
@@ -195,7 +221,7 @@ const CreateRoom = () => {
                             </div>
                         </div>
 
-                        {/* Categories Table */}
+                        {/* Room Table */}
                         <div className="col-12">
                             <div className="card mb-4">
                                 {/* <div className="card-header d-flex justify-content-between align-items-center">
@@ -239,8 +265,8 @@ const CreateRoom = () => {
                                                                             <td>{item.feature} </td>
                                                                             <td>{item.status} </td>
                                                                             <td>
-                                                                                <button className="btn btn-success">Edit</button>
-                                                                                <button onClick={()=>{deleteRoom(item.id)}} className="btn btn-danger ms-2">Delete</button>
+                                                                                <button onClick={() => { editRoom(item.id) }} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                                                                                <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button>
                                                                             </td>
                                                                         </tr>
                                                                     ))}
@@ -252,6 +278,47 @@ const CreateRoom = () => {
                                                 )}
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/*  <!-- Modal --> */}
+                        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">{getRoom.room_name} || <span className="text-danger">Room Number : {getRoom.room_number}</span></h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form onSubmit={handleChange}>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Status
+                                                </label>
+                                                <select
+                                                    name="status"
+                                                    id="status"
+                                                    className="form-control"
+                                                    value={getRoom?.status || "available"}
+                                                    onChange={(e) => setStatus(e.target.value)}
+                                                >
+                                                    <option value="available">Available</option>
+                                                    <option value="pre-booking">Pre-Booking</option>
+                                                    <option value="booking">Booking</option>
+                                                    <option value="available">Checkout</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" className="btn btn-primary">
+                                                Save Changes
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        {/*   <button type="button" className="btn btn-primary">Save changes</button> */}
                                     </div>
                                 </div>
                             </div>

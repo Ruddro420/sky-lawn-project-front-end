@@ -1,33 +1,52 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import SupportShow from "../sub-component/SupportShow";
+import { useEffect, useState } from "react";
 
 
 const Support = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
   const { register, handleSubmit, reset, } = useForm();
-
-
   const onSubmit = (data) => {
-
-    console.log(data);
-
     axios
-        .post("http://192.168.0.115:8000/api/suport/add", {
-            name: data.name,
-            subject: data.subject,
-            phone: data.phone,
-            massage: data.massage,
+      .post("http://192.168.0.115:8000/api/suport/add", {
+        name: data.name,
+        subject: data.subject,
+        phone: data.phone,
+        massage: data.massage,
 
-        })
-        .then(() => {
-            toast.success("sopport added successfully!");
-            reset()
-        })
-        .catch((error) => {
-            console.log(error);
-            toast.error("Failed to add sopport!");
-        });
+      })
+      .then(() => {
+        toast.success("Ticket Added!");
+        reset()
+        setLoading(false);
+        fetchData()
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Soemthing Wrong !");
+        setLoading(false);
+      });
   }
+  // fetch support
+  const fetchData = () => {
+    setLoading(true);
+    axios
+      .get("http://192.168.0.115:8000/api/suport-data")
+      .then((response) => {
+        setData(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="content-wrapper">
       <div className="container-xxl flex-grow-1 container-p-y">
@@ -97,11 +116,18 @@ const Support = () => {
                   </div>
                 </form>
 
-                
+
               </div>
             </div>
           </div>
-
+        </div>
+        <div className="row">
+          <div className="col">
+            {/* Show Support */}
+            <div className="col-xxl">
+              <SupportShow loading={loading} data={data} />
+            </div>
+          </div>
         </div>
       </div>
       <div className="content-backdrop fade"></div>

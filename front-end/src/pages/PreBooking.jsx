@@ -11,6 +11,7 @@ const PreBooking = () => {
     const [roomNumber, setRoomNumber] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const [selectedRoomCat, setSelectedRoomCat] = useState("");
 
     const fetchCategories = () => {
         setLoading(true);
@@ -46,6 +47,8 @@ const PreBooking = () => {
     }, []);
 
     const onSubmit = (data) => {
+        console.log(data);
+
         axios
             .post("http://192.168.0.115:8000/api/prebook/add", {
                 date_time: data.date_time,
@@ -60,8 +63,10 @@ const PreBooking = () => {
                 duration_day: data.duration_day,
                 booking_by: data.booking_by,
             })
-            .then(() => {
+            .then((response) => {
                 toast.success("Pre Booking added successfully!");
+                console.log(response);
+
                 fetchCategories();
                 fetchRoomNumber();
             })
@@ -71,25 +76,31 @@ const PreBooking = () => {
             });
     }
 
-
     /* Select room by price */
     const handleRoomSelection = (roomId) => {
-        const selectedRoom = roomNumber.find(room => room.id === parseInt(roomId));
+        // get room to price
+        const selectedRoom = roomNumber.find(room => room.room_number == parseInt(roomId));
         setSelectedRoomPrice(selectedRoom ? selectedRoom.price : "");
+        // get room to category
+        const selectedCat = roomNumber.find(room => room.room_number == parseInt(roomId));
+        setSelectedRoomCat(selectedCat ? selectedCat.category : "");
     };
+    console.log(selectedRoomCat);
 
+
+    // calculate price
     const calculateRoomPrice = () => {
-        const basePrice = parseFloat(selectedRoomPrice) || 0; 
+        const basePrice = parseFloat(selectedRoomPrice) || 0;
         if (selectPerson == 1) {
-            return (basePrice - 500).toFixed(2); 
+            return (basePrice - 500).toFixed(2);
         } else if (selectPerson > 2) {
-            return (basePrice + (selectPerson - 2) * 1000).toFixed(2); 
+            return (basePrice + (selectPerson - 2) * 1000).toFixed(2);
         }
         return basePrice.toFixed(2);
     };
 
     const handleCheck = () => {
-        setShowForm(true); 
+        setShowForm(true);
     };
 
 
@@ -159,7 +170,7 @@ const PreBooking = () => {
                                                                         roomNumber.map(item => {
                                                                             return (
                                                                                 <>
-                                                                                    <option key={item.id} value={item.id}>{item.room_number}</option>
+                                                                                    <option key={item.id} value={item.room_number}>{item.room_number}</option>
                                                                                 </>
                                                                             )
                                                                         })
@@ -175,23 +186,16 @@ const PreBooking = () => {
                                                             <label className="form-label" htmlFor="basic-default-fullname">
                                                                 Select Room Category
                                                             </label>
-                                                            <select
+                                                            <input
                                                                 {...register("room_category", { required: true })}
-                                                                className="form-control"
+                                                                type="text"
                                                                 name="room_category"
-                                                                id="">
-                                                                <option value="">Select Room Category</option>
-                                                                {
-                                                                    category.map(item => {
-                                                                        return (
-                                                                            <>
-                                                                                <option key={item.id} value={item.id}>{item.name}</option>
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
-
-                                                            </select>
+                                                                className="form-control"
+                                                                id=""
+                                                                value={selectedRoomCat.name}
+                                                                readOnly
+                                                                placeholder="Room Cateogry"
+                                                            />
                                                         </div>
                                                     </div>
 
