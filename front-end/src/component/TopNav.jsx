@@ -52,12 +52,12 @@ const TopNav = () => {
             <li className="nav-item lh-1 me-3">
               <a
                 className="github-button"
-                href="https://github.com/themeselection/sneat-html-admin-template-free"
+                //href="https://github.com/themeselection/sneat-html-admin-template-free"
                 data-icon="octicon-star"
                 data-size="large"
                 data-show-count="true"
-                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-              >Star</a
+                //aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+              >{userData?.name}</a
               >
             </li>
 

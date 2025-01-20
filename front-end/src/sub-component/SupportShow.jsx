@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const SupportShow = ({ data, loading }) => {
-    console.log(data);
-    
+const SupportShow = ({ data, loading ,deleteRoom}) => {
     return (
         <div>
             {/* Pree - Booking Details */}
@@ -41,7 +39,7 @@ const SupportShow = ({ data, loading }) => {
                                                                 <td>{item.phone} </td>
                                                                 <td>{item.status == 0 ? 'Pending' : 'Closed'} </td>
                                                                 <td>
-                                                                    <button /* onClick={() => { deleteRoom(item.id) }} */ className="btn btn-danger ms-2">Delete</button>
+                                                                    <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button>
                                                                 </td>
                                                             </tr>
                                                         ))}
