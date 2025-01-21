@@ -76,14 +76,14 @@ const Sidebar = () => {
               <div data-i18n="Analytics">Pre-Booking</div>
             </NavLink>
           </li>
-          <li className="menu-item">
+          {/* <li className="menu-item">
             <NavLink to='/customer-register' className={({ isActive }) => {
               return isActive ? "menu-link active-link text-primary bg-body " : "menu-link";
             }}>
               <i className="menu-icon tf-icons bx bx-lock"></i>
               <div data-i18n="Analytics">Customer Booking</div>
             </NavLink>
-          </li>
+          </li> */}
           <li className={`menu-item ${details ? "open" : ""}`}>
             <NavLink to='#' onClick={handleToggleDetails} className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-layout"></i>
