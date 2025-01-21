@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import BookingDetails from "../pages/BookingDetails";
 
 const MainContent = () => {
   const [monthlyData, setMonthlyData] = useState();
   const [weeklyData, setweeklyData] = useState();
+  const [room, setRoom] = useState();
+  const [loading, setLoading] = useState(true);
 
   //  console.log(monthlyData);
   //  console.log(weeklyData);
+
+  console.log(room);
 
   // fetch monthly data
   const BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -38,9 +43,31 @@ const MainContent = () => {
 
       });
   };
+
+  // get preBookdata details
+  const fetchRoom = () => {
+    setLoading(true);
+    axios
+      .get(`${BASE_URL}/prebook-data`)
+      .then((response) => {
+        setRoom(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  // Fetch room fetch
+  useEffect(() => {
+    fetchRoom();
+  }, []);
+
   useEffect(() => {
     fetchMonthlyData();
     fetchWeeklyData();
+
   }, []);
 
   return (
@@ -58,14 +85,14 @@ const MainContent = () => {
                     <div className="card-body">
                       <div className="card-title d-flex align-items-start justify-content-between">
                         <div className="avatar flex-shrink-0">
-                          
-                            <img
-                              src="../assets/img/icons/unicons/chart-success.png"
-                              alt="chart success"
-                              className="rounded"
-                            />
-                            
-                          
+
+                          <img
+                            src="../assets/img/icons/unicons/chart-success.png"
+                            alt="chart success"
+                            className="rounded"
+                          />
+
+
                         </div>
                         <div className="dropdown">
                           <button
@@ -250,8 +277,8 @@ const MainContent = () => {
               <div className="card h-100">
                 <div className="card-header d-flex align-items-center justify-content-between pb-0">
                   <div className="card-title mb-0">
-                    <h5 className="m-0 me-2">Order Statistics</h5>
-                    <small className="text-muted">42.82k Total Sales</small>
+                    <h5 className="m-0 me-2">Booking Statistics</h5>
+                    <small className="text-muted">Total Booking {room?.length}</small>
                   </div>
                   <div className="dropdown">
                     <button
@@ -275,72 +302,85 @@ const MainContent = () => {
                   <div className="d-flex justify-content-between align-items-center mb-3">
                     <div className="d-flex flex-column align-items-center gap-1">
                       <h2 className="mb-2">8,258 TK</h2>
-                      <span>Total Orders</span>
+                      <h6 className="me-4">Last 3 Booking</h6>
                     </div>
                     <div id="orderStatisticsChart"></div>
                   </div>
+                  {/* <ul className="p-0 m-0">
+                    {loading ? (
+                      <p>Loading.....</p>
+                    ) :  ( 
+                      room.slice(-3).reverse().map((item) => (
+                        <li key={item?.id} className="d-flex mb-4 pb-1">
+                          <div className="avatar flex-shrink-0 me-3">
+                            <span className="avatar-initial rounded bg-label-success">
+                              <i className="bx bx-user"></i>
+                            </span>
+                          </div>
+                          <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div className="me-2">
+                              <h6 className="mb-0">{item?.name}</h6>
+                              <small className="text-muted">Room: {item?.room_number}</small>
+                              <p className="text-muted mb-0">
+                                {item?.nationality} | {item?.date_time}
+                              </p>
+                            </div>
+                            <div className="user-progress text-end">
+                              <small className="fw-semibold text-primary">
+                                {item?.room_price}
+                              </small>
+                              <br />
+                              <small className="text-muted">{item?.duration_day} Day(s)</small>
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                    )}
+                  </ul> */}
+
                   <ul className="p-0 m-0">
-                    <li className="d-flex mb-4 pb-1">
-                      <div className="avatar flex-shrink-0 me-3">
-                        <span className="avatar-initial rounded bg-label-primary"
-                        ><i className="bx bx-mobile-alt"></i
-                        ></span>
+                    {loading ? (
+                      <p>Loading.....</p>
+                    ) : room.length === 0 ? (
+                      <div className="alert alert-warning" role="alert">
+                        No Data Found
                       </div>
-                      <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="me-2">
-                          <h6 className="mb-0">Aparajita</h6>
-                          <small className="text-muted">R.N: 401</small>
-                        </div>
-                        <div className="user-progress">
-                          <small className="fw-semibold">82.5 Taka</small>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="d-flex mb-4 pb-1">
-                      <div className="avatar flex-shrink-0 me-3">
-                        <span className="avatar-initial rounded bg-label-success"><i className="bx bx-closet"></i></span>
-                      </div>
-                      <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="me-2">
-                          <h6 className="mb-0">Rajnigandha</h6>
-                          <small className="text-muted">R.N: 401</small>
-                        </div>
-                        <div className="user-progress">
-                          <small className="fw-semibold">23.8k</small>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="d-flex mb-4 pb-1">
-                      <div className="avatar flex-shrink-0 me-3">
-                        <span className="avatar-initial rounded bg-label-info"><i className="bx bx-home-alt"></i></span>
-                      </div>
-                      <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="me-2">
-                          <h6 className="mb-0">Ashok</h6>
-                          <small className="text-muted">R.N: 501</small>
-                        </div>
-                        <div className="user-progress">
-                          <small className="fw-semibold">849k</small>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="d-flex">
-                      <div className="avatar flex-shrink-0 me-3">
-                        <span className="avatar-initial rounded bg-label-secondary"
-                        ><i className="bx bx-football"></i
-                        ></span>
-                      </div>
-                      <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="me-2">
-                          <h6 className="mb-0">Dolonchapa</h6>
-                          <small className="text-muted">R.N: 506</small>
-                        </div>
-                        <div className="user-progress">
-                          <small className="fw-semibold">99</small>
-                        </div>
-                      </div>
-                    </li>
+                    ) : (
+                      room
+                        .slice(-3) // Get the last 3 items
+                        .reverse() // Reverse the order
+                        .map((item) => (
+                          <li key={item?.id} className="d-flex mb-4 pb-1">
+                            <div className="avatar flex-shrink-0 me-3">
+                              <span className="avatar-initial rounded bg-label-success">
+                                <i className="bx bx-user"></i>
+                              </span>
+                            </div>
+                            <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div className="me-2">
+                                <h6 className="mb-0">{item?.name}</h6>
+                                <small className="text-muted">Room: {item?.room_number}</small>
+                                <p className="text-muted mb-0">
+                                  {item?.nationality} | {new Date(item?.date_time).toLocaleString("en-bd", {
+                                    dateStyle: "medium",
+                                    timeStyle: "short",
+                                  })}
+                                </p>
+                              </div>
+                              <div className="user-progress text-end">
+                                <small className="fw-semibold text-primary">
+                                  ${item?.room_price}
+                                </small>
+                                <br />
+                                <small className="text-muted">{item?.duration_day} Day(s)</small>
+                              </div>
+                            </div>
+                          </li>
+                        ))
+                    )}
                   </ul>
+
+
                 </div>
               </div>
             </div>
