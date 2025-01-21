@@ -36,7 +36,7 @@ const PreBookingDetails = () => {
         axios
             .get(`${BASE_URL}/prebook-data`)
             .then((response) => {
-                setRoom(response.data);
+                setRoom(response.data.data);
                 setLoading(false);
             })
             .catch((error) => {
