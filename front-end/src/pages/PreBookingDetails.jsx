@@ -7,8 +7,8 @@ const PreBookingDetails = () => {
     const [category, setCategory] = useState([]);
     const [room, setRoom] = useState([]);
     const [loading, setLoading] = useState(true);
-      // fetch data
-      const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    // fetch data
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const fetchCategories = () => {
         setLoading(true);
@@ -51,9 +51,11 @@ const PreBookingDetails = () => {
     }, []);
     const navigate = useNavigate()
     // booking data
-    const booking = (data) =>{
+    const booking = (data) => {
         navigate(`/booking/${data}`)
     }
+    console.log(room);
+
     return (
         <div>
             <div className="content-wrapper">
@@ -98,7 +100,11 @@ const PreBookingDetails = () => {
                                                                     <td>{item.duration_day} </td>
                                                                     <td>{item.booking_by} </td>
                                                                     <td>
-                                                                        <button onClick={()=>booking(item.id)} className="btn btn-success">Booking</button>
+                                                                        {
+                                                                            item.status == 1 ? <button disabled onClick={() => booking(item.id)} className="btn btn-primary">Booked</button> :
+                                                                                <button onClick={() => booking(item.id)} className="btn btn-danger">Apply Booking</button>
+                                                                        }
+
                                                                         {/*  <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button> */}
                                                                     </td>
                                                                 </tr>

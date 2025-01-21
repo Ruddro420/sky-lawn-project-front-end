@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { format, parseISO } from 'date-fns';
+import toast from "react-hot-toast";
 
 const Booking = () => {
     const [preBook, setPreBook] = useState({});
@@ -43,7 +44,69 @@ const Booking = () => {
         fetchRoom();
     }, [data]);
 
-    console.log(preBook);
+    // add booking data
+
+    const onSubmit = (data) => {
+        console.log(data);
+    
+        // Create FormData object for file uploads
+        const formData = new FormData();
+    
+        // Append all fields to FormData
+        formData.append("name", data.name);
+        formData.append("mobile", data.phone);
+        formData.append("fathers_name", data.fathers_name);
+        formData.append("mothers_name", data.mothers_name);
+        formData.append("address", data.address);
+        formData.append("nationality", data.nationality);
+        formData.append("profession", data.profession);
+        formData.append("company", data.company);
+        formData.append("comming_form", data.comming_form);
+        formData.append("purpose", data.purpose);
+        formData.append("checking_date_time", data.date_time);
+        formData.append("checkout_date_time", data.checkout_date_time);
+        formData.append("room_category", data.room_category);
+        formData.append("room_number", data.room_number);
+        formData.append("room_price", data.room_price);
+        formData.append("person", data.person);
+        formData.append("duration_day", data.duration_day);
+        formData.append("total_price", data.total_price);
+        formData.append("nid_no", data.nid_no);
+    
+        // Handle file fields (append only if files are provided)
+        if (data.nid_doc?.[0]) formData.append("nid_doc", data.nid_doc[0]);
+        if (data.couple_doc?.[0]) formData.append("couple_doc", data.couple_doc[0]);
+        if (data.passport_doc?.[0]) formData.append("passport_doc", data.passport_doc[0]);
+        if (data.visa_doc?.[0]) formData.append("visa_doc", data.visa_doc[0]);
+        if (data.other_doc?.[0]) formData.append("other_doc", data.other_doc[0]);
+    
+        formData.append("passport_no", data.passport_no);
+        formData.append("visa_no", data.visa_no);
+        formData.append("payment_status", data.payment_status);
+        formData.append("payment_method", data.payment_method);
+        formData.append("booking_by", data.booking_by);
+    
+        // Axios POST request with FormData
+        axios
+            .post(`${BASE_URL}/booking/add`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", // Set appropriate headers for file uploads
+                },
+            })
+            .then((response) => {
+                toast.success("Booking added successfully!");
+                console.log(response);
+    
+                // Optionally fetch updated data
+                /* fetchCategories();
+                fetchRoomNumber(); */
+            })
+            .catch((error) => {
+                console.error("Error:", error.response?.data || error.message);
+                toast.error("Failed to add booking!");
+            });
+    };
+    
 
     return (
         <div>
@@ -56,7 +119,7 @@ const Booking = () => {
                                     <h5 className="mb-0">Booking Details</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form /* onSubmit={handleSubmit(onSubmit)} */>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="row">
                                             <div className="w-full">
                                                 <div className="mb-3">
@@ -334,8 +397,8 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("nid_no", { required: true })}
-                                                        name="number"
-                                                        type="datetime-local"
+                                                        name="nid_no"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="NID No"
@@ -349,8 +412,8 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("passport_no", { required: false })}
-                                                        name="number"
-                                                        type="datetime-local"
+                                                        name="passport_no"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Passport No"
@@ -436,7 +499,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("nid_doc", { required: false })}
-                                                        name="nid_doc"
+                                                        name="nid_doc[]"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
@@ -452,7 +515,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("couple_doc", { required: false })}
-                                                        name="couple_doc"
+                                                        name="couple_doc[]"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
@@ -468,7 +531,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("passport_doc", { required: false })}
-                                                        name="passport_doc"
+                                                        name="passport_doc[]"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
@@ -484,7 +547,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("visa_doc", { required: false })}
-                                                        name="visa_doc"
+                                                        name="visa_doc[]"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
@@ -500,7 +563,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("other_doc", { required: false })}
-                                                        name="other_doc"
+                                                        name="other_doc[]"
                                                         multiple
                                                         type="file"
                                                         className="form-control"

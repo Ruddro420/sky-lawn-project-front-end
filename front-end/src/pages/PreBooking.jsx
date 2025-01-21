@@ -48,11 +48,11 @@ const PreBooking = () => {
         fetchCategories();
         fetchRoomNumber();
     }, []);
-
+    // add pre - booking data
     const onSubmit = (data) => {
         console.log(data);
 
-        /* axios
+        axios
             .post(`${BASE_URL}/prebook/add`, {
                 date_time: data.date_time,
                 name: data.name,
@@ -76,7 +76,7 @@ const PreBooking = () => {
             .catch((error) => {
                 console.log(error);
                 toast.error("Failed to add booking!");
-            }); */
+            });
     }
 
     /* Select room by price */
