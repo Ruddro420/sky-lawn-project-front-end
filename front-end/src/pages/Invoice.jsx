@@ -2,14 +2,59 @@ import { useEffect, useState } from 'react';
 import './Invoice.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 const Invoice = () => {
     const { id } = useParams()
-
     const [getInvoice, setGetInvoice] = useState([])
     const [loading, setLoading] = useState(true);
     const [otheres, setOthers] = useState(0);
     const [food, setFood] = useState(0);
     const [discount, setDiscount] = useState(0);
+    
+
+
+
+/* invoice download start */
+const handleDownloadPDF = () => {
+    const element = document.getElementById("tm_download_section");
+
+    // Replace input fields with their values
+    const inputs = element.querySelectorAll("input");
+    inputs.forEach((input) => {
+        const span = document.createElement("span");
+        span.textContent = input.value || "0"; // Show zero if the field is empty
+        span.style.fontFamily = "Arial, sans-serif"; // Ensure proper font rendering
+        span.style.fontSize = getComputedStyle(input).fontSize;
+        span.style.textAlign = getComputedStyle(input).textAlign;
+        input.parentNode.replaceChild(span, input);
+    });
+
+    html2canvas(element, { scale: 2 }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`${getInvoice.invoice}-invoice.pdf`);
+
+        // Revert spans back to input fields (optional, to restore the UI)
+        inputs.forEach((input, index) => {
+            const span = element.querySelectorAll("span")[index];
+            input.parentNode.replaceChild(input, span);
+        });
+    });
+};
+
+
+
+
+
+
+
+
+    /* invoice download end */
 
     // env url
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -33,14 +78,26 @@ const Invoice = () => {
         fetchRoom();
     }, []);
 
-    console.log(getInvoice);
+    // console.log(getInvoice.invoice);
 
-
+    // const [advanced, setAdvanced] = useState(getInvoice.advance);
+    // console.log(getInvoice.advance);
+    
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="">
                     <div className="">
+                         <div className="tm_invoice_btns tm_hide_print">
+                               
+                                <button onClick={handleDownloadPDF} className="tm_invoice_btn invoiceprintbtn tm_color1">
+                                    <span className="tm_btn_icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><circle cx="392" cy="184" r="24" fill='currentColor' /></svg>
+                                    </span>
+                                    <span className="tm_btn_text">Print</span>
+                                </button>
+                                
+                            </div>
                         <div className="tm_invoice_wrap">
                             <div className="tm_invoice tm_style2" id="tm_download_section">
                                 <div className="tm_invoice_in">
@@ -135,26 +192,40 @@ const Invoice = () => {
                                                                 <td className="tm_width_6">Restaurant Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"></td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={food} type="number" onChange={(e) => setFood(e.target.value)} />
+                                                                <td className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input className='custom-input-data custom-input-width' value={food} type="number" onChange={(e) => setFood(e.target.value)} />
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td className="tm_width_6">Others Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={otheres} type="number" onChange={(e) => setOthers(e.target.value)} />
+                                                                <td className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input className='custom-input-data custom-input-width' value={otheres} type="number" onChange={(e) => setOthers(e.target.value)} />
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td className="tm_width_6">Discount (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={discount} type="number" onChange={(e) => setDiscount(e.target.value)} />
+                                                                <td className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input className='custom-input-data custom-input-width' 
+                                                                    value={discount} type="number" 
+                                                                    onChange={(e) => setDiscount(e.target.value)} />
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td className="tm_width_6">Advanced Payment (৳)</td>
+                                                                <td contentEditable="true" className="tm_width_2"> </td>
+                                                                <td className="tm_width_2" contentEditable="true"> </td>
+                                                                <td className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input className='custom-input-data custom-input-width' 
+                                                                    value={getInvoice.advance} type="number" 
+                                                                    readOnly
+                                                                   /*  onChange={(e) => setAdvanced(e.target.value)} */ />
+                                                                </td>
+                                                            </tr>
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -169,7 +240,7 @@ const Invoice = () => {
                                                         <tbody>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_bold">Subtoal</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳ {parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)}</td>
+                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳ {(food==''?0:parseInt(food)) + (otheres==''?0:parseInt(otheres)) + (getInvoice.room_price==''?0: parseInt(getInvoice.room_price))}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount</td>
@@ -181,7 +252,7 @@ const Invoice = () => {
                                                             </tr> */}
                                                             <tr>
                                                                 <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">Grand Total	</td>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">{(parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)) - (discount == '' ? 0 : parseInt(discount))} </td>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">৳ {((food==''?0:parseInt(food)) + (otheres==''?0:parseInt(otheres)) + parseInt(getInvoice.room_price)) - (discount == '' ? 0 : parseInt(discount))-parseInt(getInvoice.advance)} </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -206,7 +277,8 @@ const Invoice = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tm_invoice_btns tm_hide_print">
+
+                           {/*  <div className="tm_invoice_btns tm_hide_print">
                                 <a href="javascript:window.print()" className="tm_invoice_btn tm_color1">
                                     <span className="tm_btn_icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><circle cx="392" cy="184" r="24" fill='currentColor' /></svg>
@@ -219,7 +291,7 @@ const Invoice = () => {
                                     </span>
                                     <span className="tm_btn_text">Download</span>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

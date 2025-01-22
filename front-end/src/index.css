@@ -3,6 +3,16 @@
     outline: none;
     text-align: right;
 }
+.inv-inp{
+    /* padding-right: 0px !important; */
+}
+.custom-input-width {
+    /* width: 100px !important; */
+    font-family: Arial, sans-serif; /* Ensure a common font is applied */
+    /* margin-right: 100px; */
+  
+}
+
 /* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
