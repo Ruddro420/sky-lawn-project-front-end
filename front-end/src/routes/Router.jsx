@@ -19,6 +19,7 @@ import PreBookingDetails from "../pages/PreBookingDetails";
 import Booking from "../pages/Booking";
 import BookingDetails from "../pages/BookingDetails";
 import MainBookingDetails from "../pages/MainBookingDetails";
+import Invoice from "../pages/Invoice";
 
 const Router = createBrowserRouter([
     {
@@ -82,6 +83,14 @@ const Router = createBrowserRouter([
             {
                 path: '/main-booking-details',
                 element: <MainBookingDetails />
+            },
+            {
+                path: '/bookingDetails/:id',
+                element: <BookingDetails />
+            },
+            {
+                path: '/invoice',
+                element: <Invoice></Invoice>
             },
             
         ]

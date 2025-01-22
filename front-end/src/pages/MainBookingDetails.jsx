@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainBookingDetails = () => {
     const [booking, setBooking] = useState([]);
@@ -7,7 +8,7 @@ const MainBookingDetails = () => {
 
     // env url
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-    // get preBookdata details
+    // get Booking details
     const fetchRoom = () => {
         setLoading(true);
         axios
@@ -22,10 +23,16 @@ const MainBookingDetails = () => {
             });
     };
 
-    // Fetch room fetch
+    // Fetch room booking fetch
     useEffect(() => {
         fetchRoom();
     }, []);
+
+    const navigate = useNavigate()
+    // booking data
+    const details = (id) => {
+        navigate(`/bookingDetails/${id}`)
+    }
 
     console.log(booking);
     return (
@@ -37,7 +44,7 @@ const MainBookingDetails = () => {
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Main Booking Details</h5>
-                                <h1>{booking.length}</h1>
+                                <h1>{booking?.length}</h1>
                             </div>
 
                             <div className="card-body">
@@ -64,17 +71,25 @@ const MainBookingDetails = () => {
                                                     </thead>
 
                                                     <tbody className="table-border-bottom-0">
-                                                        {booking.map((item, index) => (
+                                                        {booking?.map((item, index) => (
                                                             <tr key={index}>
                                                                 <td>{item.name} </td>
-                                                                <td>{item.phone} </td>
+                                                                <td>{item.mobile} </td>
                                                                 <td>{item.address} </td>
-                                                                <td>{item.checking_date_time} </td>
-                                                                <td>{item.checkout_date_time} </td>
+                                                                <td>{new Date(item?.checking_date_time).toLocaleString("en-bd", {
+                                                                    dateStyle: "medium",
+                                                                    timeStyle: "short",
+                                                                })}</td>
+                                                                {/* <td>{item.checking_date_time} </td> */}
+                                                                <td>{new Date(item?.checkout_date_time).toLocaleString("en-bd", {
+                                                                    dateStyle: "medium",
+                                                                    timeStyle: "short",
+                                                                })} </td>
                                                                 <td>{item.room_number} </td>
                                                                 <td>{item.payment_status} </td>
                                                                 <td>
-                                                                   <button className="btn btn-primary">Invoice</button>
+                                                                    <button className="btn btn-primary ">Invoice</button>
+                                                                    <button onClick={()=>{details(item.id)}} className="btn btn-info ms-2">Details</button>
                                                                 </td>
                                                             </tr>
                                                         ))}
