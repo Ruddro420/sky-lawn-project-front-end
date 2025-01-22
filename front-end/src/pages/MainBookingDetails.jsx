@@ -33,6 +33,10 @@ const MainBookingDetails = () => {
     const details = (id) => {
         navigate(`/bookingDetails/${id}`)
     }
+    // get invoice
+    const invoiceGenerate = (id) =>{
+        navigate(`/invoice/${id}`)
+    }
 
     console.log(booking);
     return (
@@ -64,8 +68,8 @@ const MainBookingDetails = () => {
                                                             <th>Address</th>
                                                             <th>Check In</th>
                                                             <th>Check Out</th>
-                                                            <th>Room Number</th>
-                                                            <th>Payment Status</th>
+                                                            <th>R.N</th>
+                                                            <th>P.S</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
@@ -88,8 +92,8 @@ const MainBookingDetails = () => {
                                                                 <td>{item.room_number} </td>
                                                                 <td>{item.payment_status} </td>
                                                                 <td>
-                                                                    <button className="btn btn-primary ">Invoice</button>
-                                                                    <button onClick={()=>{details(item.id)}} className="btn btn-info ms-2">Details</button>
+                                                                    <button onClick={() => invoiceGenerate(item.id)} className="btn btn-primary ">Invoice</button>
+                                                                    <button onClick={() => { details(item.id) }} className="btn btn-info ms-2">Details</button>
                                                                 </td>
                                                             </tr>
                                                         ))}

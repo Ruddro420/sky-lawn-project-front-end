@@ -89,10 +89,10 @@ const Router = createBrowserRouter([
                 element: <BookingDetails />
             },
             {
-                path: '/invoice',
-                element: <Invoice></Invoice>
+                path: '/invoice/:id',
+                element: <Invoice />
             },
-            
+
         ]
     },
     {
