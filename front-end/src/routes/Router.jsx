@@ -18,6 +18,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import PreBookingDetails from "../pages/PreBookingDetails";
 import Booking from "../pages/Booking";
 import BookingDetails from "../pages/BookingDetails";
+import MainBookingDetails from "../pages/MainBookingDetails";
 
 const Router = createBrowserRouter([
     {
@@ -77,6 +78,10 @@ const Router = createBrowserRouter([
             {
                 path: '/booking/:data',
                 element: <Booking />
+            },
+            {
+                path: '/main-booking-details',
+                element: <MainBookingDetails />
             },
             
         ]

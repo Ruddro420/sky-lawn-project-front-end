@@ -99,7 +99,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="menu-item">
-                <NavLink to='/booking/:data' className={({ isActive }) => {
+                <NavLink to='/main-booking-details' className={({ isActive }) => {
                   return isActive ? "menu-link active-link bg-body text-primary " : "menu-link";
                 }}>
                   <div data-i18n="Without menu">Booking Details</div>

@@ -5,13 +5,14 @@ import toast from "react-hot-toast";
 
 
 const CreateRoom = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm();
 
     const [category, setCategory] = useState([]);
     const [room, setRoom] = useState([]);
     const [loading, setLoading] = useState(true);
     const [getRoom, setGetRoom] = useState('');
-    const [status, setStatus] = useState()
+    const [status, setStatus] = useState();
+    const [getUpdateRoom, setGetUpdateRoom] = useState('');
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -32,6 +33,7 @@ const CreateRoom = () => {
     // Fetch categories on component load
     useEffect(() => {
         fetchCategories();
+
     }, []);
 
     // get room details
@@ -96,7 +98,6 @@ const CreateRoom = () => {
     const editRoom = (id) => {
         const data = room.find(item => item.id == id)
         setGetRoom(data);
-
     }
     // change edit
     const handleChange = (e) => {
@@ -117,6 +118,47 @@ const CreateRoom = () => {
                 toast.error("Failed to add room!");
             });
     }
+
+    // get update room 
+    const updateRoom = (id) => {
+        const data = room.find(item => item.id == id)
+        setGetUpdateRoom(data);
+        setValue("room_name", data.room_name);
+        setValue("room_number", data.room_number);
+        setValue("price", data.price);
+        setValue("feature", data.feature);
+        setValue("room_category_id", data.room_category_id);
+    }
+    // update room 
+    const onUpdateSubmit = (data) => {
+        console.log(data);
+        
+        // Create FormData object for file uploads
+        const formData = new FormData();
+
+        // Append all fields to FormData
+        formData.append("room_name", data.room_name);
+        formData.append("room_number", data.room_number);
+        formData.append("price", data.price);
+        formData.append("feature", data.feature);
+        formData.append("room_category_id", data.room_category_id);
+        // call api
+        axios
+            .post(`${BASE_URL}/room/update`, formData)
+            .then(() => {
+                toast.success("Update successfully!");
+                //setGetCategory("");
+                fetchCategories(); // Refresh the category list
+                fetchRoom();
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error("Something Went Wrong!");
+            });
+    }
+
+
+    console.log(getUpdateRoom);
 
 
 
@@ -269,6 +311,11 @@ const CreateRoom = () => {
                                                                             <td>
                                                                                 <button onClick={() => { editRoom(item.id) }} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
                                                                                 <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button>
+                                                                                <button
+                                                                                    onClick={() => { updateRoom(item.id) }}
+                                                                                    className="btn btn-success ms-2"
+                                                                                    data-bs-toggle="modal" data-bs-target="#updateModal"
+                                                                                >Update</button>
                                                                             </td>
                                                                         </tr>
                                                                     ))}
@@ -311,6 +358,104 @@ const CreateRoom = () => {
                                                     <option value="booking">Booking</option>
                                                     <option value="available">Checkout</option>
                                                 </select>
+                                            </div>
+                                            <button type="submit" className="btn btn-primary">
+                                                Save Changes
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        {/*   <button type="button" className="btn btn-primary">Save changes</button> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/*  <!-- Edit Modal --> */}
+                        <div className="modal fade" id="updateModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">{getUpdateRoom.room_name} || <span className="text-danger">Room Number : {getUpdateRoom.room_number}</span></h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form onSubmit={handleSubmit(onUpdateSubmit)}>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Room Name
+                                                </label>
+                                                <input
+                                                    {...register("room_name", { required: true })}
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="room_name"
+
+                                                />
+                                            </div>
+
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Room Category
+                                                </label>
+                                                <select
+                                                    {...register("room_category_id", { required: true })}
+                                                    name="room_category_id"
+                                                    id="room_category_id"
+                                                    className="form-control"
+                                                    value={getUpdateRoom?.room_category_id || ""}
+                                                    onChange={(e) => setValue("room_category_id", e.target.value)}
+                                                >
+
+                                                    {
+                                                        category.map(item => {
+                                                            return (
+                                                                <>
+                                                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+
+                                                </select>
+                                            </div>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Room Number
+                                                </label>
+                                                <input
+                                                    {...register("room_number", { required: true })}
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="room_number"
+
+                                                />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Room Price
+                                                </label>
+                                                <input
+                                                    {...register("price", { required: true })}
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="price"
+
+                                                />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="status">
+                                                    Room Feature
+                                                </label>
+                                                <input
+                                                    {...register("feature", { required: true })}
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="feature"
+
+                                                />
                                             </div>
                                             <button type="submit" className="btn btn-primary">
                                                 Save Changes
