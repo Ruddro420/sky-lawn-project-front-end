@@ -137,6 +137,7 @@ const CreateRoom = () => {
         const formData = new FormData();
 
         // Append all fields to FormData
+        formData.append("id", getUpdateRoom.id);
         formData.append("room_name", data.room_name);
         formData.append("room_number", data.room_number);
         formData.append("price", data.price);
@@ -157,8 +158,6 @@ const CreateRoom = () => {
             });
     }
 
-
-    console.log(getUpdateRoom);
 
 
 
@@ -401,7 +400,7 @@ const CreateRoom = () => {
                                                     Room Category
                                                 </label>
                                                 <select
-                                                    {...register("room_category_id", { required: true })}
+                                                   /*  {...register("room_category_id", { required: true })} */
                                                     name="room_category_id"
                                                     id="room_category_id"
                                                     className="form-control"
