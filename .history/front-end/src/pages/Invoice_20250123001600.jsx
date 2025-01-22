@@ -8,8 +8,6 @@ const Invoice = () => {
     const [getInvoice, setGetInvoice] = useState([])
     const [loading, setLoading] = useState(true);
     const [otheres, setOthers] = useState(0);
-    const [food, setFood] = useState(0);
-    const [discount, setDiscount] = useState(0);
 
     // env url
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -128,32 +126,20 @@ const Invoice = () => {
                                                             <tr>
                                                                 <td className="tm_width_6">{getInvoice.room_number} - {getInvoice.room_category}</td>
                                                                 <td className="tm_width_2"> ৳ {getInvoice.room_price}</td>
-                                                                <td className="tm_width_2"> ৳ {getInvoice.total_price}</td>
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td>
+                                                                <td className="tm_width_2" contentEditable="true" > ৳ {getInvoice.total_price}</td>
+                                                                <td className="tm_width_2 tm_text_right" contentEditable="true"> ৳{getInvoice.total_price}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_6">Restaurant Cost (৳)</td>
+                                                                <td className="tm_width_6">Restaurant Cost</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"></td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={food} type="number" onChange={(e) => setFood(e.target.value)} />
-                                                                </td>
+                                                                <td className="tm_width_2 tm_text_right" contentEditable="true">৳ 00</td>
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_6">Others Cost (৳)</td>
+                                                                <td className="tm_width_6">Others Cost</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={otheres} type="number" onChange={(e) => setOthers(e.target.value)} />
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td className="tm_width_6">Discount (৳)</td>
-                                                                <td contentEditable="true" className="tm_width_2"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data' value={discount} type="number" onChange={(e) => setDiscount(e.target.value)} />
-                                                                </td>
+                                                                <td className="tm_width_2 tm_text_right"> <input className='custom-input-data' value={otheres} type="number" /></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -169,19 +155,19 @@ const Invoice = () => {
                                                         <tbody>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_bold">Subtoal</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳ {parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)}</td>
+                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳1000</td>
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount</td>
-                                                                <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">{discount}</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount 100%</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">- ৳100</td>
                                                             </tr>
-                                                            {/* <tr>
+                                                            <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_pt0">Tax 5%</td>
                                                                 <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_pt0">+ ৳50</td>
-                                                            </tr> */}
+                                                            </tr>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">Grand Total	</td>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">{(parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)) - (discount == '' ? 0 : parseInt(discount))} </td>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0"> ৳950</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

@@ -169,19 +169,19 @@ const Invoice = () => {
                                                         <tbody>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_bold">Subtoal</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳ {parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)}</td>
+                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold"> ৳ {food + otheres + getInvoice.room_price}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount</td>
-                                                                <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">{discount}</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount 100%</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">- ৳100</td>
                                                             </tr>
-                                                            {/* <tr>
+                                                            <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_pt0">Tax 5%</td>
                                                                 <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_pt0">+ ৳50</td>
-                                                            </tr> */}
+                                                            </tr>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">Grand Total	</td>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">{(parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)) - (discount == '' ? 0 : parseInt(discount))} </td>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0"> ৳950</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

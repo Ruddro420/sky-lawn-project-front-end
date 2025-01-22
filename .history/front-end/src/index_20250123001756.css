@@ -2,6 +2,7 @@
     border: none!important;
     outline: none;
     text-align: right;
+    -moz-appearance: textfield;
 }
 /* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

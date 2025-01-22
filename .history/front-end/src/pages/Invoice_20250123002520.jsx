@@ -181,7 +181,7 @@ const Invoice = () => {
                                                             </tr> */}
                                                             <tr>
                                                                 <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">Grand Total	</td>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">{(parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)) - (discount == '' ? 0 : parseInt(discount))} </td>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">{(parseInt(food) + parseInt(otheres) + parseInt(getInvoice.room_price)) - discount == '' ? 0 : parseInt(discount)} </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
