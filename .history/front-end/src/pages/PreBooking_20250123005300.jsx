@@ -12,7 +12,6 @@ const PreBooking = () => {
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
     const [selectedRoomCat, setSelectedRoomCat] = useState("");
-    const [duration, setDuration] = useState(1);
 
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -90,17 +89,21 @@ const PreBooking = () => {
         setSelectedRoomCat(selectedCat ? selectedCat.category : "");
     };
 
-
     // calculate price
     const calculateRoomPrice = () => {
         const basePrice = parseFloat(selectedRoomPrice) || 0;
-        if (selectPerson == 1) {
-            return (basePrice - 500).toFixed(2);
+        const duration = parseInt(document.getElementById("duration_day")?.value || 1);
+        let finalPrice = basePrice;
+
+        if (selectPerson === 1) {
+            finalPrice = basePrice - 500;
         } else if (selectPerson > 2) {
-            return (basePrice + (selectPerson - 2) * 1000).toFixed(2);
+            finalPrice = basePrice + (selectPerson - 2) * 1000;
         }
-        return basePrice.toFixed(2);
+
+        return (finalPrice * duration).toFixed(2);
     };
+
 
     const handleCheck = () => {
         let checkInputData = document.getElementById('checkOut').value;
@@ -196,7 +199,7 @@ const PreBooking = () => {
                                                                 Select Room Category
                                                             </label>
                                                             <input
-                                                                {...register("room_category", { required: false })}
+                                                                {...register("room_category", { required: true })}
                                                                 type="text"
                                                                 name="room_category"
                                                                 className="form-control"
@@ -284,16 +287,18 @@ const PreBooking = () => {
                                                                 className="form-control"
                                                                 id="duration_day"
                                                                 placeholder="Duration of stay"
-                                                                value={duration}
-                                                                onChange={(e) => setDuration(e.target.value)}
+                                                                onChange={() => {
+                                                                    document.getElementById("room_price").value = calculateRoomPrice();
+                                                                }}
                                                             />
+
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
                                                                 Price - <span className="text-danger">
-                                                                    {calculateRoomPrice() * duration} ৳ </span>
+                                                                    {calculateRoomPrice()} ৳ </span>
                                                             </label>
                                                             <input
                                                                 {...register("room_price", { required: true })}
@@ -301,7 +306,7 @@ const PreBooking = () => {
                                                                 type="number"
                                                                 className="form-control"
                                                                 id="basic-default-fullname"
-                                                                placeholder={calculateRoomPrice() * duration}
+                                                                placeholder={calculateRoomPrice()}
 
                                                             />
                                                         </div>

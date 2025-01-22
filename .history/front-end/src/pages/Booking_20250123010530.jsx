@@ -30,8 +30,7 @@ const Booking = () => {
                 setValue("phone", response.data.phone);
                 setValue("person", response.data.person);
                 setValue("duration_day", response.data.duration_day);
-                setValue("room_price", response.data.room_price);
-                setValue("total_price", response.data.room_price);
+                setValue("room_price", response.data.room_price * response.data.duration_day);
                 setValue("booking_by", response.data.booking_by);
                 setValue("date_time", format(parseISO(response.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
             })
@@ -284,111 +283,7 @@ const Booking = () => {
                                             <hr />
                                             <h5 className="mt-4">Personal Information</h5>
                                             <hr />
-                                            <div className="col-lg-6 mt-3">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Father&apos;s Name
-                                                    </label>
-                                                    <input
-                                                        {...register("fathers_name", { required: true })}
-                                                        name="fathers_name"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Father's Name"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6 mt-3">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Mother&apos;s Name
-                                                    </label>
-                                                    <input
-                                                        {...register("mothers_name", { required: true })}
-                                                        name="mothers_name"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Mother's Name"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Address
-                                                    </label>
-                                                    <input
-                                                        {...register("address", { required: true })}
-                                                        name="address"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Address"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Profession
-                                                    </label>
-                                                    <input
-                                                        {...register("profession", { required: true })}
-                                                        name="profession"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Profession"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Comming Form
-                                                    </label>
-                                                    <input
-                                                        {...register("comming_form", { required: true })}
-                                                        name="comming_form"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Comming Form"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Booking Purpose
-                                                    </label>
-                                                    <input
-                                                        {...register("purpose", { required: true })}
-                                                        name="purpose"
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Booking Purpose"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-12">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Check Out Date & Time
-                                                    </label>
-                                                    <input
-                                                        {...register("checkout_date_time", { required: true })}
-                                                        name="checkout_date_time"
-                                                        type="datetime-local"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Check Out"
-                                                    />
-                                                </div>
-                                            </div>
+                                           
                                             <hr />
                                             <h5 className="mt-4">Confidential Information</h5>
                                             <hr />
@@ -407,7 +302,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 mt-3">
+                                            <div className="col-lg-4">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Passport No
@@ -422,7 +317,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 mt-3">
+                                            <div className="col-lg-4">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Visa No
@@ -438,9 +333,9 @@ const Booking = () => {
                                                 </div>
                                             </div>
                                             <hr />
-                                            <h5 className="mt-3">Payments</h5>
+                                            <h5>Payments</h5>
                                             <hr />
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Payment Status
@@ -456,7 +351,7 @@ const Booking = () => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Payment Status

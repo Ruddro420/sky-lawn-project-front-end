@@ -188,7 +188,7 @@ const PreBookingDetails = () => {
                                                                     <td>{item.duration_day}</td>
                                                                     <td>{item.booking_by}</td>
                                                                     <td>
-                                                                        {item.status == 1 ? (
+                                                                        {item.status === 1 ? (
                                                                             <button
                                                                                 disabled
                                                                                 className="btn btn-primary"

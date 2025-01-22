@@ -31,7 +31,6 @@ const Booking = () => {
                 setValue("person", response.data.person);
                 setValue("duration_day", response.data.duration_day);
                 setValue("room_price", response.data.room_price);
-                setValue("total_price", response.data.room_price);
                 setValue("booking_by", response.data.booking_by);
                 setValue("date_time", format(parseISO(response.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
             })

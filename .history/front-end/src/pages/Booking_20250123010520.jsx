@@ -30,8 +30,7 @@ const Booking = () => {
                 setValue("phone", response.data.phone);
                 setValue("person", response.data.person);
                 setValue("duration_day", response.data.duration_day);
-                setValue("room_price", response.data.room_price);
-                setValue("total_price", response.data.room_price);
+                setValue("room_price", response.data.room_price * response.data.duration_day);
                 setValue("booking_by", response.data.booking_by);
                 setValue("date_time", format(parseISO(response.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
             })
@@ -284,7 +283,8 @@ const Booking = () => {
                                             <hr />
                                             <h5 className="mt-4">Personal Information</h5>
                                             <hr />
-                                            <div className="col-lg-6 mt-3">
+                                           <div>
+                                           <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Father&apos;s Name
@@ -299,7 +299,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Mother&apos;s Name
@@ -389,10 +389,11 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
+                                           </div>
                                             <hr />
                                             <h5 className="mt-4">Confidential Information</h5>
                                             <hr />
-                                            <div className="col-lg-4 mt-3">
+                                            <div className="col-lg-4">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         NID No
@@ -407,7 +408,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 mt-3">
+                                            <div className="col-lg-4">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Passport No
@@ -422,7 +423,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 mt-3">
+                                            <div className="col-lg-4">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Visa No
@@ -438,9 +439,9 @@ const Booking = () => {
                                                 </div>
                                             </div>
                                             <hr />
-                                            <h5 className="mt-3">Payments</h5>
+                                            <h5>Payments</h5>
                                             <hr />
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Payment Status
@@ -456,7 +457,7 @@ const Booking = () => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Payment Status

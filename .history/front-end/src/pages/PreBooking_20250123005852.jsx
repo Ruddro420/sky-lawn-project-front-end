@@ -196,7 +196,7 @@ const PreBooking = () => {
                                                                 Select Room Category
                                                             </label>
                                                             <input
-                                                                {...register("room_category", { required: false })}
+                                                                {...register("room_category", { required: true })}
                                                                 type="text"
                                                                 name="room_category"
                                                                 className="form-control"

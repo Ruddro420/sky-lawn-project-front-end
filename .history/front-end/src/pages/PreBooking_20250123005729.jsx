@@ -196,7 +196,7 @@ const PreBooking = () => {
                                                                 Select Room Category
                                                             </label>
                                                             <input
-                                                                {...register("room_category", { required: false })}
+                                                                {...register("room_category", { required: true })}
                                                                 type="text"
                                                                 name="room_category"
                                                                 className="form-control"
@@ -284,8 +284,6 @@ const PreBooking = () => {
                                                                 className="form-control"
                                                                 id="duration_day"
                                                                 placeholder="Duration of stay"
-                                                                value={duration}
-                                                                onChange={(e) => setDuration(e.target.value)}
                                                             />
                                                         </div>
                                                     </div>
@@ -293,7 +291,7 @@ const PreBooking = () => {
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
                                                                 Price - <span className="text-danger">
-                                                                    {calculateRoomPrice() * duration} ৳ </span>
+                                                                    {calculateRoomPrice()} ৳ </span>
                                                             </label>
                                                             <input
                                                                 {...register("room_price", { required: true })}
@@ -301,7 +299,7 @@ const PreBooking = () => {
                                                                 type="number"
                                                                 className="form-control"
                                                                 id="basic-default-fullname"
-                                                                placeholder={calculateRoomPrice() * duration}
+                                                                placeholder={calculateRoomPrice()}
 
                                                             />
                                                         </div>
