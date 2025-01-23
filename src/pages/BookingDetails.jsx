@@ -23,7 +23,7 @@ const BookingDetails = () => {
             .get(`${BASE_URL}/booking-data/show/${id}`)
             .then((response) => {
                 setBooking(response.data.data);
-                
+
                 setLoading(false);
 
                 // Set form values dynamically
@@ -52,7 +52,6 @@ const BookingDetails = () => {
                 setValue("passport_no", response.data.data.passport_no);
                 setValue("visa_no", response.data.data.visa_no);
                 // setValue("date_time", format(parseISO(response.data.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
-                
             })
             .catch((error) => {
                 console.log(error);
@@ -69,8 +68,9 @@ const BookingDetails = () => {
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
-                <div className="card-body">
-                    <form /* onSubmit={handleSubmit(onSubmit)} */ >
+                <div className="card-body card">
+                    <h4 className="mb-2">Booking Details</h4>
+                    <form  /* onSubmit={handleSubmit(onSubmit)} */ >
                         <div className="row">
                             <div className="w-full">
                                 <div className="mb-3">
