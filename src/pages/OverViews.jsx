@@ -141,17 +141,17 @@ const OverViews = () => {
                     </div>
 
                     <hr />
-                    <div className="row mb-3">
+                    <div className="row mb-3 mt-3">
                         <div className="col-md-6">
-                            <h5 className="btn btn-outline-primary">Total Count: <span id="totalCount">{data.count}</span></h5>
+                            <h5 className="btn btn-outline-primary">Total Count: <span id="totalCount">{data.count ? data.count : 0}</span></h5>
                         </div>
                         <div className="col-md-6 text-end">
-                            <h5 className="btn btn-outline-primary">Total Price: <span id="totalPrice">{data.total_price} Taka</span></h5>
+                            <h5 className="btn btn-outline-primary">Total Price: <span id="totalPrice">{data.total_price ? data.total_price : 0} Taka</span></h5>
                         </div>
                     </div>
                     <hr />
 
-                    <button onClick={downloadPDF} className="btn btn-danger">Download PDF</button>
+                    <button onClick={downloadPDF} className="btn btn-danger mb-3 mt-3">Download PDF</button>
 
                     <hr />
                     <table className="table table-bordered">
