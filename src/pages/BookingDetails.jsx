@@ -1,5 +1,5 @@
 import axios from "axios";
-import { format, parseISO } from "date-fns";
+// import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -23,21 +23,37 @@ const BookingDetails = () => {
             .get(`${BASE_URL}/booking-data/show/${id}`)
             .then((response) => {
                 setBooking(response.data.data);
+                
                 setLoading(false);
 
                 // Set form values dynamically
-                setValue("date_time", response.data.date_time);
-                setValue("name", response.data.name);
-                setValue("room_number", response.data.room_number);
-                setValue("room_category", response.data.room_category);
-                setValue("nationality", response.data.nationality);
-                setValue("company", response.data.company);
-                setValue("phone", response.data.phone);
-                setValue("person", response.data.person);
-                setValue("duration_day", response.data.duration_day);
-                setValue("room_price", response.data.room_price);
-                setValue("booking_by", response.data.booking_by);
-                setValue("date_time", format(parseISO(response.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
+                setValue("checking_date_time", response.data.data.checking_date_time);
+                setValue("name", response.data.data.name);
+                setValue("room_number", response.data.data.room_number);
+                setValue("room_category", response.data.data.room_category);
+                setValue("nationality", response.data.data.nationality);
+                setValue("company", response.data.data.company);
+                setValue("mobile", response.data.data.mobile);
+                setValue("person", response.data.data.person);
+                setValue("duration_day", response.data.data.duration_day);
+                setValue("room_price", response.data.data.room_price);
+                setValue("booking_by", response.data.data.booking_by);
+                setValue("payment_status", response.data.data.payment_status);
+                setValue("payment_method", response.data.data.payment_method);
+                setValue("total_price", response.data.data.total_price);
+                setValue("fathers_name", response.data.data.fathers_name);
+                setValue("mothers_name", response.data.data.mothers_name);
+                setValue("profession", response.data.data.profession);
+                setValue("address", response.data.data.address);
+                setValue("comming_form", response.data.data.comming_form);
+                setValue("purpose", response.data.data.purpose);
+                setValue("checkout_date_time", response.data.data.checkout_date_time);
+                setValue("nid_no", response.data.data.nid_no);
+                setValue("passport_no", response.data.data.passport_no);
+                setValue("visa_no", response.data.data.visa_no);
+                // setValue("date_time", format(parseISO(response.data.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
+                
+
             })
             .catch((error) => {
                 console.log(error);
@@ -63,8 +79,8 @@ const BookingDetails = () => {
                                         Check in Date & Time
                                     </label>
                                     <input
-                                        {...register("date_time", { required: true })}
-                                        name="date_time"
+                                        {...register("checking_date_time", { required: true })}
+                                        name="checking_date_time"
                                         type="datetime-local"
                                         className="form-control"
                                         id="basic-default-fullname"
@@ -158,8 +174,8 @@ const BookingDetails = () => {
                                         Mobile
                                     </label>
                                     <input
-                                        {...register("phone", { required: true })}
-                                        name="phone"
+                                        {...register("mobile", { required: true })}
+                                        name="mobile"
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
@@ -215,7 +231,7 @@ const BookingDetails = () => {
                                     />
                                 </div>
                             </div>
-                            {/* <hr />
+                            <hr />
                             <h5>Confidential Information</h5>
                             <hr />
                             <div className="col-lg-6">
@@ -370,7 +386,7 @@ const BookingDetails = () => {
                                         placeholder="Visa No"
                                     />
                                 </div>
-                            </div> */}
+                            </div>
                             <hr />
                             <h5>Payments</h5>
                             <hr />
@@ -379,15 +395,16 @@ const BookingDetails = () => {
                                     <label className="form-label" htmlFor="basic-default-fullname">
                                         Payment Status
                                     </label>
-                                    <select
+                                    <input
                                         {...register("payment_status", { required: true })}
                                         name="payment_status"
                                         className="form-control"
+                                        type="text"
                                     >
-                                        <option value="">Select Payment Status</option>
+                                        {/* <option value="">Select Payment Status</option>
                                         <option value="Paid">Paid</option>
-                                        <option value="Pending">Pending</option>
-                                    </select>
+                                        <option value="Pending">Pending</option> */}
+                                    </input>
                                 </div>
                             </div>
                             <div className="col-lg-6">
@@ -395,19 +412,20 @@ const BookingDetails = () => {
                                     <label className="form-label" htmlFor="basic-default-fullname">
                                         Payment Status
                                     </label>
-                                    <select
+                                    <input
                                         {...register("payment_method", { required: true })}
                                         name="payment_method"
                                         className="form-control"
+                                        type="text"
                                     >
-                                        <option value="">Select Payment Method</option>
+                                        {/* <option value="">Select Payment Method</option>
                                         <option value="Cash">Cash</option>
                                         <option value="Bkash">Bkash</option>
                                         <option value="Nagad">Nagad</option>
                                         <option value="Rocket">Rocket</option>
                                         <option value="Upay">Upay</option>
-                                        <option value="Card">Card</option>
-                                    </select>
+                                        <option value="Card">Card</option> */}
+                                    </input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
@@ -425,7 +443,7 @@ const BookingDetails = () => {
                                     />
                                 </div>
                             </div>
-                            {/* <hr />
+                            <hr />
                             <h5>Documents</h5>
                             <hr />
                             <div className="col-lg-6">
@@ -507,9 +525,9 @@ const BookingDetails = () => {
                                         placeholder="Select File"
                                     />
                                 </div>
-                            </div> */}
+                            </div>
 
-                            <div className="col-lg-6">
+                            {/* <div className="col-lg-6">
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="basic-default-fullname">
                                         Booked by
@@ -524,9 +542,10 @@ const BookingDetails = () => {
                                     />
                                 </div>
                             </div>
+                            */}
 
                             <div>
-                                <input type="submit" className="btn btn-primary" />
+                                {/* <input type="submit" className="btn btn-primary" /> */}
                             </div>
                         </div>
                     </form>
