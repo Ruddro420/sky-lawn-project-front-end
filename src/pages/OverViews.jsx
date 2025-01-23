@@ -71,11 +71,11 @@ const OverViews = () => {
     // Filter the details based on the search query
     const filteredDetails = details.filter(item => {
         return (
-            (item.name && item.name.toLowerCase().includes(searchQuery.toLowerCase())) || 
-            (item.phone && item.phone.toLowerCase().includes(searchQuery.toLowerCase())) || 
-            (item.room_number && item.room_number.toString().includes(searchQuery)) || 
-            (item.mobile && item.mobile.toString().includes(searchQuery)) || 
-            (item.date_time && item.date_time.toString().includes(searchQuery)) || 
+            (item.name && item.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (item.phone && item.phone.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (item.room_number && item.room_number.toString().includes(searchQuery)) ||
+            (item.mobile && item.mobile.toString().includes(searchQuery)) ||
+            (item.date_time && item.date_time.toString().includes(searchQuery)) ||
             (item.room_price && item.room_price.toString().includes(searchQuery))
         );
     });
@@ -83,106 +83,108 @@ const OverViews = () => {
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
-                <h5>Booking Analytics</h5>
-                <div className="mt-5">
-                    <form onSubmit={handleSubmit}>
+                <div className="card p-4">
+                    <h5>Booking Analytics</h5>
+                    <div className="mt-3">
+                        <form onSubmit={handleSubmit}>
+                            <div className="row mb-3">
+                                <div className="col-md-3">
+                                    <label htmlFor="startDate">Start Date</label>
+                                    <input
+                                        onChange={(e) => setStart(e.target.value)}
+                                        type="date"
+                                        className="form-control"
+                                        value={start}
+                                        id="startDate" required />
+                                </div>
+                                <div className="col-md-3">
+                                    <label htmlFor="endDate">End Date</label>
+                                    <input
+                                        onChange={(e) => setEnd(e.target.value)}
+                                        value={end}
+                                        type="date"
+                                        className="form-control"
+                                        id="endDate" required />
+                                </div>
+                                <div className="col-md-3">
+                                    <label htmlFor="bookingType">Booking Type</label>
+                                    <select
+                                        onChange={(e) => setType(e.target.value)}
+                                        className="form-control"
+                                        id="bookingType"
+                                        required
+                                        value={type}
+                                    >
+                                        <option value=" ">Select Booking Type</option>
+                                        <option value="pre_booking">Pre Booking</option>
+                                        <option value="booking">Booking</option>
+                                    </select>
+                                </div>
+                                <div className="col-md-3 d-flex align-items-end">
+                                    <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Filter</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {/* Search Box */}
                         <div className="row mb-3">
-                            <div className="col-md-3">
-                                <label htmlFor="startDate">Start Date</label>
+                            <div className="col-md-12">
+                                <label htmlFor="search">Search</label>
                                 <input
-                                    onChange={(e) => setStart(e.target.value)}
-                                    type="date"
+                                    type="text"
                                     className="form-control"
-                                    value={start}
-                                    id="startDate" required />
-                            </div>
-                            <div className="col-md-3">
-                                <label htmlFor="endDate">End Date</label>
-                                <input
-                                    onChange={(e) => setEnd(e.target.value)}
-                                    value={end}
-                                    type="date"
-                                    className="form-control"
-                                    id="endDate" required />
-                            </div>
-                            <div className="col-md-3">
-                                <label htmlFor="bookingType">Booking Type</label>
-                                <select
-                                    onChange={(e) => setType(e.target.value)}
-                                    className="form-control"
-                                    id="bookingType"
-                                    required
-                                    value={type}
-                                >
-                                    <option value=" ">Select Booking Type</option>
-                                    <option value="pre_booking">Pre Booking</option>
-                                    <option value="booking">Booking</option>
-                                </select>
-                            </div>
-                            <div className="col-md-3 d-flex align-items-end">
-                                <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Filter</button>
+                                    id="search"
+                                    value={searchQuery}
+                                    onChange={handleSearch}
+                                    placeholder="Search by name, phone, or room number"
+                                />
                             </div>
                         </div>
-                    </form>
 
-                    {/* Search Box */}
-                    <div className="row mb-3">
-                        <div className="col-md-12">
-                            <label htmlFor="search">Search</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="search"
-                                value={searchQuery}
-                                onChange={handleSearch}
-                                placeholder="Search by name, phone, or room number"
-                            />
+                        <hr />
+                        <div className="row mb-3 mt-3">
+                            <div className="col-md-6">
+                                <h5 className="btn btn-outline-primary">Total Count: <span id="totalCount">{data.count ? data.count : 0}</span></h5>
+                            </div>
+                            <div className="col-md-6 text-end">
+                                <h5 className="btn btn-outline-primary">Total Price: <span id="totalPrice">{data.total_price ? data.total_price : 0} Taka</span></h5>
+                            </div>
                         </div>
+                        <hr />
+
+                        <button onClick={downloadPDF} className="btn btn-danger mb-3 mt-3">Download PDF</button>
+
+                        <hr />
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Room Number</th>
+                                    <th>Room Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    filteredDetails.map(item => {
+                                        return (
+                                            <tr key={item.id}>
+                                                <td>{new Date(item?.date_time ? item?.date_time : item?.checking_date_time).toLocaleString("en-bd", {
+                                                    dateStyle: "medium",
+                                                    timeStyle: "short",
+                                                })}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.phone ? item.phone : item.mobile}</td>
+                                                <td>{item.room_number}</td>
+                                                <td>{item.room_price}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
                     </div>
-
-                    <hr />
-                    <div className="row mb-3 mt-3">
-                        <div className="col-md-6">
-                            <h5 className="btn btn-outline-primary">Total Count: <span id="totalCount">{data.count ? data.count : 0}</span></h5>
-                        </div>
-                        <div className="col-md-6 text-end">
-                            <h5 className="btn btn-outline-primary">Total Price: <span id="totalPrice">{data.total_price ? data.total_price : 0} Taka</span></h5>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <button onClick={downloadPDF} className="btn btn-danger mb-3 mt-3">Download PDF</button>
-
-                    <hr />
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Room Number</th>
-                                <th>Room Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                filteredDetails.map(item => {
-                                    return (
-                                        <tr key={item.id}>
-                                            <td>{new Date(item?.date_time ? item?.date_time : item?.checking_date_time).toLocaleString("en-bd", {
-                                                dateStyle: "medium",
-                                                timeStyle: "short",
-                                            })}</td>
-                                            <td>{item.name}</td>
-                                            <td>{item.phone ? item.phone : item.mobile}</td>
-                                            <td>{item.room_number}</td>
-                                            <td>{item.room_price}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
