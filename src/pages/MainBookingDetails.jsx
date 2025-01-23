@@ -48,14 +48,14 @@ const MainBookingDetails = () => {
                 : true;
             const roomMatch = roomFilter
                 ? item.room_number
-                      .toString()
-                      .toLowerCase()
-                      .includes(roomFilter.toLowerCase())
+                    .toString()
+                    .toLowerCase()
+                    .includes(roomFilter.toLowerCase())
                 : true;
             const paymentMatch = paymentFilter
                 ? item.payment_status
-                      .toLowerCase()
-                      .includes(paymentFilter.toLowerCase())
+                    .toLowerCase()
+                    .includes(paymentFilter.toLowerCase())
                 : true;
 
             return nameMatch && phoneMatch && roomMatch && paymentMatch;
@@ -84,7 +84,7 @@ const MainBookingDetails = () => {
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Main Booking Details</h5>
-                               {/*  <h1>{filteredBooking.length}</h1> */}
+                                {/*  <h1>{filteredBooking.length}</h1> */}
                             </div>
                             <div className="card-body">
                                 <div className="row mb-3">
@@ -157,7 +157,7 @@ const MainBookingDetails = () => {
                                                     <tbody className="table-border-bottom-0">
                                                         {filteredBooking.map((item, index) => (
                                                             <tr key={index}>
-                                                                <td>{index+1}</td>
+                                                                <td>{index + 1}</td>
                                                                 <td>{item.name}</td>
                                                                 <td>{item.mobile}</td>
                                                                 <td>{item.address}</td>
@@ -180,14 +180,20 @@ const MainBookingDetails = () => {
                                                                 <td>{item.room_number}</td>
                                                                 <td>{item.payment_status}</td>
                                                                 <td>
-                                                                    <button
-                                                                        onClick={() =>
-                                                                            invoiceGenerate(item.id)
-                                                                        }
-                                                                        className="btn btn-primary"
-                                                                    >
-                                                                        Invoice
-                                                                    </button>
+                                                                    {
+                                                                        item.check_status == 0 ?
+                                                                            <button
+                                                                                disabled
+                                                                                onClick={() => invoiceGenerate(item.id)}
+                                                                                className="btn btn-danger">
+                                                                                Checkout
+                                                                            </button> : <button
+                                                                                onClick={() => invoiceGenerate(item.id)}
+                                                                                className="btn btn-primary">
+                                                                                Invoice
+                                                                            </button> 
+                                                                    }
+
                                                                     <button
                                                                         onClick={() => {
                                                                             details(item.id);

@@ -53,7 +53,6 @@ const BookingDetails = () => {
                 setValue("visa_no", response.data.data.visa_no);
                 // setValue("date_time", format(parseISO(response.data.data.date_time), 'yyyy-MM-dd\'T\'HH:mm'));
                 
-
             })
             .catch((error) => {
                 console.log(error);
