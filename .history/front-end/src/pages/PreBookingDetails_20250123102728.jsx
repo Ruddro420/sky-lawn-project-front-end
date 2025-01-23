@@ -166,7 +166,6 @@ const PreBookingDetails = () => {
                                                     <table className="table order-4 border">
                                                         <thead>
                                                             <tr>
-                                                                <th>SL</th>
                                                                 <th>Name</th>
                                                                 <th>Phone</th>
                                                                 <th>Person</th>
@@ -181,7 +180,6 @@ const PreBookingDetails = () => {
                                                         <tbody className="table-border-bottom-0">
                                                             {filteredRoom.map((item, index) => (
                                                                 <tr key={index}>
-                                                                    <td>{index + 1}</td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>

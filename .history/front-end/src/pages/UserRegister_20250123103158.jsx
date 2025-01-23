@@ -152,7 +152,6 @@ const UserRegister = () => {
                                                             <tbody className="table-border-bottom-0">
                                                                 {users.map((item, index) => (
                                                                     <tr key={index}>
-                                                                        <td>{index+1} </td>
                                                                         <td>{item.email} </td>
                                                                         <td>{visibility[index] ? item.password : "••••••••••••••••"}
                                                                             <i

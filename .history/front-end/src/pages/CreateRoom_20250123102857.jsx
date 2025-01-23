@@ -288,7 +288,6 @@ const CreateRoom = () => {
                                                             </div> : <table className="table order-4 border">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>SL</th>
                                                                         <th>Number</th>
                                                                         <th>Name</th>
                                                                         <th>Category</th>

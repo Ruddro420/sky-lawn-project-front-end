@@ -181,7 +181,6 @@ const PreBookingDetails = () => {
                                                         <tbody className="table-border-bottom-0">
                                                             {filteredRoom.map((item, index) => (
                                                                 <tr key={index}>
-                                                                    <td>{index + 1}</td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>
