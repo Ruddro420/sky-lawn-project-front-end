@@ -1,5 +1,6 @@
 import axios from "axios";
 import { format, parseISO } from "date-fns";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -7,6 +8,8 @@ import { useParams } from "react-router-dom";
 
 const BookingDetails = () => {
     const { register, handleSubmit, setValue } = useForm();
+    const [loading, setLoading] = useState(true);
+    const [booking, setBooking] = useState([]);
 
     const { id } = useParams();
 
@@ -17,10 +20,10 @@ const BookingDetails = () => {
     const fetchRoom = () => {
         // setLoading(true);
         axios
-            .get(`${BASE_URL}/booking-data/${id}`)
+            .get(`${BASE_URL}/booking-data/show/${id}`)
             .then((response) => {
-                setBooking(response.data.data[0]);
-                // setLoading(false);
+                setBooking(response.data.data);
+                setLoading(false);
 
                 // Set form values dynamically
                 setValue("date_time", response.data.date_time);
@@ -46,11 +49,13 @@ const BookingDetails = () => {
     useEffect(() => {
         fetchRoom();
     }, [id]);
+    console.log(booking);
+
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="card-body">
-                    <form onSubmit={handleSubmit(onSubmit)} >
+                    <form /* onSubmit={handleSubmit(onSubmit)} */ >
                         <div className="row">
                             <div className="w-full">
                                 <div className="mb-3">

@@ -84,7 +84,7 @@ const MainBookingDetails = () => {
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Main Booking Details</h5>
-                                <h1>{filteredBooking.length}</h1>
+                               {/*  <h1>{filteredBooking.length}</h1> */}
                             </div>
                             <div className="card-body">
                                 <div className="row mb-3">
