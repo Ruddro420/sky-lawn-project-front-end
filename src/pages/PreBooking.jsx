@@ -58,7 +58,7 @@ const PreBooking = () => {
                 date_time: data.date_time,
                 name: data.name,
                 room_number: data.room_number,
-                room_category: data.room_category,
+                room_category: selectedRoomCat.name,
                 room_price: data.room_price,
                 nationality: data.nationality,
                 company: data.company,
@@ -196,13 +196,13 @@ const PreBooking = () => {
                                                                 Select Room Category
                                                             </label>
                                                             <input
-                                                                {...register("room_category", { required: true })}
+                                                                {...register("room_category", { required: false })}
                                                                 type="text"
                                                                 name="room_category"
                                                                 className="form-control"
-                                                                id=""
+                                                                id="room_category"
                                                                 value={selectedRoomCat.name}
-                                                                readOnly
+                                                                disabled
                                                                 placeholder="Room Cateogry"
                                                             />
                                                         </div>

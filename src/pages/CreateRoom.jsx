@@ -57,6 +57,8 @@ const CreateRoom = () => {
     }, []);
     // get form data
     const onSubmit = (data) => {
+        console.log(data);
+        
         axios
             .post(`${BASE_URL}/room/add`, {
                 room_number: data.room_number,
@@ -138,11 +140,11 @@ const CreateRoom = () => {
 
         // Append all fields to FormData
         formData.append("id", getUpdateRoom.id);
-        formData.append("room_name", data.room_name);
-        formData.append("room_number", data.room_number);
-        formData.append("price", data.price);
-        formData.append("feature", data.feature);
-        formData.append("room_category_id", data.room_category_id);
+        formData.append("room_name", data.rname);
+        formData.append("room_number", data.rnumber);
+        formData.append("price", data.rprice);
+        formData.append("feature", data.rfeature);
+        formData.append("room_category_id", data.rcategory);
         // call api
         axios
             .post(`${BASE_URL}/room/update`, formData)
@@ -312,11 +314,11 @@ const CreateRoom = () => {
                                                                             <td>
                                                                                 <button onClick={() => { editRoom(item.id) }} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
                                                                                 <button onClick={() => { deleteRoom(item.id) }} className="btn btn-danger ms-2">Delete</button>
-                                                                                <button
+                                                                               {/*  <button
                                                                                     onClick={() => { updateRoom(item.id) }}
                                                                                     className="btn btn-success ms-2"
                                                                                     data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                                                >Update</button>
+                                                                                >Update</button> */}
                                                                             </td>
                                                                         </tr>
                                                                     ))}
@@ -375,7 +377,7 @@ const CreateRoom = () => {
                         </div>
 
                         {/*  <!-- Edit Modal --> */}
-                        <div className="modal fade" id="updateModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        {/* <div className="modal fade" id="updateModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
                                     <div className="modal-header">
@@ -389,7 +391,7 @@ const CreateRoom = () => {
                                                     Room Name
                                                 </label>
                                                 <input
-                                                    {...register("room_name", { required: true })}
+                                                    {...register("rname", { required: true })}
                                                     type="text"
                                                     className="form-control"
                                                     name="room_name"
@@ -402,8 +404,8 @@ const CreateRoom = () => {
                                                     Room Category
                                                 </label>
                                                 <select
-                                                   /*  {...register("room_category_id", { required: true })} */
-                                                    name="room_category_id"
+                                                   
+                                                    name="rcategory"
                                                     id="room_category_id"
                                                     className="form-control"
                                                     value={getUpdateRoom?.room_category_id || ""}
@@ -427,7 +429,7 @@ const CreateRoom = () => {
                                                     Room Number
                                                 </label>
                                                 <input
-                                                    {...register("room_number", { required: true })}
+                                                    {...register("rnumber", { required: true })}
                                                     type="text"
                                                     className="form-control"
                                                     name="room_number"
@@ -439,7 +441,7 @@ const CreateRoom = () => {
                                                     Room Price
                                                 </label>
                                                 <input
-                                                    {...register("price", { required: true })}
+                                                    {...register("rprice", { required: true })}
                                                     type="text"
                                                     className="form-control"
                                                     name="price"
@@ -451,7 +453,7 @@ const CreateRoom = () => {
                                                     Room Feature
                                                 </label>
                                                 <input
-                                                    {...register("feature", { required: true })}
+                                                    {...register("rfeature", { required: true })}
                                                     type="text"
                                                     className="form-control"
                                                     name="feature"
@@ -466,11 +468,11 @@ const CreateRoom = () => {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        {/*   <button type="button" className="btn btn-primary">Save changes</button> */}
+                                       
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="content-backdrop fade"></div>
