@@ -41,6 +41,7 @@ const BookingDetails = () => {
                 setValue("payment_status", response.data.data.payment_status);
                 setValue("payment_method", response.data.data.payment_method);
                 setValue("total_price", response.data.data.total_price);
+                setValue("advance", response.data.data.advance);
                 setValue("fathers_name", response.data.data.fathers_name);
                 setValue("mothers_name", response.data.data.mothers_name);
                 setValue("profession", response.data.data.profession);
@@ -231,7 +232,7 @@ const BookingDetails = () => {
                                 </div>
                             </div>
                             <hr />
-                            <h5>Confidential Information</h5>
+                            <h5>Personal Information</h5>
                             <hr />
                             <div className="col-lg-6">
                                 <div className="mb-3">
@@ -427,7 +428,7 @@ const BookingDetails = () => {
                                     </input>
                                 </div>
                             </div>
-                            <div className="col-lg-12">
+                            <div className="col-lg-6">
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="basic-default-fullname">
                                         Total Payment
@@ -435,6 +436,21 @@ const BookingDetails = () => {
                                     <input
                                         {...register("total_price", { required: true })}
                                         name="total_price"
+                                        type="number"
+                                        className="form-control"
+                                        id="basic-default-fullname"
+                                        placeholder="Total Price"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-lg-6">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="basic-default-fullname">
+                                        Advanced Payment
+                                    </label>
+                                    <input
+                                        {...register("advance", { required: true })}
+                                        name="advance"
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"

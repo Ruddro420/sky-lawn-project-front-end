@@ -55,6 +55,8 @@ const PreBookingDetails = () => {
         fetchRoom();
     }, []);
 
+    console.log(room);
+
     const navigate = useNavigate();
 
     // Booking data
@@ -167,6 +169,7 @@ const PreBookingDetails = () => {
                                                         <thead>
                                                             <tr>
                                                                 <th>SL</th>
+                                                                <th>Date</th>
                                                                 <th>Name</th>
                                                                 <th>Phone</th>
                                                                 <th>Person</th>
@@ -182,6 +185,12 @@ const PreBookingDetails = () => {
                                                             {filteredRoom.map((item, index) => (
                                                                 <tr key={index}>
                                                                     <td>{index + 1}</td>
+                                                                    <td>{new Date(
+                                                                        item?.date_time
+                                                                    ).toLocaleString("en-bd", {
+                                                                        dateStyle: "medium",
+                                                                        timeStyle: "short",
+                                                                    })}</td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>

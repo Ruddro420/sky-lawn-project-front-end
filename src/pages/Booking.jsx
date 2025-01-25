@@ -290,7 +290,7 @@ const Booking = () => {
                                                         Father&apos;s Name
                                                     </label>
                                                     <input
-                                                        {...register("fathers_name", { required: true })}
+                                                        {...register("fathers_name", { required: false })}
                                                         name="fathers_name"
                                                         type="text"
                                                         className="form-control"
@@ -305,7 +305,7 @@ const Booking = () => {
                                                         Mother&apos;s Name
                                                     </label>
                                                     <input
-                                                        {...register("mothers_name", { required: true })}
+                                                        {...register("mothers_name", { required: false })}
                                                         name="mothers_name"
                                                         type="text"
                                                         className="form-control"
@@ -320,7 +320,7 @@ const Booking = () => {
                                                         Address
                                                     </label>
                                                     <input
-                                                        {...register("address", { required: true })}
+                                                        {...register("address", { required: false })}
                                                         name="address"
                                                         type="text"
                                                         className="form-control"
@@ -335,7 +335,7 @@ const Booking = () => {
                                                         Profession
                                                     </label>
                                                     <input
-                                                        {...register("profession", { required: true })}
+                                                        {...register("profession", { required: false })}
                                                         name="profession"
                                                         type="text"
                                                         className="form-control"
@@ -350,7 +350,7 @@ const Booking = () => {
                                                         Comming Form
                                                     </label>
                                                     <input
-                                                        {...register("comming_form", { required: true })}
+                                                        {...register("comming_form", { required: false })}
                                                         name="comming_form"
                                                         type="text"
                                                         className="form-control"
@@ -365,7 +365,7 @@ const Booking = () => {
                                                         Booking Purpose
                                                     </label>
                                                     <input
-                                                        {...register("purpose", { required: true })}
+                                                        {...register("purpose", { required: false })}
                                                         name="purpose"
                                                         type="text"
                                                         className="form-control"
@@ -398,7 +398,7 @@ const Booking = () => {
                                                         NID No
                                                     </label>
                                                     <input
-                                                        {...register("nid_no", { required: true })}
+                                                        {...register("nid_no", { required: false })}
                                                         name="nid_no"
                                                         type="number"
                                                         className="form-control"
@@ -494,7 +494,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Adcanced Payment
+                                                        Advanced Payment
                                                     </label>
                                                     <input
                                                         {...register("advance", { required: true })}
