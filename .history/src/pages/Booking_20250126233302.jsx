@@ -56,7 +56,7 @@ const Booking = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(nid);
 
         // Create FormData object for file uploads
         const formData = new FormData();
@@ -436,7 +436,7 @@ const Booking = () => {
                                                     <input
                                                         {...register("visa_no", { required: false })}
                                                         name="visa_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Visa No"
@@ -597,7 +597,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Booked by <span className="text-danger">*</span>
+                                                        Booked by
                                                     </label>
                                                     <input
                                                         {...register("booking_by", { required: true })}

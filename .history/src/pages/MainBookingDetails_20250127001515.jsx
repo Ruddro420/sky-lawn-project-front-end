@@ -171,7 +171,7 @@ const MainBookingDetails = () => {
                                                                     key={index}
                                                                     style={{
                                                                         backgroundColor: isLatest
-                                                                            ? "#d1f7c4" // Highlight with a light green background
+                                                                            ? "#FBF5E5" // Highlight with a light green background
                                                                             : "transparent",
                                                                     }}
                                                                 >

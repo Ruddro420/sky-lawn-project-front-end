@@ -79,7 +79,7 @@ const PreBooking = () => {
             })
             .catch((error) => {
                 console.log(error);
-                toast.error("Room is already pre-booked for the specified date!");
+                toast.error("Failed to add booking!");
             });
     }
 
@@ -229,10 +229,10 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Company Name 
+                                                                Company Name <span className="text-danger">*</span>
                                                             </label>
                                                             <input
-                                                                {...register("company", { required: false })}
+                                                                {...register("company", { required: true })}
                                                                 name="company"
                                                                 type="text"
                                                                 className="form-control"

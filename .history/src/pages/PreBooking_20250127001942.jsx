@@ -79,7 +79,7 @@ const PreBooking = () => {
             })
             .catch((error) => {
                 console.log(error);
-                toast.error("Room is already pre-booked for the specified date!");
+                toast.error("Failed to add booking!");
             });
     }
 

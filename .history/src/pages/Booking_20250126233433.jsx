@@ -56,7 +56,7 @@ const Booking = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(nid);
 
         // Create FormData object for file uploads
         const formData = new FormData();

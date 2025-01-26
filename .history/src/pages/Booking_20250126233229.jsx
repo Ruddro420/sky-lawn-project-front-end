@@ -56,7 +56,7 @@ const Booking = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(nid);
 
         // Create FormData object for file uploads
         const formData = new FormData();
@@ -401,7 +401,7 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        NID No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        NID No <span>Sepereate With Comma (,)</span>
                                                     </label>
                                                     <input
                                                         {...register("nid_no", { required: false })}
@@ -416,12 +416,12 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Passport No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        Passport No
                                                     </label>
                                                     <input
                                                         {...register("passport_no", { required: false })}
                                                         name="passport_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Passport No"
@@ -431,12 +431,12 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Visa No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        Visa No
                                                     </label>
                                                     <input
                                                         {...register("visa_no", { required: false })}
                                                         name="visa_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Visa No"
@@ -597,7 +597,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Booked by <span className="text-danger">*</span>
+                                                        Booked by
                                                     </label>
                                                     <input
                                                         {...register("booking_by", { required: true })}

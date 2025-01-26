@@ -22,9 +22,8 @@ const MainBookingDetails = () => {
         axios
             .get(`${BASE_URL}/booking-data`)
             .then((response) => {
-                const data = response.data.data[0];
-                setBooking(data);
-                setFilteredBooking(data); // Initialize with all data
+                setBooking(response.data.data[0]);
+                setFilteredBooking(response.data.data[0]); // Initialize with all data
                 setLoading(false);
             })
             .catch((error) => {
@@ -76,12 +75,6 @@ const MainBookingDetails = () => {
         navigate(`/invoice/${id}`);
     };
 
-    // Find the latest booking
-    const latestBookingId =
-        booking.length > 0
-            ? Math.max(...booking.map((item) => new Date(item.created_at).getTime()))
-            : null;
-
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -91,6 +84,7 @@ const MainBookingDetails = () => {
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
                                 <h5 className="mb-0">Main Booking Details</h5>
+                                {/*  <h1>{filteredBooking.length}</h1> */}
                             </div>
                             <div className="card-body">
                                 <div className="row mb-3">
@@ -161,80 +155,56 @@ const MainBookingDetails = () => {
                                                         </tr>
                                                     </thead>
                                                     <tbody className="table-border-bottom-0">
-                                                        {filteredBooking.map((item, index) => {
-                                                            const isLatest =
-                                                                new Date(item.created_at).getTime() ===
-                                                                latestBookingId;
-
-                                                            return (
-                                                                <tr
-                                                                    key={index}
-                                                                    style={{
-                                                                        backgroundColor: isLatest
-                                                                            ? "#d1f7c4" // Highlight with a light green background
-                                                                            : "transparent",
-                                                                    }}
-                                                                >
-                                                                    <td>{index + 1}</td>
-                                                                    <td>{item.name}</td>
-                                                                    <td>{item.mobile}</td>
-                                                                    <td>{item.address}</td>
-                                                                    <td>
-                                                                        {new Date(
-                                                                            item?.checking_date_time
-                                                                        ).toLocaleString("en-bd", {
-                                                                            dateStyle: "medium",
-                                                                            timeStyle: "short",
-                                                                        })}
-                                                                    </td>
-                                                                    <td>
-                                                                        {new Date(
-                                                                            item?.checkout_date_time
-                                                                        ).toLocaleString("en-bd", {
-                                                                            dateStyle: "medium",
-                                                                            timeStyle: "short",
-                                                                        })}
-                                                                    </td>
-                                                                    <td>{item.room_number}</td>
-                                                                    <td>{item.payment_status}</td>
-                                                                    <td>
-                                                                        {item.check_status == 0 ? (
+                                                        {filteredBooking.map((item, index) => (
+                                                            <tr key={index}>
+                                                                <td>{index + 1}</td>
+                                                                <td>{item.name}</td>
+                                                                <td>{item.mobile}</td>
+                                                                <td>{item.address}</td>
+                                                                <td>
+                                                                    {new Date(
+                                                                        item?.checking_date_time
+                                                                    ).toLocaleString("en-bd", {
+                                                                        dateStyle: "medium",
+                                                                        timeStyle: "short",
+                                                                    })}
+                                                                </td>
+                                                                <td>
+                                                                    {new Date(
+                                                                        item?.checkout_date_time
+                                                                    ).toLocaleString("en-bd", {
+                                                                        dateStyle: "medium",
+                                                                        timeStyle: "short",
+                                                                    })}
+                                                                </td>
+                                                                <td>{item.room_number}</td>
+                                                                <td>{item.payment_status}</td>
+                                                                <td>
+                                                                    {
+                                                                        item.check_status == 0 ?
                                                                             <button
                                                                                 disabled
-                                                                                onClick={() =>
-                                                                                    invoiceGenerate(
-                                                                                        item.id
-                                                                                    )
-                                                                                }
-                                                                                className="btn btn-danger"
-                                                                            >
+                                                                                onClick={() => invoiceGenerate(item.id)}
+                                                                                className="btn btn-danger">
                                                                                 Checkout
-                                                                            </button>
-                                                                        ) : (
-                                                                            <button
-                                                                                onClick={() =>
-                                                                                    invoiceGenerate(
-                                                                                        item.id
-                                                                                    )
-                                                                                }
-                                                                                className="btn btn-primary"
-                                                                            >
+                                                                            </button> : <button
+                                                                                onClick={() => invoiceGenerate(item.id)}
+                                                                                className="btn btn-primary">
                                                                                 Invoice
-                                                                            </button>
-                                                                        )}
+                                                                            </button> 
+                                                                    }
 
-                                                                        <button
-                                                                            onClick={() => {
-                                                                                details(item.id);
-                                                                            }}
-                                                                            className="btn btn-info ms-2"
-                                                                        >
-                                                                            Details
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            );
-                                                        })}
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            details(item.id);
+                                                                        }}
+                                                                        className="btn btn-info ms-2"
+                                                                    >
+                                                                        Details
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
                                                     </tbody>
                                                 </table>
                                             )}

@@ -56,7 +56,7 @@ const Booking = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(nid);
 
         // Create FormData object for file uploads
         const formData = new FormData();
@@ -179,7 +179,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Select Room Category <span className="text-danger">*</span>
+                                                        Select Room Category
                                                     </label>
                                                     <input
                                                         {...register("room_category", { required: true })}
@@ -195,7 +195,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Nationality <span className="text-danger">*</span>
+                                                        Nationality
                                                     </label>
                                                     <input
                                                         {...register("nationality", { required: true })}
@@ -211,7 +211,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Company Name <span className="text-danger">*</span>
+                                                        Company Name
                                                     </label>
                                                     <input
                                                         {...register("company", { required: true })}
@@ -227,7 +227,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Mobile <span className="text-danger">*</span>
+                                                        Mobile
                                                     </label>
                                                     <input
                                                         {...register("phone", { required: true })}
@@ -243,7 +243,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Person <span className="text-danger">*</span>
+                                                        Person
                                                     </label>
                                                     <input
                                                         {...register("person", { required: true })}
@@ -259,7 +259,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Duration Of Stay <span className="text-danger">*</span>
+                                                        Duration Of Stay
                                                     </label>
                                                     <input
                                                         {...register("duration_day", { required: true })}
@@ -275,8 +275,8 @@ const Booking = () => {
                                             <div className="col-lg-12">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Price ৳ <span className="text-danger">*</span>
-                                                    </label> 
+                                                        Price ৳
+                                                    </label>
                                                     <input
                                                         {...register("room_price", { required: true })}
                                                         name="room_price"
@@ -383,7 +383,7 @@ const Booking = () => {
                                             <div className="col-lg-12">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Check Out Date & Time <span className="text-danger">*</span>
+                                                        Check Out Date & Time
                                                     </label>
                                                     <input
                                                         {...register("checkout_date_time", { required: true })}
@@ -401,12 +401,12 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        NID No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        NID No
                                                     </label>
                                                     <input
                                                         {...register("nid_no", { required: false })}
                                                         name="nid_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="NID No"
@@ -416,12 +416,12 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Passport No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        Passport No
                                                     </label>
                                                     <input
                                                         {...register("passport_no", { required: false })}
                                                         name="passport_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Passport No"
@@ -431,12 +431,12 @@ const Booking = () => {
                                             <div className="col-lg-4 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Visa No <span className="text-danger">(Sepereate With Comma)</span>
+                                                        Visa No
                                                     </label>
                                                     <input
                                                         {...register("visa_no", { required: false })}
                                                         name="visa_no"
-                                                        type="text"
+                                                        type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Visa No"
@@ -449,8 +449,8 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status <span className="text-danger">*</span>
-                                                    </label> 
+                                                        Payment Status
+                                                    </label>
                                                     <select
                                                         {...register("payment_status", { required: true })}
                                                         name="payment_status"
@@ -465,7 +465,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status <span className="text-danger">*</span>
+                                                        Payment Status
                                                     </label>
                                                     <select
                                                         {...register("payment_method", { required: true })}
@@ -485,7 +485,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Total Payment <span className="text-danger">*</span>
+                                                        Total Payment
                                                     </label>
                                                     <input
                                                         {...register("total_price", { required: true })}
@@ -500,7 +500,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Advanced Payment <span className="text-danger">*</span>
+                                                        Advanced Payment
                                                     </label>
                                                     <input
                                                         {...register("advance", { required: true })}
@@ -513,9 +513,9 @@ const Booking = () => {
                                                 </div>
                                             </div>
                                             <hr />
-                                            <h5 className="mt-3">Documents</h5>
+                                            <h5>Documents</h5>
                                             <hr />
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         NID Doc
@@ -529,7 +529,7 @@ const Booking = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Couple Doc
@@ -597,7 +597,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Booked by <span className="text-danger">*</span>
+                                                        Booked by
                                                     </label>
                                                     <input
                                                         {...register("booking_by", { required: true })}
