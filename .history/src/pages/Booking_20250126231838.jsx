@@ -105,7 +105,7 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("Already booking this day!");
             });
     };
     

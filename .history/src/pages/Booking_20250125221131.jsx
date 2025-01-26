@@ -50,53 +50,47 @@ const Booking = () => {
     const onSubmit = (data) => {
         console.log(data);
     
-        // Create FormData object for file uploads
-        const formData = new FormData();
+        // Check if `data` is an array or a single object
+        const bookings = Array.isArray(data) ? data : [data]; // Ensure bookings is always an array
     
-        // Append all fields to FormData
-        formData.append("name", data.name);
-        formData.append("mobile", data.phone);
-        formData.append("fathers_name", data.fathers_name);
-        formData.append("mothers_name", data.mothers_name);
-        formData.append("address", data.address);
-        formData.append("nationality", data.nationality);
-        formData.append("profession", data.profession);
-        formData.append("company", data.company);
-        formData.append("comming_form", data.comming_form);
-        formData.append("purpose", data.purpose);
-        formData.append("checking_date_time", data.date_time);
-        formData.append("checkout_date_time", data.checkout_date_time);
-        formData.append("room_category", data.room_category);
-        formData.append("room_number", data.room_number);
-        formData.append("room_price", data.room_price);
-        formData.append("person", data.person);
-        formData.append("duration_day", data.duration_day);
-        formData.append("total_price", data.total_price);
-        formData.append("nid_no", data.nid_no);
-        formData.append("advance", data.advance);
+        // Prepare the payload
+        const payload = bookings.map((booking) => ({
+            name: booking.name,
+            mobile: booking.phone,
+            fathers_name: booking.fathers_name,
+            mothers_name: booking.mothers_name,
+            address: booking.address,
+            nationality: booking.nationality,
+            profession: booking.profession,
+            company: booking.company,
+            comming_form: booking.comming_form,
+            purpose: booking.purpose,
+            checking_date_time: booking.date_time,
+            checkout_date_time: booking.checkout_date_time,
+            room_category: booking.room_category,
+            room_number: booking.room_number,
+            room_price: booking.room_price,
+            person: booking.person,
+            duration_day: booking.duration_day,
+            total_price: booking.total_price,
+            nid_no: booking.nid_no,
+            advance: booking.advance,
+            passport_no: booking.passport_no,
+            visa_no: booking.visa_no,
+            payment_status: booking.payment_status,
+            payment_method: booking.payment_method,
+            booking_by: booking.booking_by,
+        }));
     
-        // Handle file fields (append only if files are provided)
-        if (data.nid_doc?.[0]) formData.append("nid_doc", data.nid_doc[0]);
-        if (data.couple_doc?.[0]) formData.append("couple_doc", data.couple_doc[0]);
-        if (data.passport_doc?.[0]) formData.append("passport_doc", data.passport_doc[0]);
-        if (data.visa_doc?.[0]) formData.append("visa_doc", data.visa_doc[0]);
-        if (data.other_doc?.[0]) formData.append("other_doc", data.other_doc[0]);
-    
-        formData.append("passport_no", data.passport_no);
-        formData.append("visa_no", data.visa_no);
-        formData.append("payment_status", data.payment_status);
-        formData.append("payment_method", data.payment_method);
-        formData.append("booking_by", data.booking_by);
-    
-        // Axios POST request with FormData
+        // Axios POST request with the JSON payload
         axios
-            .post(`${BASE_URL}/booking/add`, formData, {
+            .post(`${BASE_URL}/booking/add`, { bookings: payload }, {
                 headers: {
-                    "Content-Type": "multipart/form-data", // Set appropriate headers for file uploads
+                    "Content-Type": "application/json", // Set appropriate headers for JSON data
                 },
             })
             .then((response) => {
-                toast.success("Booking added successfully!");
+                toast.success("Bookings added successfully!");
                 console.log(response);
     
                 // Optionally fetch updated data
@@ -105,9 +99,11 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("Failed to add bookings!");
             });
     };
+    
+    
     
 
     return (

@@ -105,7 +105,7 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("Failed to add booking!");
             });
     };
     
@@ -516,7 +516,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("nid_doc", { required: false })}
-                                                        name="nid_doc[]"
+                                                        name="nid_doc"
                                                         multiple
                                                         type="file"
                                                         className="form-control"

@@ -49,9 +49,6 @@ const PreBooking = () => {
         fetchCategories();
         fetchRoomNumber();
     }, []);
-
-    console.log(roomNumber);
-    
     // add pre - booking data
     const onSubmit = (data) => {
         console.log(data);

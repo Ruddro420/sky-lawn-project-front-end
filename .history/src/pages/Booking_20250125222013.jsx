@@ -47,46 +47,52 @@ const Booking = () => {
 
     // add booking data
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = (dataArray) => {
+        console.log(dataArray);
     
-        // Create FormData object for file uploads
+        // Create a FormData object
         const formData = new FormData();
     
-        // Append all fields to FormData
-        formData.append("name", data.name);
-        formData.append("mobile", data.phone);
-        formData.append("fathers_name", data.fathers_name);
-        formData.append("mothers_name", data.mothers_name);
-        formData.append("address", data.address);
-        formData.append("nationality", data.nationality);
-        formData.append("profession", data.profession);
-        formData.append("company", data.company);
-        formData.append("comming_form", data.comming_form);
-        formData.append("purpose", data.purpose);
-        formData.append("checking_date_time", data.date_time);
-        formData.append("checkout_date_time", data.checkout_date_time);
-        formData.append("room_category", data.room_category);
-        formData.append("room_number", data.room_number);
-        formData.append("room_price", data.room_price);
-        formData.append("person", data.person);
-        formData.append("duration_day", data.duration_day);
-        formData.append("total_price", data.total_price);
-        formData.append("nid_no", data.nid_no);
-        formData.append("advance", data.advance);
+        // Check if the incoming data is an array (handle multiple bookings)
+        if (!Array.isArray(dataArray)) {
+            dataArray = [dataArray];
+        }
     
-        // Handle file fields (append only if files are provided)
-        if (data.nid_doc?.[0]) formData.append("nid_doc", data.nid_doc[0]);
-        if (data.couple_doc?.[0]) formData.append("couple_doc", data.couple_doc[0]);
-        if (data.passport_doc?.[0]) formData.append("passport_doc", data.passport_doc[0]);
-        if (data.visa_doc?.[0]) formData.append("visa_doc", data.visa_doc[0]);
-        if (data.other_doc?.[0]) formData.append("other_doc", data.other_doc[0]);
+        // Loop through each booking data and append to FormData
+        dataArray.forEach((data, index) => {
+            formData.append(`bookings[${index}][name]`, data.name);
+            formData.append(`bookings[${index}][mobile]`, data.phone);
+            formData.append(`bookings[${index}][fathers_name]`, data.fathers_name);
+            formData.append(`bookings[${index}][mothers_name]`, data.mothers_name);
+            formData.append(`bookings[${index}][address]`, data.address);
+            formData.append(`bookings[${index}][nationality]`, data.nationality);
+            formData.append(`bookings[${index}][profession]`, data.profession);
+            formData.append(`bookings[${index}][company]`, data.company);
+            formData.append(`bookings[${index}][comming_form]`, data.comming_form);
+            formData.append(`bookings[${index}][purpose]`, data.purpose);
+            formData.append(`bookings[${index}][checking_date_time]`, data.date_time);
+            formData.append(`bookings[${index}][checkout_date_time]`, data.checkout_date_time);
+            formData.append(`bookings[${index}][room_category]`, data.room_category);
+            formData.append(`bookings[${index}][room_number]`, data.room_number);
+            formData.append(`bookings[${index}][room_price]`, data.room_price);
+            formData.append(`bookings[${index}][person]`, data.person);
+            formData.append(`bookings[${index}][duration_day]`, data.duration_day);
+            formData.append(`bookings[${index}][total_price]`, data.total_price);
+            formData.append(`bookings[${index}][nid_no]`, data.nid_no);
+            formData.append(`bookings[${index}][advance]`, data.advance);
+            formData.append(`bookings[${index}][passport_no]`, data.passport_no);
+            formData.append(`bookings[${index}][visa_no]`, data.visa_no);
+            formData.append(`bookings[${index}][payment_status]`, data.payment_status);
+            formData.append(`bookings[${index}][payment_method]`, data.payment_method);
+            formData.append(`bookings[${index}][booking_by]`, data.booking_by);
     
-        formData.append("passport_no", data.passport_no);
-        formData.append("visa_no", data.visa_no);
-        formData.append("payment_status", data.payment_status);
-        formData.append("payment_method", data.payment_method);
-        formData.append("booking_by", data.booking_by);
+            // Append files if they exist
+            if (data.nid_doc?.[0]) formData.append(`bookings[${index}][nid_doc]`, data.nid_doc[0]);
+            if (data.couple_doc?.[0]) formData.append(`bookings[${index}][couple_doc]`, data.couple_doc[0]);
+            if (data.passport_doc?.[0]) formData.append(`bookings[${index}][passport_doc]`, data.passport_doc[0]);
+            if (data.visa_doc?.[0]) formData.append(`bookings[${index}][visa_doc]`, data.visa_doc[0]);
+            if (data.other_doc?.[0]) formData.append(`bookings[${index}][other_doc]`, data.other_doc[0]);
+        });
     
         // Axios POST request with FormData
         axios
@@ -96,7 +102,7 @@ const Booking = () => {
                 },
             })
             .then((response) => {
-                toast.success("Booking added successfully!");
+                toast.success("Booking(s) added successfully!");
                 console.log(response);
     
                 // Optionally fetch updated data
@@ -105,9 +111,10 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("Failed to add booking(s)!");
             });
     };
+    
     
 
     return (
@@ -399,7 +406,7 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("nid_no", { required: false })}
-                                                        name="nid_no"
+                                                        name="nid_no[]"
                                                         type="number"
                                                         className="form-control"
                                                         id="basic-default-fullname"
