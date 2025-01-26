@@ -9,7 +9,9 @@ import toast from "react-hot-toast";
 const Booking = () => {
     const [preBook, setPreBook] = useState({});
     const [loading, setLoading] = useState(true);
+    const [nidDocs, setNidDocs] = useState([]);
     const { register, handleSubmit, setValue } = useForm();
+    //const [data,setData] = useState()
     const { data } = useParams();
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -47,12 +49,23 @@ const Booking = () => {
 
     // add booking data
 
+    // Handle file input change
+    const handleFileChange = (e) => {
+        const files = Array.from(e.target.files); // Convert FileList to an array
+        setNidDocs(files); // Update state with the selected files
+    };
+
     const onSubmit = (data) => {
-        console.log(data);
-    
+        //console.log(nid);
+
         // Create FormData object for file uploads
         const formData = new FormData();
-    
+
+         // Append each file to FormData
+         nidDocs.forEach((file, index) => {
+            formData.append(`nid_doc[${index}]`, file); // Add files with unique keys
+        });
+
         // Append all fields to FormData
         formData.append("name", data.name);
         formData.append("mobile", data.phone);
@@ -74,31 +87,23 @@ const Booking = () => {
         formData.append("total_price", data.total_price);
         formData.append("nid_no", data.nid_no);
         formData.append("advance", data.advance);
-    
-        // Handle file fields (append only if files are provided)
-        if (data.nid_doc?.[0]) formData.append("nid_doc", data.nid_doc[0]);
-        if (data.couple_doc?.[0]) formData.append("couple_doc", data.couple_doc[0]);
-        if (data.passport_doc?.[0]) formData.append("passport_doc", data.passport_doc[0]);
-        if (data.visa_doc?.[0]) formData.append("visa_doc", data.visa_doc[0]);
-        if (data.other_doc?.[0]) formData.append("other_doc", data.other_doc[0]);
-    
+        // testing
+        //formData.append("nid_doc", nid);
         formData.append("passport_no", data.passport_no);
         formData.append("visa_no", data.visa_no);
         formData.append("payment_status", data.payment_status);
         formData.append("payment_method", data.payment_method);
         formData.append("booking_by", data.booking_by);
-    
+
         // Axios POST request with FormData
         axios
             .post(`${BASE_URL}/booking/add`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data", // Set appropriate headers for file uploads
-                },
+                headers: { "Content-Type": "multipart/form-data" },
             })
             .then((response) => {
                 toast.success("Booking added successfully!");
                 console.log(response);
-    
+
                 // Optionally fetch updated data
                 /* fetchCategories();
                 fetchRoomNumber(); */
@@ -108,7 +113,8 @@ const Booking = () => {
                 toast.error("Failed to add booking!");
             });
     };
-    
+
+
 
     return (
         <div>
@@ -515,13 +521,11 @@ const Booking = () => {
                                                         NID Doc
                                                     </label>
                                                     <input
-                                                        {...register("nid_doc", { required: false })}
-                                                        name="nid_doc[]"
-                                                        multiple
                                                         type="file"
+                                                        name="nid_doc"
+                                                        multiple // Allows multiple file selection
                                                         className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Select File"
+                                                        onChange={handleFileChange}
                                                     />
                                                 </div>
                                             </div>
