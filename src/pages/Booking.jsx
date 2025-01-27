@@ -214,7 +214,7 @@ const Booking = () => {
                                                         Company Name <span className="text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        {...register("company", { required: true })}
+                                                        {...register("company", { required: false })}
                                                         name="company"
                                                         type="text"
                                                         className="form-control"
@@ -323,10 +323,10 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Address
+                                                        Address <span className="text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        {...register("address", { required: false })}
+                                                        {...register("address", { required: true })}
                                                         name="address"
                                                         type="text"
                                                         className="form-control"

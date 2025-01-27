@@ -41,8 +41,11 @@ const PreBookingDetails = () => {
         axios
             .get(`${BASE_URL}/prebook-data`)
             .then((response) => {
-                setRoom(response.data.data);
-                setFilteredRoom(response.data.data); // Initialize filteredRoom with all data
+                const sortedData = response.data.data.sort(
+                    (a, b) => new Date(b.date_time) - new Date(a.date_time)
+                );
+                setRoom(sortedData);
+                setFilteredRoom(sortedData); // Initialize filteredRoom with sorted data
                 setLoading(false);
             })
             .catch((error) => {
@@ -80,7 +83,7 @@ const PreBookingDetails = () => {
                 ? item.room_price.toString().includes(priceFilter)
                 : true;
             const statusMatch = statusFilter
-                ? (statusFilter == "booked" && item.status == 1 ) ||
+                ? (statusFilter == "booked" && item.status == 1) ||
                   (statusFilter == "available" && item.status != 1)
                 : true;
 
@@ -183,7 +186,15 @@ const PreBookingDetails = () => {
 
                                                         <tbody className="table-border-bottom-0">
                                                             {filteredRoom.map((item, index) => (
-                                                                <tr key={index}>
+                                                                <tr
+                                                                    key={index}
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            index === 0
+                                                                                ? "#dff0d8" // Light green for the latest row
+                                                                                : "transparent",
+                                                                    }}
+                                                                >
                                                                     <td>{index + 1}</td>
                                                                     <td>{new Date(
                                                                         item?.date_time

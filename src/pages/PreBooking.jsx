@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const PreBooking = () => {
     const [selectedRoomPrice, setSelectedRoomPrice] = useState("");
@@ -50,12 +51,10 @@ const PreBooking = () => {
         fetchRoomNumber();
     }, []);
 
-    console.log(roomNumber);
+    const navigate = useNavigate()
     
     // add pre - booking data
     const onSubmit = (data) => {
-        console.log(data);
-
         axios
             .post(`${BASE_URL}/prebook/add`, {
                 date_time: data.date_time,
@@ -73,9 +72,9 @@ const PreBooking = () => {
             .then((response) => {
                 toast.success("Pre Booking added successfully!");
                 console.log(response);
-
                 fetchCategories();
                 fetchRoomNumber();
+                navigate('/pre-booking-details')
             })
             .catch((error) => {
                 console.log(error);
@@ -217,7 +216,7 @@ const PreBooking = () => {
                                                                 Nationality <span className="text-danger">*</span>
                                                             </label>
                                                             <input
-                                                                {...register("nationality", { required: false })}
+                                                                {...register("nationality", { required: true })}
                                                                 name="nationality"
                                                                 type="text"
                                                                 className="form-control"

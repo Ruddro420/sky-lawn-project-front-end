@@ -7,7 +7,7 @@ const FooterContent = () => {
                 <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                     <div className="mb-2 mb-md-0">
                         ©2025
-                         made with  by
+                         made   by
                         <a href="https://themeselection.com" target="_blank" className="footer-link fw-bolder">Inspired Digital</a>
                     </div>
                     <div>

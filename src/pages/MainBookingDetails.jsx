@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const MainBookingDetails = () => {
     const [booking, setBooking] = useState([]);
     const [filteredBooking, setFilteredBooking] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const { register, setValue, handleSubmit } = useForm();
 
     // Filter states
     const [nameFilter, setNameFilter] = useState("");
@@ -75,6 +79,54 @@ const MainBookingDetails = () => {
     const invoiceGenerate = (id) => {
         navigate(`/invoice/${id}`);
     };
+
+    const [getIdForInvoice, setGetIdForInvoice] = useState()
+    const [getDateForInvoice, setGetDateForInvoice] = useState()
+
+    // check out date change
+
+    const toggleModal = (id, checkOutDate) => {
+        setShowModal(!showModal)
+        setGetIdForInvoice(id)
+        setGetDateForInvoice(checkOutDate)
+        console.log(checkOutDate);
+
+    };
+
+    // set data
+    setValue("checkout_date_time", getDateForInvoice);
+
+    const onSubmit = (data) => {
+        console.log(data);
+
+        const formData = new FormData();
+        //e.preventDefault();
+
+        formData.append("checkout_date_time", data.checkout_date_time);
+        formData.append("id", getIdForInvoice);
+
+        // Axios POST request with FormData
+        axios
+            .post(`${BASE_URL}/book/checkout/update`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then((response) => {
+                toast.success("Set Check Out Date!");
+                console.log(response);
+            })
+            .catch((error) => {
+                console.error("Error:", error.response?.data || error.message);
+                toast.error("Something Went Wrong!");
+            });
+        // Close modal after submission
+        toggleModal();
+
+        setTimeout(() => {
+            navigate(`/invoice/${getIdForInvoice}`);
+        }, 3000)
+    };
+
+
 
     // Find the latest booking
     const latestBookingId =
@@ -212,12 +264,13 @@ const MainBookingDetails = () => {
                                                                             </button>
                                                                         ) : (
                                                                             <button
-                                                                                onClick={() =>
-                                                                                    invoiceGenerate(
-                                                                                        item.id
-                                                                                    )
-                                                                                }
+                                                                                /*  onClick={() =>
+                                                                                     invoiceGenerate(
+                                                                                         item.id
+                                                                                     )
+                                                                                 } */
                                                                                 className="btn btn-primary"
+                                                                                onClick={() => toggleModal(item.id, item.checkout_date_time)}
                                                                             >
                                                                                 Invoice
                                                                             </button>
@@ -247,6 +300,61 @@ const MainBookingDetails = () => {
                 </div>
             </div>
             <div className="content-backdrop fade"></div>
+            {/*  <!-- Modal --> */}
+            {showModal && (
+                <div
+                    className="modal fade show"
+                    style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                    Set Checkout Date
+                                </h1>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={toggleModal}
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <div className="mb-3">
+                                        <label className="form-label" htmlFor="basic-default-fullname">
+                                            Check in Date & Time <span className="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            {...register("checkout_date_time", { required: true })}
+                                            name="checkout_date_time"
+                                            type="datetime-local"
+                                            className="form-control"
+                                            id="checkout_date_time"
+                                            placeholder="Booking by reference"
+                                        />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">
+                                        Save Changes
+                                    </button>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={toggleModal}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
