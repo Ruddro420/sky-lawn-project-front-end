@@ -320,15 +320,15 @@ const TopNav = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme lg:d-none"
+      <nav className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme "
         id="layout-navbar">
         <a
-          className="nav-item nav-link px-0 me-xl-4"
+          className="nav-item nav-link px-0 me-xl-4 d-lg-none"
           onClick={() => setOpen(!open)}
         >
           {open === true ? (
 
-            <AiOutlineClose className="fs-3"></AiOutlineClose>
+            <AiOutlineClose className=" bx-sm"></AiOutlineClose>
           ) : (
             <i className="bx bx-menu bx-sm"></i>
           )}
@@ -336,10 +336,10 @@ const TopNav = () => {
 
         {/* Navbar Links */}
         <div
-          className={` bg-navbar-theme lg:d-none ${open ? "show bg-navbar-theme text-black position-absolute  start-0 top-100 w-100" : "d-none"}`}
+          className={` bg-navbar-theme lg:d-none ${open ? "show bg-navbar-theme text-black position-absolute  start-0 left-0 top-100 w-100" : "d-none"}`}
           id="navbarNav"
         >
-          <ul className="navbar-nav bg-navbar-theme p-3 me-auto mb-2 mb-lg-0 lg:d-none">
+          <ul className="navbar-nav bg-navbar-theme p-3 me-auto mb-2 mb-lg-0 d-lg-none">
             <li className="nav-item">
               <NavLink
                 to="/"

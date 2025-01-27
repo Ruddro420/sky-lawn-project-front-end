@@ -263,8 +263,8 @@ const CreateRoom = () => {
                             </div>
                         </div>
 
-                        {/* Room Table */}
-                       {/*  <div className="col-12">
+                        {/* Room Table  */}
+                         <div className="col-12">
                             <div className="card mb-4">
                                 
                                 <div className="card-body">
@@ -324,7 +324,7 @@ const CreateRoom = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
 
                         {/*  <!-- Modal --> */}
                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

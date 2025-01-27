@@ -217,7 +217,7 @@ const PreBooking = () => {
                                                                 Nationality <span className="text-danger">*</span>
                                                             </label>
                                                             <input
-                                                                {...register("nationality", { required: true })}
+                                                                {...register("nationality", { required: false })}
                                                                 name="nationality"
                                                                 type="text"
                                                                 className="form-control"
@@ -247,7 +247,7 @@ const PreBooking = () => {
                                                                 Mobile <span className="text-danger">*</span>
                                                             </label>
                                                             <input
-                                                                {...register("phone", { required: true })}
+                                                                {...register("phone", { required: false })}
                                                                 name="phone"
                                                                 type="number"
                                                                 className="form-control"
@@ -318,7 +318,7 @@ const PreBooking = () => {
                                                                 {...register("booking_by", { required: true })}
                                                                 name="booking_by"
                                                                 type="text"
-                                                                className="form-control"
+                                                                className="form-control" 
                                                                 id="basic-default-fullname"
                                                                 placeholder="Booking by reference"
                                                             />
