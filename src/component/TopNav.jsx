@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
+import './Com.css'
 
 const TopNav = () => {
   const [userData, setUserData] = useState(null);
