@@ -22,9 +22,9 @@ const TopNav = () => {
     }
   }, []);
 
-  // if (!userData) {
-  //   return <p>Loading...</p>;
-  // }
+  if (!userData) {
+    return <p>Loading...</p>;
+  }
 
   const toggleDropdown = (setter) => {
     setter((prev) => !prev);
@@ -204,16 +204,15 @@ const TopNav = () => {
 
           <ul className="navbar-nav flex-row align-items-center ms-auto">
             {/* <!-- Place this tag where you want the button to render. --> */}
-            <li className="nav-item lh-1 me-3">
+            <li className="nav-item lh-1 me-1">
               <a
-                className="github-button"
-                href="https://github.com/themeselection/sneat-html-admin-template-free"
-                data-icon="octicon-star"
-                data-size="large"
-                data-show-count="true"
-                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                className="button fs-6"
+
+
+              // data-show-count="true"
+              // aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
               >
-                Star
+                {userData?.name}
               </a>
             </li>
 
@@ -246,13 +245,13 @@ const TopNav = () => {
                         </div>
                       </div>
                       <div className="flex-grow-1">
-                        <span className="fw-semibold d-block">John Doe</span>
-                        <small className="text-muted">Admin</small>
+                        <span className="fw-semibold d-block">{userData?.name}</span>
+                        <small className="text-muted">{userData?.email}</small>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <div className="dropdown-divider"></div>
                 </li>
                 <li>
@@ -280,12 +279,12 @@ const TopNav = () => {
                 </li>
                 <li>
                   <div className="dropdown-divider"></div>
-                </li>
+                </li> */}
                 <li>
-                  <a className="dropdown-item" href="auth-login-basic.html">
+                  <NavLink to="/login" className="dropdown-item" >
                     <i className="bx bx-power-off me-2"></i>
-                    <span className="align-middle">Log Out</span>
-                  </a>
+                    <span onClick={handleLogout} className="align-middle">Log Out</span>
+                  </NavLink>
                 </li>
               </ul>
             </li>
