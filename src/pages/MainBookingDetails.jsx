@@ -215,7 +215,7 @@ const MainBookingDetails = () => {
                                                     <tbody className="table-border-bottom-0">
                                                         {filteredBooking.map((item, index) => {
                                                             const isLatest =
-                                                                new Date(item.created_at).getTime() ===
+                                                                new Date(item.created_at).getTime() ==
                                                                 latestBookingId;
 
                                                             return (

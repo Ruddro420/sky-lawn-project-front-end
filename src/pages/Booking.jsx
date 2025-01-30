@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { format, parseISO } from 'date-fns';
 import toast from "react-hot-toast";
 
@@ -10,7 +10,14 @@ const Booking = () => {
     const [preBook, setPreBook] = useState({});
     const [loading, setLoading] = useState(true);
     const [nidDocs, setNidDocs] = useState([]);
+    const [otherDocs, setOtherDocs] = useState([]);
+    const [coupleDocs, setCoupleDocs] = useState([]);
+    const [visaDocs, setVisaDocs] = useState([]);
+
+
+
     const { register, handleSubmit, setValue } = useForm();
+    const navigate = useNavigate()
     //const [data,setData] = useState()
     const { data } = useParams();
     // fetch data
@@ -47,13 +54,12 @@ const Booking = () => {
         fetchRoom();
     }, [data]);
 
-    // add booking data
 
-    // Handle file input change
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files); // Convert FileList to an array
-        setNidDocs(files); // Update state with the selected files
-    };
+    // file handel nid
+    const handleFileChange = (e) => { const files = Array.from(e.target.files); setNidDocs(files); };
+    const handleFileChangeVisa = (e) => { const files = Array.from(e.target.files); setVisaDocs(files); };
+    const handleFileChangeCouple = (e) => { const files = Array.from(e.target.files); setCoupleDocs(files); };
+    const handleFileChangeOthers = (e) => { const files = Array.from(e.target.files); setOtherDocs(files); };
 
     const onSubmit = (data) => {
         console.log(data);
@@ -61,10 +67,11 @@ const Booking = () => {
         // Create FormData object for file uploads
         const formData = new FormData();
 
-         // Append each file to FormData
-         nidDocs.forEach((file, index) => {
-            formData.append(`nid_doc[${index}]`, file); // Add files with unique keys
-        });
+        // Append each file to FormData
+        nidDocs.forEach((file, index) => { formData.append(`nid_doc[${index}]`, file); });
+        otherDocs.forEach((file, index) => { formData.append(`other_doc[${index}]`, file); });
+        coupleDocs.forEach((file, index) => { formData.append(`couple_doc[${index}]`, file); });
+        visaDocs.forEach((file, index) => { formData.append(`visa_doc[${index}]`, file); });
 
         // Append all fields to FormData
         formData.append("name", data.name);
@@ -103,6 +110,7 @@ const Booking = () => {
             .then((response) => {
                 toast.success("Booking added successfully!");
                 console.log(response);
+                navigate('/main-booking-details')
 
                 // Optionally fetch updated data
                 /* fetchCategories();
@@ -276,7 +284,7 @@ const Booking = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Price ৳ <span className="text-danger">*</span>
-                                                    </label> 
+                                                    </label>
                                                     <input
                                                         {...register("room_price", { required: true })}
                                                         name="room_price"
@@ -450,7 +458,7 @@ const Booking = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Payment Status <span className="text-danger">*</span>
-                                                    </label> 
+                                                    </label>
                                                     <select
                                                         {...register("payment_status", { required: true })}
                                                         name="payment_status"
@@ -536,28 +544,13 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("couple_doc", { required: false })}
-                                                        name="couple_doc[]"
+                                                        name="couple_doc"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Select File"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <div className="mb-3">
-                                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Passport Doc
-                                                    </label>
-                                                    <input
-                                                        {...register("passport_doc", { required: false })}
-                                                        name="passport_doc[]"
-                                                        multiple
-                                                        type="file"
-                                                        className="form-control"
-                                                        id="basic-default-fullname"
-                                                        placeholder="Select File"
+                                                        onChange={handleFileChangeCouple}
                                                     />
                                                 </div>
                                             </div>
@@ -568,12 +561,13 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("visa_doc", { required: false })}
-                                                        name="visa_doc[]"
+                                                        name="visa_doc"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Select File"
+                                                        onChange={handleFileChangeVisa}
                                                     />
                                                 </div>
                                             </div>
@@ -584,16 +578,16 @@ const Booking = () => {
                                                     </label>
                                                     <input
                                                         {...register("other_doc", { required: false })}
-                                                        name="other_doc[]"
+                                                        name="other_doc"
                                                         multiple
                                                         type="file"
                                                         className="form-control"
                                                         id="basic-default-fullname"
                                                         placeholder="Select File"
+                                                        onChange={handleFileChangeOthers}
                                                     />
                                                 </div>
                                             </div>
-
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">

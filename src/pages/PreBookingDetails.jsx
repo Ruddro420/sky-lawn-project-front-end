@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const PreBookingDetails = () => {
@@ -84,7 +85,7 @@ const PreBookingDetails = () => {
                 : true;
             const statusMatch = statusFilter
                 ? (statusFilter == "booked" && item.status == 1) ||
-                  (statusFilter == "available" && item.status != 1)
+                (statusFilter == "available" && item.status != 1)
                 : true;
 
             return nameMatch && phoneMatch && roomMatch && priceMatch && statusMatch;
@@ -92,6 +93,24 @@ const PreBookingDetails = () => {
 
         setFilteredRoom(filtered);
     }, [nameFilter, phoneFilter, roomFilter, priceFilter, statusFilter, room]);
+
+    // delete data
+    // Delete a category
+    const deleteRoom = (id) => {
+        if (window.confirm("Are you sure you want to delete this ?")) {
+            axios
+                .get(`${BASE_URL}/prebook/delete/${id}`)
+                .then(() => {
+                    toast.success("Deleted successfully!");
+                    fetchCategories(); // Refresh the category list
+                    fetchRoom();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    toast.error("Failed to delete !");
+                });
+        }
+    };
 
     return (
         <div>
@@ -227,6 +246,9 @@ const PreBookingDetails = () => {
                                                                                 Apply Booking
                                                                             </button>
                                                                         )}
+                                                                        <button
+                                                                            onClick={() => { deleteRoom(item?.id) }}
+                                                                            className="btn btn-primary ms-2">Delete</button>
                                                                     </td>
                                                                 </tr>
                                                             ))}
