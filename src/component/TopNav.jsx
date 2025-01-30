@@ -22,9 +22,9 @@ const TopNav = () => {
     }
   }, []);
 
-  if (!userData) {
-    return <p>Loading...</p>;
-  }
+  // if (!userData) {
+  //   return <p>Loading...</p>;
+  // }
 
   const toggleDropdown = (setter) => {
     setter((prev) => !prev);
@@ -45,7 +45,7 @@ const TopNav = () => {
 
         {/* Sidebar */}
         <div
-          className={`slide-menu ${open ? "open" : ""}`}
+          className={`d-lg-none slide-menu ${open ? "open" : "d-none"}`}
           id="navbarNav"
         >
           {/* Close Button */}
@@ -54,20 +54,23 @@ const TopNav = () => {
           </div>
 
           {/* Sidebar Links */}
-          <ul className="navbar-nav bg-navbar-theme p-3 me-auto mb-2 mb-lg-0 d-lg-none">
-            <li className="nav-item">
+          <ul className="navbar-nav bg-navbar-theme p-3 me-auto mb-2  mb-lg-0 d-lg-none">
+            <li className="nav-menu">
               <NavLink
                 to="/"
+                onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   isActive ? "nav-link active text-primary" : "nav-link"
                 }
+
+
               >
                 Dashboard
               </NavLink>
             </li>
             {/* Hotel Room Dropdown */}
-            <li className="nav-item dropdown">
-              <a
+            <li className="nav-menu dropdown">
+              <NavLink
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="roomDropdown"
@@ -77,27 +80,38 @@ const TopNav = () => {
                 onClick={() => toggleDropdown(setRoomOpen)}
               >
                 Hotel Room
-              </a>
+              </NavLink>
               <ul
-                className={`dropdown-menu ${roomOpen ? "show" : ""}`}
+                className={`dropdown-menu shadow-none ${roomOpen ? "show" : ""}`}
                 aria-labelledby="roomDropdown"
               >
                 <li>
-                  <NavLink to="/room-category" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/room-category" className="dropdown-item">
                     Category
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/room" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/room" className="dropdown-item">
                     Room
                   </NavLink>
                 </li>
               </ul>
             </li>
 
+            <li className="nav-menu">
+              <NavLink
+                onClick={() => setOpen(false)}
+                to="/pre-booking"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active text-primary" : "nav-link"
+                }
+              >
+                Pre-Booking
+              </NavLink>
+            </li>
             {/* Booking Details Dropdown */}
-            <li className="nav-item dropdown">
-              <a
+            <li className="nav-menu dropdown">
+              <NavLink
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="detailsDropdown"
@@ -107,18 +121,18 @@ const TopNav = () => {
                 onClick={() => toggleDropdown(setDetails)}
               >
                 Booking Details
-              </a>
+              </NavLink>
               <ul
-                className={`dropdown-menu ${details ? "show" : ""}`}
+                className={`dropdown-menu shadow-none ${details ? "show" : ""}`}
                 aria-labelledby="detailsDropdown"
               >
                 <li>
-                  <NavLink to="/pre-booking-details" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/pre-booking-details" className="dropdown-item">
                     Pre-Booking Details
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/main-booking-details" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/main-booking-details" className="dropdown-item">
                     Main Booking Details
                   </NavLink>
                 </li>
@@ -126,10 +140,10 @@ const TopNav = () => {
             </li>
 
             {/* Analytics Dropdown */}
-            <li className="nav-item dropdown">
-              <a
+            <li className="nav-menu dropdown">
+              <NavLink
                 className="nav-link dropdown-toggle"
-                href="#"
+
                 id="analyticsDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -137,18 +151,18 @@ const TopNav = () => {
                 onClick={() => toggleDropdown(setAnalytics)}
               >
                 Analytics
-              </a>
+              </NavLink>
               <ul
-                className={`dropdown-menu ${analytics ? "show" : ""}`}
+                className={`dropdown-menu shadow-none ${analytics ? "show" : ""}`}
                 aria-labelledby="analyticsDropdown"
               >
                 <li>
-                  <NavLink to="/overviews" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/overviews" className="dropdown-item">
                     Overviews
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/report" className="dropdown-item">
+                  <NavLink onClick={() => setOpen(false)} to="/report" className="dropdown-item">
                     Report
                   </NavLink>
                 </li>
@@ -156,25 +170,124 @@ const TopNav = () => {
             </li>
 
             {/* Static Links */}
-            <li className="nav-item">
-              <NavLink
-                to="/pre-booking"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active text-primary" : "nav-link"
-                }
-              >
-                Pre-Booking
-              </NavLink>
-            </li>
-            <li className="nav-item">
+            <li className="nav-menu">
               <NavLink
                 to="/support"
+                onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   isActive ? "nav-link active text-primary" : "nav-link"
                 }
               >
                 Support
               </NavLink>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          className="navbar-nav-right d-flex align-items-center"
+          id="navbar-collapse"
+        >
+          {/* <!-- Search --> */}
+          <div className="navbar-nav align-items-center">
+            <div className="nav-item d-flex align-items-center">
+              <i className="bx bx-search fs-4 lh-0"></i>
+              <input
+                type="text"
+                className="form-control border-0 shadow-none"
+                placeholder="Search..."
+                aria-label="Search..."
+              />
+            </div>
+          </div>
+          {/* <!-- /Search --> */}
+
+          <ul className="navbar-nav flex-row align-items-center ms-auto">
+            {/* <!-- Place this tag where you want the button to render. --> */}
+            <li className="nav-item lh-1 me-3">
+              <a
+                className="github-button"
+                href="https://github.com/themeselection/sneat-html-admin-template-free"
+                data-icon="octicon-star"
+                data-size="large"
+                data-show-count="true"
+                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+              >
+                Star
+              </a>
+            </li>
+
+            {/* <!-- User --> */}
+            <li className="nav-item navbar-dropdown dropdown-user dropdown">
+              <a
+                className="nav-link dropdown-toggle hide-arrow"
+                href="javascript:void(0);"
+                data-bs-toggle="dropdown"
+              >
+                <div className="avatar avatar-online">
+                  <img
+                    src="../assets/img/avatars/1.png"
+                    alt
+                    className="w-px-40 h-auto rounded-circle"
+                  />
+                </div>
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <div className="d-flex">
+                      <div className="flex-shrink-0 me-3">
+                        <div className="avatar avatar-online">
+                          <img
+                            src="../assets/img/avatars/1.png"
+                            alt
+                            className="w-px-40 h-auto rounded-circle"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex-grow-1">
+                        <span className="fw-semibold d-block">John Doe</span>
+                        <small className="text-muted">Admin</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div className="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="bx bx-user me-2"></i>
+                    <span className="align-middle">My Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="bx bx-cog me-2"></i>
+                    <span className="align-middle">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <span className="d-flex align-items-center align-middle">
+                      <i className="flex-shrink-0 bx bx-credit-card me-2"></i>
+                      <span className="flex-grow-1 align-middle">Billing</span>
+                      <span className="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">
+                        4
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <div className="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="auth-login-basic.html">
+                    <i className="bx bx-power-off me-2"></i>
+                    <span className="align-middle">Log Out</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
