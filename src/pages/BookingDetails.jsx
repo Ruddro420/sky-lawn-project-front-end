@@ -466,78 +466,78 @@ const BookingDetails = () => {
                             {/* Documents Start */}
 
                             <div className="row">
-    {/* NID Documents */}
-    <div className="col-lg-6">
-        <div className="mb-3">
-            <label className="form-label">NID Documents</label>
-            {booking && booking.nid_doc ? (
-                <table className="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {JSON.parse(booking.nid_doc).map((file, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{file}</td>
-                                <td>
-                                    <a href={`http://192.168.0.33:8000/nid_doc/doc/${file}`} 
-                                       download={file} 
-                                       className="btn btn-primary btn-sm">
-                                        Download
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No NID Document Available</p>
-            )}
-        </div>
-    </div>
+                                {/* NID Documents */}
+                                <div className="col-lg-6">
+                                    <div className="mb-3">
+                                        <label className="form-label">NID Documents</label>
+                                        {booking && booking.nid_doc ? (
+                                            <table className="table table-bordered text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>File Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {JSON.parse(booking.nid_doc).map((file, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{file}</td>
+                                                            <td>
+                                                                <a href={`http://192.168.0.33:8000/nid_doc/doc/${file}`}
+                                                                    download={file}
+                                                                    className="btn btn-primary btn-sm">
+                                                                    Download
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <p>No NID Document Available</p>
+                                        )}
+                                    </div>
+                                </div>
 
-    {/* Couple Documents */}
-    <div className="col-lg-6">
-        <div className="mb-3">
-            <label className="form-label">Couple Documents</label>
-            {booking && booking.couple_doc ? (
-                <table className="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {JSON.parse(booking.couple_doc).map((file, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{file}</td>
-                                <td>
-                                    <a href={`http://192.168.0.33:8000/couple_doc/doc/${file}`} 
-                                       download={file} 
-                                       className="btn btn-primary btn-sm">
-                                        Download
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No Couple Document Available</p>
-            )}
-        </div>
-    </div>
+                                {/* Couple Documents */}
+                                <div className="col-lg-6">
+                                    <div className="mb-3">
+                                        <label className="form-label">Couple Documents</label>
+                                        {booking && booking.couple_doc ? (
+                                            <table className="table table-bordered text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>File Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {JSON.parse(booking.couple_doc).map((file, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{file}</td>
+                                                            <td>
+                                                                <a href={`http://192.168.0.33:8000/couple_doc/doc/${file}`}
+                                                                    download={file}
+                                                                    className="btn btn-primary btn-sm">
+                                                                    Download
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <p>No Couple Document Available</p>
+                                        )}
+                                    </div>
+                                </div>
 
-    {/* Passport Documents */}
-    <div className="col-lg-6">
+                                {/* Passport Documents */}
+                                {/* <div className="col-lg-6">
         <div className="mb-3">
             <label className="form-label">Passport Documents</label>
             {booking && booking.passport_doc ? (
@@ -569,78 +569,78 @@ const BookingDetails = () => {
                 <p>No Passport Document Available</p>
             )}
         </div>
-    </div>
+    </div> */}
 
-    {/* Visa Documents */}
-    <div className="col-lg-6">
-        <div className="mb-3">
-            <label className="form-label">Visa Documents</label>
-            {booking && booking.visa_doc ? (
-                <table className="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {JSON.parse(booking.visa_doc).map((file, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{file}</td>
-                                <td>
-                                    <a href={`http://192.168.0.33:8000/visa_doc/doc/${file}`} 
-                                       download={file} 
-                                       className="btn btn-primary btn-sm">
-                                        Download
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No Visa Document Available</p>
-            )}
-        </div>
-    </div>
+                                {/* Visa Documents */}
+                                <div className="col-lg-6">
+                                    <div className="mb-3">
+                                        <label className="form-label">Passport Documents</label>
+                                        {booking && booking.visa_doc ? (
+                                            <table className="table table-bordered text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>File Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {JSON.parse(booking.visa_doc).map((file, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{file}</td>
+                                                            <td>
+                                                                <a href={`http://192.168.0.33:8000/visa_doc/doc/${file}`}
+                                                                    download={file}
+                                                                    className="btn btn-primary btn-sm">
+                                                                    Download
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <p>No Visa Document Available</p>
+                                        )}
+                                    </div>
+                                </div>
 
-    {/* Other Documents */}
-    <div className="col-lg-6">
-        <div className="mb-3">
-            <label className="form-label">Other Documents</label>
-            {booking && booking.other_doc ? (
-                <table className="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {JSON.parse(booking.other_doc).map((file, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{file}</td>
-                                <td>
-                                    <a href={`http://192.168.0.33:8000/other_doc/doc/${file}`} 
-                                       download={file} 
-                                       className="btn btn-primary btn-sm">
-                                        Download
-                                    </a>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>No Other Document Available</p>
-            )}
-        </div>
-    </div>
-</div>
+                                {/* Other Documents */}
+                                <div className="col-lg-6">
+                                    <div className="mb-3">
+                                        <label className="form-label">Other Documents</label>
+                                        {booking && booking.other_doc ? (
+                                            <table className="table table-bordered text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>File Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {JSON.parse(booking.other_doc).map((file, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{file}</td>
+                                                            <td>
+                                                                <a href={`http://192.168.0.33:8000/other_doc/doc/${file}`}
+                                                                    download={file}
+                                                                    className="btn btn-primary btn-sm">
+                                                                    Download
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        ) : (
+                                            <p>No Other Document Available</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
 
 
 
