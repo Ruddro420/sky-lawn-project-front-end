@@ -97,11 +97,18 @@ const Invoice = () => {
 
         html2canvas(element, { scale: 2 }).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF("p", "mm", "a4");
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+            // const pdf = new jsPDF("p", "mm", "a4");
+            const pdf = new jsPDF({
+                orientation: "portrait",
+                unit: "pt",  // Use points for accurate size
+                format: [612, 792], // Letter size (8.5 x 11 inches in points)
+            });
+            // const pdfWidth = pdf.internal.pageSize.getWidth();
+            // const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            const pdfWidth = 612;
+            const pdfHeight = 792;
+            const marginTop = 106;
+            pdf.addImage(imgData, "PNG", 0, marginTop, pdfWidth, pdfHeight - marginTop);
             pdf.save(`${getInvoice.invoice}-invoice.pdf`);
 
             // Revert spans back to input fields (optional, to restore the UI)
@@ -147,16 +154,16 @@ const Invoice = () => {
                                                 })}</p>
                                             </div>
                                         </div>
-                                        <div className="tm_invoice_info tm_mb25">
-                                            <div className="tm_invoice_info_left">
+                                        <div className=" tm_mb25">
+                                            {/* <div className="tm_invoice_info_left">
                                                 <p className="tm_mb17">
                                                     <b className="tm_f18 tm_primary_color">SKY LAWN Hotel & Restaurant</b> <br />
                                                     R. K. Road. Islambag <br />  Rangpur<br />
                                                     <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="a2cecdd5c7cecee2c5cfc3cbce8cc1cdcf">info@skylawnhotel</a> <br />
                                                     +88 01326085222
                                                 </p>
-                                            </div>
-                                            <div className="tm_invoice_info_right">
+                                            </div> */}
+                                            <div className="">
                                                 <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in tm_gray_bg tm_round_border">
                                                     <div>
                                                         <span>Check In:</span> <br />
