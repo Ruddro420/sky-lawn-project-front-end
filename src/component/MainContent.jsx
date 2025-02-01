@@ -83,7 +83,7 @@ const MainContent = () => {
         <div className="content-wrapper">
           <div className="container-xxl flex-grow-1 container-p-y">
             <div className="row">
-              <div className="col-lg-12 col-md-4 order-1">
+              <div className="col-lg-12 col-md-12 order-1">
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-sm-12 mb-4">
                     <div className="card">
