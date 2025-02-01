@@ -85,7 +85,7 @@ const MainContent = () => {
             <div className="row">
               <div className="col-lg-12 col-md-4 order-1">
                 <div className="row">
-                  <div className="col-lg-12 col-md-12 col-6 mb-4">
+                  <div className="col-lg-12 col-md-12 col-sm-12 mb-4">
                     <div className="card">
                       <div className="card-body">
                         <div className="card-title d-flex align-items-start justify-content-between">
