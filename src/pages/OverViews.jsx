@@ -30,6 +30,8 @@ const OverViews = () => {
                 page_size: pageSize,
             })
             .then((response) => {
+                console.log(response);
+                
                 setData(response.data);
                 setDetails(response.data.data);
                 setLoading(false);

@@ -22,6 +22,8 @@ const BookingDetails = () => {
         axios
             .get(`${BASE_URL}/booking-data/show/${id}`)
             .then((response) => {
+                console.log(response);
+
                 setBooking(response.data.data);
 
                 setLoading(false);
@@ -461,86 +463,188 @@ const BookingDetails = () => {
                             <hr />
                             <h5>Documents</h5>
                             <hr />
-                            <div className="col-lg-6">
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                        NID Doc
-                                    </label>
-                                    <input
-                                        {...register("nid_doc", { required: false })}
-                                        name="nid_doc[]"
-                                        multiple
-                                        type="file"
-                                        className="form-control"
-                                        id="basic-default-fullname"
-                                        placeholder="Select File"
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                        Couple Doc
-                                    </label>
-                                    <input
-                                        {...register("couple_doc", { required: false })}
-                                        name="couple_doc[]"
-                                        multiple
-                                        type="file"
-                                        className="form-control"
-                                        id="basic-default-fullname"
-                                        placeholder="Select File"
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                        Passport Doc
-                                    </label>
-                                    <input
-                                        {...register("passport_doc", { required: false })}
-                                        name="passport_doc[]"
-                                        multiple
-                                        type="file"
-                                        className="form-control"
-                                        id="basic-default-fullname"
-                                        placeholder="Select File"
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                        Visa Doc
-                                    </label>
-                                    <input
-                                        {...register("visa_doc", { required: false })}
-                                        name="visa_doc[]"
-                                        multiple
-                                        type="file"
-                                        className="form-control"
-                                        id="basic-default-fullname"
-                                        placeholder="Select File"
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="basic-default-fullname">
-                                        Others Doc
-                                    </label>
-                                    <input
-                                        {...register("other_doc", { required: false })}
-                                        name="other_doc[]"
-                                        multiple
-                                        type="file"
-                                        className="form-control"
-                                        id="basic-default-fullname"
-                                        placeholder="Select File"
-                                    />
-                                </div>
-                            </div>
+                            {/* Documents Start */}
+
+                            <div className="row">
+    {/* NID Documents */}
+    <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">NID Documents</label>
+            {booking && booking.nid_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.nid_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/nid_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No NID Document Available</p>
+            )}
+        </div>
+    </div>
+
+    {/* Couple Documents */}
+    <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">Couple Documents</label>
+            {booking && booking.couple_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.couple_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/couple_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No Couple Document Available</p>
+            )}
+        </div>
+    </div>
+
+    {/* Passport Documents */}
+    <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">Passport Documents</label>
+            {booking && booking.passport_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.passport_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/passport_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No Passport Document Available</p>
+            )}
+        </div>
+    </div>
+
+    {/* Visa Documents */}
+    <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">Visa Documents</label>
+            {booking && booking.visa_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.visa_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/visa_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No Visa Document Available</p>
+            )}
+        </div>
+    </div>
+
+    {/* Other Documents */}
+    <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">Other Documents</label>
+            {booking && booking.other_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.other_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/other_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No Other Document Available</p>
+            )}
+        </div>
+    </div>
+</div>
+
+
+
+                            {/* Documents END */}
 
                             {/* <div className="col-lg-6">
                                 <div className="mb-3">
