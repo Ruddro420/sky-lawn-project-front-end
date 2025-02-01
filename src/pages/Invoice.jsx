@@ -101,7 +101,7 @@ const Invoice = () => {
             const pdf = new jsPDF({
                 orientation: "portrait",
                 unit: "pt",  // Use points for accurate size
-                format: [612, 792], // Letter size (8.5 x 11 inches in points)
+                format: [612, 792], // Letter size 
             });
             // const pdfWidth = pdf.internal.pageSize.getWidth();
             // const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
@@ -154,7 +154,7 @@ const Invoice = () => {
                                                 })}</p>
                                             </div>
                                         </div>
-                                        <div className=" tm_mb25">
+                                        <div className="  tm_mb25">
                                             {/* <div className="tm_invoice_info_left">
                                                 <p className="tm_mb17">
                                                     <b className="tm_f18 tm_primary_color">SKY LAWN Hotel & Restaurant</b> <br />
@@ -164,7 +164,8 @@ const Invoice = () => {
                                                 </p>
                                             </div> */}
                                             <div className="">
-                                                <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in tm_gray_bg tm_round_border">
+                                                <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in  tm_round_border"
+                                                >
                                                     <div>
                                                         <span>Check In:</span> <br />
                                                         <b className="tm_primary_color">{new Date(getInvoice?.checking_date_time).toLocaleString("en-bd", {
@@ -213,7 +214,7 @@ const Invoice = () => {
                                                 <div className="tm_table_responsive">
                                                     <table>
                                                         <thead>
-                                                            <tr>
+                                                            <tr className='update-bg'>
                                                                 <th className="tm_width_6 tm_semi_bold tm_primary_color">Name</th>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color"> Price</th>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color">Total Price</th>
