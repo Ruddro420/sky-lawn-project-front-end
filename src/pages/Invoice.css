@@ -2630,3 +2630,19 @@ hr {
     padding: 27px 15px 27px 15px;
   }
 }/*# sourceMappingURL=style.css.map */
+
+
+
+.tm_invoice.tm_style2 .tm_invoice_info_in {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #00bfff26;
+  color: black;
+  border: none;
+}
+.tm_primary_color {
+  color: black;
+}
+.update-bg {
+  background: #00bfff26;
+}

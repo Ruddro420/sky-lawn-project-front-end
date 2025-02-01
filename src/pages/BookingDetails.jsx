@@ -465,7 +465,11 @@ const BookingDetails = () => {
                             <hr />
                             {/* Documents Start */}
 
+<<<<<<< HEAD
                             <div className="row mt-3">
+=======
+                            <div className="row">
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                 {/* NID Documents */}
                                 <div className="col-lg-6">
                                     <div className="mb-3">
@@ -485,7 +489,11 @@ const BookingDetails = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{file}</td>
                                                             <td>
+<<<<<<< HEAD
                                                                 <a href={`https://hotel-management-system.webgive.net/nid_doc/doc/${file}`}
+=======
+                                                                <a href={`http://192.168.0.33:8000/nid_doc/doc/${file}`}
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                                                     download={file}
                                                                     className="btn btn-primary btn-sm">
                                                                     Download
@@ -520,7 +528,11 @@ const BookingDetails = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{file}</td>
                                                             <td>
+<<<<<<< HEAD
                                                                 <a href={`https://hotel-management-system.webgive.net/couple_doc/doc/${file}`}
+=======
+                                                                <a href={`http://192.168.0.33:8000/couple_doc/doc/${file}`}
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                                                     download={file}
                                                                     className="btn btn-primary btn-sm">
                                                                     Download
@@ -537,6 +549,7 @@ const BookingDetails = () => {
                                 </div>
 
                                 {/* Passport Documents */}
+<<<<<<< HEAD
                                 <div className="col-lg-6">
                                     <div className="mb-3">
                                         <label className="form-label">Passport Documents</label>
@@ -570,11 +583,50 @@ const BookingDetails = () => {
                                         )}
                                     </div>
                                 </div>
+=======
+                                {/* <div className="col-lg-6">
+        <div className="mb-3">
+            <label className="form-label">Passport Documents</label>
+            {booking && booking.passport_doc ? (
+                <table className="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>File Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {JSON.parse(booking.passport_doc).map((file, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{file}</td>
+                                <td>
+                                    <a href={`http://192.168.0.33:8000/passport_doc/doc/${file}`} 
+                                       download={file} 
+                                       className="btn btn-primary btn-sm">
+                                        Download
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No Passport Document Available</p>
+            )}
+        </div>
+    </div> */}
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
 
                                 {/* Visa Documents */}
                                 <div className="col-lg-6">
                                     <div className="mb-3">
+<<<<<<< HEAD
                                         <label className="form-label">Visa Documents</label>
+=======
+                                        <label className="form-label">Passport Documents</label>
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                         {booking && booking.visa_doc ? (
                                             <table className="table table-bordered text-center">
                                                 <thead>
@@ -590,7 +642,11 @@ const BookingDetails = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{file}</td>
                                                             <td>
+<<<<<<< HEAD
                                                                 <a href={`https://hotel-management-system.webgive.net/visa_doc/doc/${file}`}
+=======
+                                                                <a href={`http://192.168.0.33:8000/visa_doc/doc/${file}`}
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                                                     download={file}
                                                                     className="btn btn-primary btn-sm">
                                                                     Download
@@ -625,7 +681,11 @@ const BookingDetails = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{file}</td>
                                                             <td>
+<<<<<<< HEAD
                                                                 <a href={`https://hotel-management-system.webgive.net/other_doc/doc/${file}`}
+=======
+                                                                <a href={`http://192.168.0.33:8000/other_doc/doc/${file}`}
+>>>>>>> 0a10434350f3525b6f5c0905cb81461d931e4d56
                                                                     download={file}
                                                                     className="btn btn-primary btn-sm">
                                                                     Download
