@@ -173,6 +173,26 @@ const TopNav = () => {
             {/* Static Links */}
             <li className="nav-menu">
               <NavLink
+                to='/user-register'
+                onClick={() => setOpen(false)}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active text-primary" : "nav-link"
+                }>
+                User Register
+              </NavLink>
+            </li>
+            <li className="nav-menu">
+              <NavLink
+                onClick={() => setOpen(false)}
+                to='/account-settings'
+                className={({ isActive }) =>
+                  isActive ? "nav-link active text-primary" : "nav-link"
+                }>
+                Account Settings
+              </NavLink>
+            </li>
+            <li className="nav-menu">
+              <NavLink
                 to="/support"
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>

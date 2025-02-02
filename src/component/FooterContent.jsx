@@ -1,13 +1,13 @@
 
 const FooterContent = () => {
     return (
-        <div>
+        <div className="">
 
             <div className="content-footer footer bg-footer-theme">
-                <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column align-items-center">
                     <div className="mb-2 mb-md-0">
                         ©2025
-                         made   by
+                        made   by
                         <a href="https://themeselection.com" target="_blank" className="footer-link fw-bolder">Inspired Digital</a>
                     </div>
                     <div>
