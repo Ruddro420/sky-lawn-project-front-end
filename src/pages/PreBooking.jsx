@@ -52,9 +52,11 @@ const PreBooking = () => {
     }, []);
 
     const navigate = useNavigate()
-    
+
+
     // add pre - booking data
     const onSubmit = (data) => {
+        console.log(data);
         axios
             .post(`${BASE_URL}/prebook/add`, {
                 date_time: data.date_time,
@@ -81,6 +83,8 @@ const PreBooking = () => {
                 toast.error("Room is already pre-booked for the specified date!");
             });
     }
+
+
 
     /* Select room by price */
     const handleRoomSelection = (roomId) => {
@@ -150,10 +154,11 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Person Name <span className="text-danger">*</span>
+                                                                Person Name
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
-                                                                {...register("name", { required: true })}
+                                                                {...register("name", { required: false })}
                                                                 name="name"
                                                                 type="text"
                                                                 className="form-control"
@@ -165,7 +170,8 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Room Number <span className="text-danger">*</span>
+                                                                Room Number
+                                                                <span className="text-danger">*</span>
                                                             </label>
                                                             {
                                                                 <select
@@ -195,7 +201,8 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Select Room Category <span className="text-danger">*</span>
+                                                                Select Room Category
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
                                                                 {...register("room_category", { required: false })}
@@ -213,10 +220,11 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Nationality <span className="text-danger">*</span>
+                                                                Nationality
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
-                                                                {...register("nationality", { required: true })}
+                                                                {...register("nationality", { required: false })}
                                                                 name="nationality"
                                                                 type="text"
                                                                 className="form-control"
@@ -228,7 +236,7 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Company Name 
+                                                                Company Name
                                                             </label>
                                                             <input
                                                                 {...register("company", { required: false })}
@@ -243,7 +251,8 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Mobile <span className="text-danger">*</span>
+                                                                Mobile
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
                                                                 {...register("phone", { required: false })}
@@ -258,10 +267,11 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Person <span className="text-danger">*</span>
+                                                                Person
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
-                                                                {...register("person", { required: true })}
+                                                                {...register("person", { required: false })}
                                                                 name="person"
                                                                 type="number"
                                                                 className="form-control"
@@ -277,10 +287,11 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Duration Of Stay <span className="text-danger">*</span>
+                                                                Duration Of Stay
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
-                                                                {...register("duration_day", { required: true })}
+                                                                {...register("duration_day", { required: false })}
                                                                 name="duration_day"
                                                                 type="number"
                                                                 className="form-control"
@@ -294,11 +305,12 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Price - <span className="text-danger"> <span className="text-danger">*</span>
+                                                                Price - <span className="text-danger">
+                                                                    {/* <span className="text-danger">*</span> */}
                                                                     {calculateRoomPrice() * duration} ৳ </span>
                                                             </label>
                                                             <input
-                                                                {...register("room_price", { required: true })}
+                                                                {...register("room_price", { required: false })}
                                                                 name="room_price"
                                                                 type="number"
                                                                 className="form-control"
@@ -311,13 +323,14 @@ const PreBooking = () => {
                                                     <div className="col-lg-6">
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
-                                                                Booked by <span className="text-danger">*</span>
+                                                                Booked by
+                                                                {/* <span className="text-danger">*</span> */}
                                                             </label>
                                                             <input
-                                                                {...register("booking_by", { required: true })}
+                                                                {...register("booking_by", { required: false })}
                                                                 name="booking_by"
                                                                 type="text"
-                                                                className="form-control" 
+                                                                className="form-control"
                                                                 id="basic-default-fullname"
                                                                 placeholder="Booking by reference"
                                                             />

@@ -1098,14 +1098,31 @@ hr {
   margin-top: -1px;
 }
 .tm_invoice_footer .tm_left_footer {
-  width: 58%;
+  width: 50%;
   padding: 10px 15px;
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
 }
+
+
+
+.flexdisplay{
+  display: flex;
+  padding: 10px;
+  padding-top: 25px;
+  margin-left: 80px;
+  margin-right: 100px;
+
+  justify-content: space-between;
+}
+
+
+
 .tm_invoice_footer .tm_right_footer {
-  width: 42%;
+  width: 50%;
+  padding: 10px 15px;
+  
 }
 
 .tm_note {
@@ -2645,4 +2662,9 @@ hr {
 }
 .update-bg {
   background: #00bfff26;
+}
+
+
+.font_size{
+  font-size: 20px;
 }

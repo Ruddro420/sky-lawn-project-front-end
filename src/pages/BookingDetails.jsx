@@ -96,7 +96,7 @@ const BookingDetails = () => {
                                         Person Name
                                     </label>
                                     <input
-                                        {...register("name", { required: true })}
+                                        {...register("name", { required: false })}
                                         name="name"
                                         type="text"
                                         className="form-control"
@@ -112,7 +112,7 @@ const BookingDetails = () => {
                                         Room Number
                                     </label>
                                     <input
-                                        {...register("room_number", { required: true })}
+                                        {...register("room_number", { required: false })}
                                         type="text"
                                         name="room_number"
                                         className="form-control"
@@ -128,7 +128,7 @@ const BookingDetails = () => {
                                         Select Room Category
                                     </label>
                                     <input
-                                        {...register("room_category", { required: true })}
+                                        {...register("room_category", { required: false })}
                                         type="text"
                                         name="room_category"
                                         className="form-control"
@@ -144,7 +144,7 @@ const BookingDetails = () => {
                                         Nationality
                                     </label>
                                     <input
-                                        {...register("nationality", { required: true })}
+                                        {...register("nationality", { required: false })}
                                         name="nationality"
                                         type="text"
                                         className="form-control"
@@ -160,7 +160,7 @@ const BookingDetails = () => {
                                         Company Name
                                     </label>
                                     <input
-                                        {...register("company", { required: true })}
+                                        {...register("company", { required: false })}
                                         name="company"
                                         type="text"
                                         className="form-control"
@@ -176,7 +176,7 @@ const BookingDetails = () => {
                                         Mobile
                                     </label>
                                     <input
-                                        {...register("mobile", { required: true })}
+                                        {...register("mobile", { required: false })}
                                         name="mobile"
                                         type="number"
                                         className="form-control"
@@ -192,7 +192,7 @@ const BookingDetails = () => {
                                         Person
                                     </label>
                                     <input
-                                        {...register("person", { required: true })}
+                                        {...register("person", { required: false })}
                                         name="person"
                                         type="number"
                                         className="form-control"
@@ -208,7 +208,7 @@ const BookingDetails = () => {
                                         Duration Of Stay
                                     </label>
                                     <input
-                                        {...register("duration_day", { required: true })}
+                                        {...register("duration_day", { required: false })}
                                         name="duration_day"
                                         type="number"
                                         className="form-control"
@@ -224,7 +224,7 @@ const BookingDetails = () => {
                                         Price ৳
                                     </label>
                                     <input
-                                        {...register("room_price", { required: true })}
+                                        {...register("room_price", { required: false })}
                                         name="room_price"
                                         type="number"
                                         className="form-control"
@@ -242,7 +242,7 @@ const BookingDetails = () => {
                                         Father&apos;s Name
                                     </label>
                                     <input
-                                        {...register("fathers_name", { required: true })}
+                                        {...register("fathers_name", { required: false })}
                                         name="fathers_name"
                                         type="text"
                                         className="form-control"
@@ -257,7 +257,7 @@ const BookingDetails = () => {
                                         Mother&apos;s Name
                                     </label>
                                     <input
-                                        {...register("mothers_name", { required: true })}
+                                        {...register("mothers_name", { required: false })}
                                         name="mothers_name"
                                         type="text"
                                         className="form-control"
@@ -272,7 +272,7 @@ const BookingDetails = () => {
                                         Address
                                     </label>
                                     <input
-                                        {...register("address", { required: true })}
+                                        {...register("address", { required: false })}
                                         name="address"
                                         type="text"
                                         className="form-control"
@@ -287,7 +287,7 @@ const BookingDetails = () => {
                                         Profession
                                     </label>
                                     <input
-                                        {...register("profession", { required: true })}
+                                        {...register("profession", { required: false })}
                                         name="profession"
                                         type="text"
                                         className="form-control"
@@ -302,7 +302,7 @@ const BookingDetails = () => {
                                         Comming Form
                                     </label>
                                     <input
-                                        {...register("comming_form", { required: true })}
+                                        {...register("comming_form", { required: false })}
                                         name="comming_form"
                                         type="text"
                                         className="form-control"
@@ -317,7 +317,7 @@ const BookingDetails = () => {
                                         Booking Purpose
                                     </label>
                                     <input
-                                        {...register("purpose", { required: true })}
+                                        {...register("purpose", { required: false })}
                                         name="purpose"
                                         type="text"
                                         className="form-control"
@@ -332,7 +332,7 @@ const BookingDetails = () => {
                                         Check Out Date & Time
                                     </label>
                                     <input
-                                        {...register("checkout_date_time", { required: true })}
+                                        {...register("checkout_date_time", { required: false })}
                                         name="checkout_date_time"
                                         type="datetime-local"
                                         className="form-control"
@@ -350,7 +350,7 @@ const BookingDetails = () => {
                                         NID No
                                     </label>
                                     <input
-                                        {...register("nid_no", { required: true })}
+                                        {...register("nid_no", { required: false })}
                                         name="nid_no"
                                         type="number"
                                         className="form-control"
@@ -398,7 +398,7 @@ const BookingDetails = () => {
                                         Payment Status
                                     </label>
                                     <input
-                                        {...register("payment_status", { required: true })}
+                                        {...register("payment_status", { required: false })}
                                         name="payment_status"
                                         className="form-control"
                                         type="text"
@@ -415,7 +415,7 @@ const BookingDetails = () => {
                                         Payment Status
                                     </label>
                                     <input
-                                        {...register("payment_method", { required: true })}
+                                        {...register("payment_method", { required: false })}
                                         name="payment_method"
                                         className="form-control"
                                         type="text"
@@ -436,7 +436,7 @@ const BookingDetails = () => {
                                         Total Payment
                                     </label>
                                     <input
-                                        {...register("total_price", { required: true })}
+                                        {...register("total_price", { required: false })}
                                         name="total_price"
                                         type="number"
                                         className="form-control"
@@ -451,7 +451,7 @@ const BookingDetails = () => {
                                         Advanced Payment
                                     </label>
                                     <input
-                                        {...register("advance", { required: true })}
+                                        {...register("advance", { required: false })}
                                         name="advance"
                                         type="number"
                                         className="form-control"

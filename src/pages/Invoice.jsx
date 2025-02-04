@@ -26,12 +26,15 @@ const Invoice = () => {
             .then((response) => {
                 setGetInvoice(response.data.data);
                 setLoading(false);
+                console.log(response.data.data)
             })
             .catch((error) => {
                 console.log(error);
                 setLoading(false);
             });
     };
+
+    console.log(getInvoice);
 
     // Fetch room booking fetch
     useEffect(() => {
@@ -137,21 +140,32 @@ const Invoice = () => {
                             </button>
 
                         </div>
-                        <div className="tm_invoice_wrap">
+                        <div className="tm_invoice_wrap font_size">
                             <div className="tm_invoice tm_style2" id="tm_download_section">
                                 <div className="tm_invoice_in">
                                     <div className="tm_invoice_content">
                                         <div className="tm_invoice_head tm_mb30">
                                             <div className="tm_invoice_left">
                                                 <b className="tm_f30 tm_medium tm_primary_color">Invoice</b>
-                                                <p className="tm_m0">Invoice Number - {getInvoice.invoice}</p>
+                                                <p className="tm_m0">Invoice Number - {getInvoice.id}</p>
                                             </div>
                                             <div className="tm_invoice_right tm_text_right">
                                                 <b className="tm_f30 tm_medium tm_primary_color">Date</b>
-                                                <p className="tm_m0">{new Date(getInvoice?.created_at).toLocaleString("en-bd", {
+                                                <p className="tm_m0">{new Date(getInvoice?.created_at).toLocaleString("en-gb", {
                                                     dateStyle: "medium",
                                                     timeStyle: "short",
-                                                })}</p>
+                                                    hour12: true,
+                                                }).replace(/\b(am|pm)\b/gi, match => match.toUpperCase())}</p>
+                                            </div>
+                                        </div>
+                                        <div className="tm_grid_row tm_col_2 tm_invoice_info_in tm_round_border tm_mb30">
+                                            <div className="tm_border_right tm_border_none_sm">
+                                                <b className="tm_primary_color">Guest Info</b>
+                                                <p className="tm_m0">Name: {getInvoice.name} <br />Mobile: {getInvoice.mobile}</p>
+                                            </div>
+                                            <div>
+                                                <b className="tm_primary_color">Business Details:</b>
+                                                <p className="tm_m0">Company: {getInvoice.company} <br />Coming From: {getInvoice.comming_form}</p>
                                             </div>
                                         </div>
                                         <div className="  tm_mb25">
@@ -168,17 +182,21 @@ const Invoice = () => {
                                                 >
                                                     <div>
                                                         <span>Check In:</span> <br />
-                                                        <b className="tm_primary_color">{new Date(getInvoice?.checking_date_time).toLocaleString("en-bd", {
+                                                        <b className="tm_primary_color">{new Date(getInvoice?.checking_date_time).toLocaleString("en-GB", {
                                                             dateStyle: "medium",
                                                             timeStyle: "short",
-                                                        })}</b>
+                                                            hour12: true,
+                                                        }).replace(/\b(am|pm)\b/gi, match => match.toUpperCase())}</b>
                                                     </div>
                                                     <div>
                                                         <span>Check Out:</span> <br />
-                                                        <b className="tm_primary_color">{new Date(getInvoice?.checkout_date_time).toLocaleString("en-bd", {
-                                                            dateStyle: "medium",
-                                                            timeStyle: "short",
-                                                        })}</b>
+                                                        <b className="tm_primary_color">
+                                                            {new Date(getInvoice?.checkout_date_time).toLocaleString("en-GB", {
+                                                                dateStyle: "medium",
+                                                                timeStyle: "short",
+                                                                hour12: true,
+                                                            }).replace(/\b(am|pm)\b/gi, match => match.toUpperCase())}
+                                                        </b>
                                                     </div>
                                                     <div>
                                                         <span>Booking ID:</span> <br />
@@ -189,26 +207,17 @@ const Invoice = () => {
                                                         <b className="tm_primary_color">{getInvoice.person}</b>
                                                     </div>
                                                     <div>
-                                                        <span>Rooms No:</span> <br />
+                                                        <span>Room:</span> <br />
                                                         <b className="tm_primary_color">{getInvoice.room_number}</b>
                                                     </div>
                                                     <div>
-                                                        <span>Room type:</span> <br />
+                                                        <span>Room Name:</span> <br />
                                                         <b className="tm_primary_color">{getInvoice.room_category}</b>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="tm_grid_row tm_col_2 tm_invoice_info_in tm_round_border tm_mb30">
-                                            <div className="tm_border_right tm_border_none_sm">
-                                                <b className="tm_primary_color">Guest Info</b>
-                                                <p className="tm_m0">Name: {getInvoice.name} <br />Phone: {getInvoice.mobile}</p>
-                                            </div>
-                                            <div>
-                                                <b className="tm_primary_color">Business Details:</b>
-                                                <p className="tm_m0">Company: {getInvoice.company} <br />Comming From: {getInvoice.comming_form}</p>
-                                            </div>
-                                        </div>
+
                                         <div className="tm_table tm_style1">
                                             <div className="tm_round_border">
                                                 <div className="tm_table_responsive">
@@ -311,22 +320,28 @@ const Invoice = () => {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div className="tm_invoice_footer tm_type1">
-                                                <div className="tm_left_footer"></div>
-                                                <div className="tm_right_footer">
+                                            <div className=" flexdisplay  tm_type1">
+                                                <div className="tm_left_footer ">
                                                     <div className="tm_sign tm_text_center">
                                                         <img src="assets/img/sign.svg" alt="" />
-                                                        <p className="tm_m0 tm_ternary_color">Samiul</p>
-                                                        <p className="tm_m0 tm_f16 tm_primary_color">Residence Manager</p>
+                                                        <p className="tm_m0 tm_ternary_color"></p>
+                                                        <b className="tm_m0 tm_f16 tm_primary_color">Guest Signature</b>
+                                                    </div>
+                                                </div>
+                                                <div className="tm_right_footer ">
+                                                    <div className="tm_sign tm_text_center marginsdfk">
+                                                        <img src="assets/img/sign.svg" alt="" />
+                                                        <p className="tm_m0 tm_ternary_color"></p>
+                                                        <b className="tm_m0 tm_f16 tm_primary_color ">Residence Manager</b>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="tm_note tm_text_center tm_font_style_normal">
+                                        {/* <div className="tm_note tm_text_center tm_font_style_normal">
                                             <hr className="tm_mb15" />
                                             <p className="tm_mb2"><b className="tm_primary_color">Terms & Conditions:</b></p>
                                             <p className="tm_m0">If you want to cancel the booking please inform us before 3 days, otherwise, you will not get any refund. <br />Invoice was created on a computer and is valid without the signature and seal.</p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

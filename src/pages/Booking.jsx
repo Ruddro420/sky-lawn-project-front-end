@@ -155,10 +155,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Person Name <span className="text-danger">*</span>
+                                                        Person Name
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("name", { required: true })}
+                                                        {...register("name", { required: false })}
                                                         name="name"
                                                         type="text"
                                                         className="form-control"
@@ -171,10 +172,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Room Number <span className="text-danger">*</span>
+                                                        Room Number
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("room_number", { required: true })}
+                                                        {...register("room_number", { required: false })}
                                                         type="text"
                                                         name="room_number"
                                                         className="form-control"
@@ -187,10 +189,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Select Room Category <span className="text-danger">*</span>
+                                                        Select Room Category
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("room_category", { required: true })}
+                                                        {...register("room_category", { required: false })}
                                                         type="text"
                                                         name="room_category"
                                                         className="form-control"
@@ -203,10 +206,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Nationality <span className="text-danger">*</span>
+                                                        Nationality
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("nationality", { required: true })}
+                                                        {...register("nationality", { required: false })}
                                                         name="nationality"
                                                         type="text"
                                                         className="form-control"
@@ -219,7 +223,8 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Company Name <span className="text-danger">*</span>
+                                                        Company Name
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
                                                         {...register("company", { required: false })}
@@ -235,10 +240,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Mobile <span className="text-danger">*</span>
+                                                        Mobile
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("phone", { required: true })}
+                                                        {...register("phone", { required: false })}
                                                         name="phone"
                                                         type="number"
                                                         className="form-control"
@@ -251,10 +257,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Person <span className="text-danger">*</span>
+                                                        Person
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("person", { required: true })}
+                                                        {...register("person", { required: false })}
                                                         name="person"
                                                         type="number"
                                                         className="form-control"
@@ -267,10 +274,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Duration Of Stay <span className="text-danger">*</span>
+                                                        Duration Of Stay
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("duration_day", { required: true })}
+                                                        {...register("duration_day", { required: false })}
                                                         name="duration_day"
                                                         type="number"
                                                         className="form-control"
@@ -283,10 +291,11 @@ const Booking = () => {
                                             <div className="col-lg-12">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Price ৳ <span className="text-danger">*</span>
+                                                        Price ৳
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("room_price", { required: true })}
+                                                        {...register("room_price", { required: false })}
                                                         name="room_price"
                                                         type="number"
                                                         className="form-control"
@@ -331,10 +340,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Address <span className="text-danger">*</span>
+                                                        Address
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("address", { required: true })}
+                                                        {...register("address", { required: false })}
                                                         name="address"
                                                         type="text"
                                                         className="form-control"
@@ -391,10 +401,11 @@ const Booking = () => {
                                             <div className="col-lg-12">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Check Out Date & Time <span className="text-danger">*</span>
+                                                        Check Out Date & Time
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("checkout_date_time", { required: true })}
+                                                        {...register("checkout_date_time", { required: false })}
                                                         name="checkout_date_time"
                                                         type="datetime-local"
                                                         className="form-control"
@@ -457,10 +468,11 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status <span className="text-danger">*</span>
+                                                        Payment Status
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <select
-                                                        {...register("payment_status", { required: true })}
+                                                        {...register("payment_status", { required: false })}
                                                         name="payment_status"
                                                         className="form-control"
                                                     >
@@ -473,10 +485,11 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status <span className="text-danger">*</span>
+                                                        Payment Status
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <select
-                                                        {...register("payment_method", { required: true })}
+                                                        {...register("payment_method", { required: false })}
                                                         name="payment_method"
                                                         className="form-control"
                                                     >
@@ -493,10 +506,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Total Payment <span className="text-danger">*</span>
+                                                        Total Payment
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("total_price", { required: true })}
+                                                        {...register("total_price", { required: false })}
                                                         name="total_price"
                                                         type="number"
                                                         className="form-control"
@@ -508,10 +522,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Advanced Payment <span className="text-danger">*</span>
+                                                        Advanced Payment
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("advance", { required: true })}
+                                                        {...register("advance", { required: false })}
                                                         name="advance"
                                                         type="number"
                                                         className="form-control"
@@ -591,10 +606,11 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Booked by <span className="text-danger">*</span>
+                                                        Booked by
+                                                        {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <input
-                                                        {...register("booking_by", { required: true })}
+                                                        {...register("booking_by", { required: false })}
                                                         name="booking_by"
                                                         type="text"
                                                         className="form-control"
