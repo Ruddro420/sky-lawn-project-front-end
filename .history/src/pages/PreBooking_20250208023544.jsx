@@ -84,6 +84,8 @@ const PreBooking = () => {
             });
     }
 
+
+
     /* Select room by price */
     const handleRoomSelection = (roomId) => {
         // get room to price

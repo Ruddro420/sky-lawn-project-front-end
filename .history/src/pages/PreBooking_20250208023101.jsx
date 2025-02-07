@@ -83,6 +83,8 @@ const PreBooking = () => {
                 toast.error("Room is already pre-booked for the specified date!");
             });
     }
+np
+
 
     /* Select room by price */
     const handleRoomSelection = (roomId) => {
