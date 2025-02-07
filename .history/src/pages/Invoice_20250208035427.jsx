@@ -16,8 +16,7 @@ const Invoice = () => {
     const [food, setFood] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [currentDate, setCurrentDate] = useState(getDate());
-    const [totalPrice, setTotalPrice] = useState();
-    
+    const [totalPrice, setTotalPrice] = useState(getInvoice.total_price);
 
     // get current data
     function getDate() {
@@ -38,7 +37,6 @@ const Invoice = () => {
             .then((response) => {
                 setGetInvoice(response.data.data);
                 setGetDay(response.data)
-                setTotalPrice(response.data.data.total_price)
                 setLoading(false);
             })
             .catch((error) => {
@@ -55,7 +53,7 @@ const Invoice = () => {
     }, []);
 
 
-  
+
 
     /* invoice download start */
     const handleDownloadPDF = () => {
@@ -79,7 +77,7 @@ const Invoice = () => {
                 comming_from: getInvoice.comming_form,
                 room_price: getInvoice.room_price,
                 duration: getInvoice.duration,
-                total_price: totalPrice,
+                total_price: getInvoice.total_price,
                 advance: getInvoice.advance,
                 discount: discount,
                 final_amount: totalAmount,
@@ -340,13 +338,13 @@ const Invoice = () => {
                                                             <tr className='tm_gray_bg'>
                                                                 <td className="tm_width_3  tm_border_none tm_pt0">Sub Total</td>
                                                                 <td
-                                                                   
+                                                                    id='subTotal'
                                                                     className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right  tm_radius_0_6_6_0">
                                                                     ৳ {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
                                                                         (Number(getInvoice?.room_price) || 0) -
-                                                                        // (Number(discount) || 0) -
+                                                                        (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
                                                                 </td>

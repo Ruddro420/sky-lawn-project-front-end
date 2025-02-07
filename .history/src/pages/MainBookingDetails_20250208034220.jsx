@@ -242,7 +242,7 @@ const MainBookingDetails = () => {
                                                                     </td>
                                                                     <td>
                                                                         {
-                                                                             item?.checkout_date_time == null ?  'Null' : new Date(
+                                                                             item?.checkout_date_time == null ?  item?.checkout_date_time : new Date(
                                                                                 item?.checkout_date_time
                                                                             ).toLocaleString("en-bd", {
                                                                                 dateStyle: "medium",

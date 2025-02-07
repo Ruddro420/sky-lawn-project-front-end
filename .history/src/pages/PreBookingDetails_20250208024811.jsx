@@ -19,6 +19,22 @@ const PreBookingDetails = () => {
     // Fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+    // date and time format
+
+    function dateTime(dateString) {
+        const date = new Date(dateString);
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+    }
+
+
+
+    // fetch category
+
     const fetchCategories = () => {
         setLoading(true);
         axios
@@ -59,6 +75,8 @@ const PreBookingDetails = () => {
         fetchRoom();
     }, []);
 
+    console.log(room);
+
     const navigate = useNavigate();
 
     // Booking data
@@ -92,7 +110,8 @@ const PreBookingDetails = () => {
         setFilteredRoom(filtered);
     }, [nameFilter, phoneFilter, roomFilter, priceFilter, statusFilter, room]);
 
-    // Delete a room
+    // delete data
+    // Delete a category
     const deleteRoom = (id) => {
         if (window.confirm("Are you sure you want to delete this ?")) {
             axios
@@ -107,45 +126,6 @@ const PreBookingDetails = () => {
                     toast.error("Failed to delete !");
                 });
         }
-    };
-
-    // Function to format date as YYYY-MM-DD
-    const formatDateTime = (dateTimeString) => {
-        console.log("Input dateTimeString:", dateTimeString); // Debugging line
-    
-        // Fallback for invalid or missing input
-        if (!dateTimeString || typeof dateTimeString !== "string") {
-            console.error("Invalid dateTimeString:", dateTimeString);
-            return "Invalid Date";
-        }
-    
-        // Ensure the input is in the correct format
-        let isoString;
-        if (dateTimeString.includes("T")) {
-            // If the input is already in ISO format (e.g., "2025-02-08T18:57:00Z")
-            isoString = dateTimeString.endsWith("Z") ? dateTimeString : dateTimeString + "Z";
-        } else {
-            // If the input is in "YYYY-MM-DD HH:mm:ss" format
-            isoString = dateTimeString.replace(" ", "T") + "Z";
-        }
-    
-        const date = new Date(isoString);
-        console.log("Parsed Date object:", date); // Debugging line
-    
-        if (isNaN(date.getTime())) {
-            console.error("Invalid Date object created from:", dateTimeString);
-            return "Invalid Date";
-        }
-    
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-        const day = String(date.getUTCDate()).padStart(2, "0");
-        const hours = String(date.getUTCHours()).padStart(2, "0");
-        const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-        const seconds = String(date.getUTCSeconds()).padStart(2, "0");
-    
-        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`; // Format as "DD-MM-YYYY HH:mm:ss"
-       // return `${day}-${month}-${year}`; // Format as "DD-MM-YYYY HH:mm:ss"
     };
 
     return (
@@ -251,7 +231,13 @@ const PreBookingDetails = () => {
                                                                     }}
                                                                 >
                                                                     <td>{index + 1}</td>
-                                                                    <td>{formatDateTime(item.date_time)}</td> {/* Display in UTC format */}
+                                                                    <td>{item?.date_time}</td>
+                                                                    {/* <td>{new Date(
+                                                                        item?.date_time
+                                                                    ).toLocaleString("en-bd", {
+                                                                        dateStyle: "medium",
+                                                                        timeStyle: "short",
+                                                                    })}</td> */}
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>
