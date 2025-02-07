@@ -204,10 +204,10 @@ const MainBookingDetails = () => {
                                                             <th>SL</th>
                                                             <th>Name</th>
                                                             <th>Phone</th>
+                                                            <th>R.N</th>
                                                             <th>Address</th>
                                                             <th>Check In</th>
                                                             <th>Check Out</th>
-                                                            <th>R.N</th>
                                                             <th>P.S</th>
                                                             <th>Actions</th>
                                                         </tr>
@@ -230,6 +230,7 @@ const MainBookingDetails = () => {
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.mobile}</td>
+                                                                    <td>{item.room_number}</td>
                                                                     <td>{item.address}</td>
                                                                     <td>
                                                                         {new Date(
@@ -247,7 +248,7 @@ const MainBookingDetails = () => {
                                                                             timeStyle: "short",
                                                                         })}
                                                                     </td>
-                                                                    <td>{item.room_number}</td>
+                                                                    
                                                                     <td>{item.payment_status}</td>
                                                                     <td>
                                                                         {item.check_status == 0 ? (

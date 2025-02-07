@@ -306,11 +306,11 @@ const PreBooking = () => {
                                                         <div className="mb-3">
                                                             <label className="form-label" htmlFor="basic-default-fullname">
                                                                 Price - <span className="text-danger">
-                                                                    {/* <span className="text-danger">*</span> */}
+                                                                    <span className="text-danger">*</span>
                                                                     {calculateRoomPrice() * duration} ৳ </span>
                                                             </label>
                                                             <input
-                                                                {...register("room_price", { required: false })}
+                                                                {...register("room_price", { required: true })}
                                                                 name="room_price"
                                                                 type="number"
                                                                 className="form-control"

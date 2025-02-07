@@ -215,12 +215,13 @@ const PreBookingDetails = () => {
                                                                     }}
                                                                 >
                                                                     <td>{index + 1}</td>
-                                                                    <td>{new Date(
+                                                                    <td>{item?.date_time}</td>
+                                                                    {/* <td>{new Date(
                                                                         item?.date_time
                                                                     ).toLocaleString("en-bd", {
                                                                         dateStyle: "medium",
                                                                         timeStyle: "short",
-                                                                    })}</td>
+                                                                    })}</td> */}
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>
