@@ -20,6 +20,7 @@ import Booking from "../pages/Booking";
 import BookingDetails from "../pages/BookingDetails";
 import MainBookingDetails from "../pages/MainBookingDetails";
 import Invoice from "../pages/Invoice";
+import ReportInvoice from "../pages/ReportInvoice";
 
 const Router = createBrowserRouter([
     {
@@ -91,6 +92,10 @@ const Router = createBrowserRouter([
             {
                 path: '/invoice/:id',
                 element: <Invoice />
+            },
+            {
+                path: '/report/invoice/:id',
+                element: <ReportInvoice />
             },
 
         ]

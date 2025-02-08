@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import toast from "react-hot-toast";
 
 
-const Invoice = () => {
+const ReportInvoice = () => {
     const { id } = useParams()
     const [getInvoice, setGetInvoice] = useState([])
     const [getDay, setGetDay] = useState([])
@@ -17,7 +17,7 @@ const Invoice = () => {
     const [discount, setDiscount] = useState(0);
     const [currentDate, setCurrentDate] = useState(getDate());
     const [totalPrice, setTotalPrice] = useState();
-    
+
 
     // get current data
     function getDate() {
@@ -46,63 +46,40 @@ const Invoice = () => {
                 setLoading(false);
             });
     };
+    const fetchInvoice = () => {
+        setLoading(true);
+        axios
+            .get(`${BASE_URL}/invoice/data/${id}`)
+            .then((response) => {
+                setGetInvoice(response.data.data);
+                setGetDay(response.data)
+                setTotalPrice(response.data.data.total_price)
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+    };
 
-    console.log(getInvoice);
 
     // Fetch room booking fetch
     useEffect(() => {
         fetchRoom();
+        fetchInvoice()
     }, []);
 
+    console.log(getInvoice);
 
-  console.log(getInvoice);
-  
+
+
+
 
     /* invoice download start */
     const handleDownloadPDF = () => {
 
         // get subTotal
         let totalAmount = document.getElementById('subTotal').innerText;
-
-        // post data
-        axios
-            .post(`${BASE_URL}/invoice/add`, {
-                booking_id: getInvoice.user_id,
-                invoice: getInvoice.invoice,
-                name: getInvoice.name,
-                profession: getInvoice.profession,
-                company: getInvoice.company,
-                mobile: getInvoice.mobile,
-                checking_date_time: getInvoice.checking_date_time,
-                checkout_date_time: getInvoice.checkout_date_time,
-                room_type: getInvoice.room_number,
-                person: getInvoice.person,
-                comming_from: getInvoice.comming_form,
-                room_price: getInvoice.room_price,
-                duration: getDay.days_difference,
-                total_price: totalPrice,
-                advance: getInvoice.advance,
-                discount: discount,
-                final_amount: totalAmount,
-                payment_status: getInvoice.payment_status,
-                payment_method: getInvoice.payment_method,
-                room_name: getDay.room?.room_name,
-                room_type_name: getInvoice.room_category,
-                resturent_cost:food,
-                other_cost:otheres,
-
-
-            })
-            .then(() => {
-                toast.success("Generate Successfully!");
-                // setGetCategory("");
-                //fetchCategories(); // Refresh the category list
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error("Something Went Wrong!");
-            });
-
 
         // check discount and food bill is emty not showing in my pdf file
         if (document.getElementById('resturant-cost') && food == 0) {
@@ -202,14 +179,7 @@ const Invoice = () => {
                                             </div>
                                         </div>
                                         <div className="  tm_mb25">
-                                            {/* <div className="tm_invoice_info_left">
-                                                <p className="tm_mb17">
-                                                    <b className="tm_f18 tm_primary_color">SKY LAWN Hotel & Restaurant</b> <br />
-                                                    R. K. Road. Islambag <br />  Rangpur<br />
-                                                    <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="a2cecdd5c7cecee2c5cfc3cbce8cc1cdcf">info@skylawnhotel</a> <br />
-                                                    +88 01326085222
-                                                </p>
-                                            </div> */}
+
                                             <div className="">
                                                 <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in  tm_round_border"
                                                 >
@@ -233,7 +203,7 @@ const Invoice = () => {
                                                     </div>
                                                     <div>
                                                         <span>Total Day:</span> <br />
-                                                        <b className="tm_primary_color">{getDay.days_difference}</b>
+                                                        <b className="tm_primary_color">{getInvoice.duration}</b>
                                                     </div>
                                                     <div>
                                                         <span>Person:</span> <br />
@@ -241,11 +211,11 @@ const Invoice = () => {
                                                     </div>
                                                     <div>
                                                         <span>Room No:</span> <br />
-                                                        <b className="tm_primary_color">{getInvoice.room_number}</b>
+                                                        <b className="tm_primary_color">{getInvoice.room_type}</b>
                                                     </div>
                                                     <div>
                                                         <span>Room Type:</span> <br />
-                                                        <b className="tm_primary_color">{getInvoice.room_category}</b>
+                                                        <b className="tm_primary_color">{getInvoice.room_type_name}</b>
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,24 +238,17 @@ const Invoice = () => {
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td className="tm_width_2">{getInvoice.room_number}</td>
-                                                                <td className="tm_width_2"> {getDay.room?.room_name}</td>
-                                                                <td className="tm_width_2"> {getDay.room?.price}</td>
-                                                                <td className="tm_width_2"> {getDay.days_difference}</td>
+                                                                <td className="tm_width_2">{getInvoice.room_type}</td>
+                                                                <td className="tm_width_2"> {getInvoice.room_name}</td>
+                                                                <td className="tm_width_2"> {getInvoice.room_price}</td>
+                                                                <td className="tm_width_2"> {getInvoice.duration}</td>
                                                                 {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {getDay.room?.price * getDay.days_difference}</td>
+                                                                <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td>
                                                                 <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data custom-input-width' value={totalPrice} type="number" onChange={(e) => setTotalPrice(e.target.value)} />
+                                                                    {getInvoice.final_amount}
+                                                                    
                                                                 </td>
                                                             </tr>
-                                                            {/*   <tr>
-                                                                <td className="tm_width_2">{getInvoice.room_number}</td>
-                                                                <td className="tm_width_2"> {getDay.room?.room_name}</td>
-                                                                <td className="tm_width_2"> {getDay.room?.price}</td>
-                                                                <td className="tm_width_2"> {getDay.days_difference}</td>
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td>
-                                                                
-                                                            </tr> */}
                                                             <tr id='resturant-cost'>
                                                                 <td className="tm_width_3">Restaurant Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
@@ -293,7 +256,7 @@ const Invoice = () => {
                                                                 <td className="tm_width_2" contentEditable="true"></td>
                                                                 <td className="tm_width_2" contentEditable="true"></td>
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    <input className='custom-input-data custom-input-width' value={food} type="number" onChange={(e) => setFood(e.target.value)} />
+                                                                    {getInvoice.resturent_cost}
                                                                 </td>
                                                             </tr>
                                                             <tr id='other-cost'>
@@ -303,7 +266,7 @@ const Invoice = () => {
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    <input className='custom-input-data custom-input-width' value={otheres} type="number" onChange={(e) => setOthers(e.target.value)} />
+                                                                    {getInvoice.other_cost}
                                                                 </td>
                                                             </tr>
                                                             <tr id='discount-cost'>
@@ -313,22 +276,17 @@ const Invoice = () => {
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    <input className='custom-input-data custom-input-width'
-                                                                        value={discount} type="number"
-                                                                        onChange={(e) => setDiscount(e.target.value)} />
+                                                                    {getInvoice.discount}
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_2">Advanced Payment (৳)</td>
+                                                                <td className="tm_width_2">A.Payment (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    <input className='custom-input-data custom-input-width'
-                                                                        value={getInvoice.advance ? getInvoice.advance : 0} type="number"
-                                                                        readOnly
-                                                                   /*  onChange={(e) => setAdvanced(e.target.value)} */ />
+                                                                   {getInvoice.advance ? getInvoice.advance : 0}
                                                                 </td>
                                                             </tr>
 
@@ -344,29 +302,10 @@ const Invoice = () => {
                                                 <div className="tm_right_footer">
                                                     <table className="tm_mb15">
                                                         <tbody>
-                                                            <tr className='tm_gray_bg'>
-                                                                <td className="tm_width_3  tm_border_none tm_pt0">Sub Total (৳)</td>
-                                                                <td
-                                                                   
-                                                                    className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right  tm_radius_0_6_6_0">
-                                                                     {(
-                                                                        (Number(food) || 0) +
-                                                                        (Number(otheres) || 0) +
-                                                                        (Number(getInvoice?.room_price) || 0) -
-                                                                        // (Number(discount) || 0) -
-                                                                        (Number(getInvoice?.advance) || 0)
-                                                                    )}
-                                                                </td>
-
-                                                            </tr>
                                                             <tr>
                                                                 <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount(৳)</td>
                                                                 <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">{discount}</td>
                                                             </tr>
-                                                            {/* <tr>
-                                                                <td className="tm_width_3 tm_primary_color tm_border_none tm_pt0">Tax 5%</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_pt0">+ ৳50</td>
-                                                            </tr> */}
                                                             <tr>
                                                                 <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">
                                                                     Grand Total (৳)
@@ -374,13 +313,7 @@ const Invoice = () => {
                                                                 <td
                                                                     id='subTotal'
                                                                     className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">
-                                                                     {(
-                                                                        (Number(food) || 0) +
-                                                                        (Number(otheres) || 0) +
-                                                                        (Number(getInvoice?.room_price) || 0) -
-                                                                        (Number(discount) || 0) -
-                                                                        (Number(getInvoice?.advance) || 0)
-                                                                    )}
+                                                                    {getInvoice.final_amount}
                                                                 </td>
 
                                                             </tr>
@@ -406,37 +339,15 @@ const Invoice = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <div className="tm_note tm_text_center tm_font_style_normal">
-                                            <hr className="tm_mb15" />
-                                            <p className="tm_mb2"><b className="tm_primary_color">Terms & Conditions:</b></p>
-                                            <p className="tm_m0">If you want to cancel the booking please inform us before 3 days, otherwise, you will not get any refund. <br />Invoice was created on a computer and is valid without the signature and seal.</p>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
-
-                            {/*  <div className="tm_invoice_btns tm_hide_print">
-                                <a href="javascript:window.print()" className="tm_invoice_btn tm_color1">
-                                    <span className="tm_btn_icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><circle cx="392" cy="184" r="24" fill='currentColor' /></svg>
-                                    </span>
-                                    <span className="tm_btn_text">Print</span>
-                                </a>
-                                <button id="tm_download_btn" className="tm_invoice_btn tm_color2">
-                                    <span className="tm_btn_icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M320 336h76c55 0 100-21.21 100-75.6s-53-73.47-96-75.6C391.11 99.74 329 48 256 48c-69 0-113.44 45.79-128 91.2-60 5.7-112 35.88-112 98.4S70 336 136 336h56M192 400.1l64 63.9 64-63.9M256 224v224.03" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" /></svg>
-                                    </span>
-                                    <span className="tm_btn_text">Download</span>
-                                </button>
-                            </div> */}
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     );
 };
 
-export default Invoice;
+export default ReportInvoice;

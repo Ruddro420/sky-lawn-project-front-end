@@ -134,6 +134,22 @@ const MainBookingDetails = () => {
             ? Math.max(...booking.map((item) => new Date(item.created_at).getTime()))
             : null;
 
+    // Delete a room
+    const deleteRoom = (id) => {
+        if (window.confirm("Are you sure you want to delete this ?")) {
+            axios
+                .get(`${BASE_URL}/booking/delete/${id}`)
+                .then(() => {
+                    toast.success("Deleted successfully!");
+                    fetchRoom();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    toast.error("Failed to delete !");
+                });
+        }
+    };
+
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -242,16 +258,16 @@ const MainBookingDetails = () => {
                                                                     </td>
                                                                     <td>
                                                                         {
-                                                                             item?.checkout_date_time == null ?  'Null' : new Date(
+                                                                            item?.checkout_date_time == null ? 'Null' : new Date(
                                                                                 item?.checkout_date_time
                                                                             ).toLocaleString("en-bd", {
                                                                                 dateStyle: "medium",
                                                                                 timeStyle: "short",
                                                                             })
                                                                         }
-                                                                        
+
                                                                     </td>
-                                                                    
+
                                                                     <td>{item.payment_status}</td>
                                                                     <td>
                                                                         {item.check_status == 0 ? (
@@ -287,6 +303,12 @@ const MainBookingDetails = () => {
                                                                             className="btn btn-info ms-2"
                                                                         >
                                                                             Details
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() => { deleteRoom(item?.id) }}
+                                                                            className="btn btn-dark ms-2"
+                                                                        >
+                                                                            Delete
                                                                         </button>
                                                                     </td>
                                                                 </tr>

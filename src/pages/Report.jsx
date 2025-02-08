@@ -86,7 +86,7 @@ const Report = () => {
     
 
      const handleDownload = (id) => {
-        navigate(`/invoice/${id}`);
+        navigate(`/report/invoice/${id}`);
     };
 
     return (
@@ -115,20 +115,6 @@ const Report = () => {
                                         className="form-control"
                                         id="endDate" required />
                                 </div>
-                                {/* <div className="col-md-3">
-                                <label htmlFor="bookingType">Booking Type</label>
-                                <select
-                                    onChange={(e) => setType(e.target.value)}
-                                    className="form-control"
-                                    id="bookingType"
-                                    required
-                                    value={type}
-                                >
-                                    <option value=" ">Select Booking Type</option>
-                                    <option value="pre_booking">Pre Booking</option>
-                                    <option value="booking">Booking</option>
-                                </select>
-                            </div> */}
                                 <div className="col-md-2 d-flex align-items-end">
                                     <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Filter</button>
                                 </div>
@@ -170,8 +156,9 @@ const Report = () => {
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Phone</th>
-                                    <th>Room Number</th>
-                                    <th>Room Price</th>
+                                    <th>R.N</th>
+                                    <th>R.P</th>
+                                    <th>Paid</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -188,6 +175,7 @@ const Report = () => {
                                                 <td>{item.phone ? item.phone : item.mobile}</td>
                                                 <td>{item.room_type}</td>
                                                 <td>{item.room_price}</td>
+                                                <td>{item.final_amount}</td>
                                                 <td> <button onClick={() => handleDownload(item.id)} className="btn btn-primary">downloadPDF</button> </td>
                                             </tr>
                                         )
