@@ -17,7 +17,7 @@ const Invoice = () => {
     const [discount, setDiscount] = useState(0);
     const [currentDate, setCurrentDate] = useState(getDate());
     const [totalPrice, setTotalPrice] = useState();
-    
+
 
     // get current data
     function getDate() {
@@ -55,14 +55,15 @@ const Invoice = () => {
     }, []);
 
 
-  console.log(getInvoice);
-  
+    console.log(getInvoice);
+
 
     /* invoice download start */
     const handleDownloadPDF = () => {
 
         // get subTotal
         let totalAmount = document.getElementById('subTotal').innerText;
+        let roomPrice = document.getElementById('roomPrice').innerText;
 
         // post data
         axios
@@ -78,7 +79,8 @@ const Invoice = () => {
                 room_type: getInvoice.room_number,
                 person: getInvoice.person,
                 comming_from: getInvoice.comming_form,
-                room_price: getInvoice.room_price,
+                // room_price: getInvoice.room_price,
+                room_price: roomPrice,
                 duration: getDay.days_difference,
                 total_price: totalPrice,
                 advance: getInvoice.advance,
@@ -88,8 +90,8 @@ const Invoice = () => {
                 payment_method: getInvoice.payment_method,
                 room_name: getDay.room?.room_name,
                 room_type_name: getInvoice.room_category,
-                resturent_cost:food,
-                other_cost:otheres,
+                resturent_cost: food,
+                other_cost: otheres,
 
 
             })
@@ -270,7 +272,13 @@ const Invoice = () => {
                                                             <tr>
                                                                 <td className="tm_width_2">{getInvoice.room_number}</td>
                                                                 <td className="tm_width_2"> {getDay.room?.room_name}</td>
-                                                                <td className="tm_width_2"> {getDay.room?.price}</td>
+                                                                <td id='roomPrice' className="tm_width_2">
+                                                                    {parseInt(
+                                                                        getInvoice.person == 1
+                                                                            ? getDay.room?.price - 500
+                                                                            : getDay.room?.price + (getInvoice.person - 1) * 1000
+                                                                    )}
+                                                                </td>
                                                                 <td className="tm_width_2"> {getDay.days_difference}</td>
                                                                 {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
                                                                 <td className="tm_width_2 tm_text_right"> ৳ {getDay.room?.price * getDay.days_difference}</td>
@@ -347,12 +355,12 @@ const Invoice = () => {
                                                             <tr className='tm_gray_bg'>
                                                                 <td className="tm_width_3  tm_border_none tm_pt0">Sub Total (৳)</td>
                                                                 <td
-                                                                   
+
                                                                     className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right  tm_radius_0_6_6_0">
-                                                                     {(
+                                                                    {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
-                                                                        (Number(getInvoice?.room_price) || 0) -
+                                                                        (Number(totalPrice) || 0) -
                                                                         // (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
@@ -374,10 +382,10 @@ const Invoice = () => {
                                                                 <td
                                                                     id='subTotal'
                                                                     className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">
-                                                                     {(
+                                                                    {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
-                                                                        (Number(getInvoice?.room_price) || 0) -
+                                                                        (Number(totalPrice) || 0) -
                                                                         (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
