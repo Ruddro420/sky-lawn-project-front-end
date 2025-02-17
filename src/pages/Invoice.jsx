@@ -181,7 +181,7 @@ const Invoice = () => {
                         </div>
                         <div className="tm_invoice_wrap font_size">
                             <div className="tm_invoice tm_style2" id="tm_download_section">
-                                <div className="tm_invoice_in">
+                                <div className="tm_invoice_in  ">
                                     <div className="tm_invoice_content">
                                         <div className="tm_invoice_head tm_mb30">
                                             <div className="tm_invoice_left">
@@ -260,7 +260,7 @@ const Invoice = () => {
                                         </div>
 
                                         <div className="tm_table tm_style1">
-                                            <div className="tm_round_border">
+                                            <div className="costom_bt costom_border_clr">
                                                 <div className="tm_table_responsive">
                                                     <table>
                                                         <thead>
@@ -354,53 +354,36 @@ const Invoice = () => {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div className="tm_invoice_footer tm_mb15">
-                                                <div className="tm_left_footer">
-                                                    <p className="tm_mb2"><b className="tm_primary_color">Payment info:</b></p>
-                                                    <p className="tm_m0">{getInvoice.name} <br />Payment Method - {getInvoice.payment_method}   <br /> </p>
+                                            <div className="tm_invoice_footer tm_border_top_0 costom_br costom_border_clr tm_mb15">
+                                                <div className="tm_left_footer border-right p-3 ">
+                                                    <p className="tm_mb8   tm_gray_bg  p-1"><b className="tm_primary_color">Payment info:</b></p>
+                                                    <p className="tm_m0 tm_gray_bg  p-1"> Name : {getInvoice.name}</p>
+                                                    <p className='tm_m0 tm_gray_bg p-1'>Payment Method - {getInvoice.payment_method}</p>
                                                 </div>
-                                                <div className="tm_right_footer">
-                                                    <table className="tm_mb15">
+                                                <div className="tm_right_footer ">
+                                                    <table className="tm_mb15  ">
                                                         <tbody>
-                                                            <tr className='tm_gray_bg'>
-                                                                <td className="tm_width_3  tm_border_none tm_pt0 tm_primary_color ">Sub Total (৳)</td>
-                                                                <td
-
-                                                                    className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right  tm_radius_0_6_6_0">
-                                                                    {/* {(
-                                                                        (Number(food) || 0) +
-                                                                        (Number(otheres) || 0) +
-                                                                        (Number(totalPrice) || 0) -
-                                                                        // (Number(discount) || 0) -
-                                                                        (Number(getInvoice?.advance) || 0)
-                                                                    )} */}
+                                                            <tr className='tm_gray_bg  costom_border_clr  '>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_pt1 tm_primary_color ">Sub Total (৳)</td>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_radius_0_6_6_0 ">
                                                                     {nightPrice * getDay.days_difference}
                                                                 </td>
-
-
                                                             </tr>
-                                                            <tr>
-                                                                <td className="tm_width_3 tm_danger_color tm_f16 tm_border_none tm_pt0">Discount(৳)</td>
-                                                                <td className="tm_width_3 tm_danger_color tm_f18 tm_text_right tm_border_none tm_pt0">{discount}</td>
+                                                            <tr className='costom_border_clr'>
+                                                                <td className="tm_width_3 tm_danger_color tm_f16 tm_pt1  ">Discount(৳)</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_f18 tm_text_right tm_border_none tm_pt1 border">{discount}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td className="tm_width_3 tm_primary_color tm_f16 tm_border_none tm_pt0">Advanced (৳)</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_f18 tm_text_right tm_border_none tm_pt0">
-                                                                    {getInvoice.advance ? getInvoice.advance : 0}</td>
+                                                            <tr className='costom_border_clr'>
+                                                                <td className="tm_width_3 tm_primary_color tm_f16 tm_pt1  ">Advanced (৳)</td>
+                                                                <td className="tm_width_3 tm_primary_color tm_f18 tm_text_right tm_border_none tm_pt1 border">
+                                                                    {getInvoice.advance ? getInvoice.advance : 0}
+                                                                </td>
                                                             </tr>
-
-
-                                                            {/* <tr>
-                                                                <td className="tm_width_3 tm_primary_color tm_border_none tm_pt0">Tax 5%</td>
-                                                                <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_pt0">+ ৳50</td>
-                                                            </tr> */}
-                                                            <tr>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">
+                                                            <tr className='costom_border_clr costom_border_bottom'>
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color  tm_radius_6_0_0_6    costom_border_bottom">
                                                                     Grand Total (৳)
                                                                 </td>
-                                                                <td
-                                                                    id='subTotal'
-                                                                    className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">
+                                                                <td id='subTotal' className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_text_right  tm_radius_0_6_6_0   costom_border_bottom">
                                                                     {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
@@ -409,9 +392,7 @@ const Invoice = () => {
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
                                                                 </td>
-
                                                             </tr>
-
                                                         </tbody>
                                                     </table>
                                                 </div>
