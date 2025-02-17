@@ -112,13 +112,13 @@ const PreBookingDetails = () => {
     // Function to format date as YYYY-MM-DD
     const formatDateTime = (dateTimeString) => {
         console.log("Input dateTimeString:", dateTimeString); // Debugging line
-    
+
         // Fallback for invalid or missing input
         if (!dateTimeString || typeof dateTimeString !== "string") {
             console.error("Invalid dateTimeString:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         // Ensure the input is in the correct format
         let isoString;
         if (dateTimeString.includes("T")) {
@@ -128,24 +128,24 @@ const PreBookingDetails = () => {
             // If the input is in "YYYY-MM-DD HH:mm:ss" format
             isoString = dateTimeString.replace(" ", "T") + "Z";
         }
-    
+
         const date = new Date(isoString);
         console.log("Parsed Date object:", date); // Debugging line
-    
+
         if (isNaN(date.getTime())) {
             console.error("Invalid Date object created from:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         const year = date.getUTCFullYear();
         const month = String(date.getUTCMonth() + 1).padStart(2, "0");
         const day = String(date.getUTCDate()).padStart(2, "0");
         const hours = String(date.getUTCHours()).padStart(2, "0");
         const minutes = String(date.getUTCMinutes()).padStart(2, "0");
         const seconds = String(date.getUTCSeconds()).padStart(2, "0");
-    
+
         return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`; // Format as "DD-MM-YYYY HH:mm:ss"
-       // return `${day}-${month}-${year}`; // Format as "DD-MM-YYYY HH:mm:ss"
+        // return `${day}-${month}-${year}`; // Format as "DD-MM-YYYY HH:mm:ss"
     };
 
     return (
@@ -214,17 +214,88 @@ const PreBookingDetails = () => {
                                         {loading ? (
                                             <p>Loading...</p>
                                         ) : (
-                                            <div className="table-responsive text-nowrap">
+                                            // <div className="table-responsive text-nowrap">
+                                            //     {filteredRoom.length === 0 ? (
+                                            //         <div
+                                            //             className="alert alert-warning"
+                                            //             role="alert"
+                                            //         >
+                                            //             No Data Found
+                                            //         </div>
+                                            //     ) : (
+                                            //         <table className="table order-4 border">
+                                            //             <thead>
+                                            //                 <tr>
+                                            //                     <th>SL</th>
+                                            //                     <th>Date</th>
+                                            //                     <th>Name</th>
+                                            //                     <th>Phone</th>
+                                            //                     <th>Person</th>
+                                            //                     <th>Room Number</th>
+                                            //                     <th>Price</th>
+                                            //                     <th>D.D</th>
+                                            //                     <th>Booked By</th>
+                                            //                     <th>Actions</th>
+                                            //                 </tr>
+                                            //             </thead>
+
+                                            //             <tbody className="table-border-bottom-0">
+                                            //                 {filteredRoom.map((item, index) => (
+                                            //                     <tr
+                                            //                         key={index}
+                                            //                         style={{
+                                            //                             backgroundColor:
+                                            //                                 index === 0
+                                            //                                     ? "#dff0d8" // Light green for the latest row
+                                            //                                     : "transparent",
+                                            //                         }}
+                                            //                     >
+                                            //                         <td>{index + 1}</td>
+                                            //                         <td>{formatDateTime(item.date_time)}</td> {/* Display in UTC format */}
+                                            //                         <td>{item.name}</td>
+                                            //                         <td>{item.phone}</td>
+                                            //                         <td>{item.person}</td>
+                                            //                         <td>{item.room_number}</td>
+                                            //                         <td>{item.room_price}</td>
+                                            //                         <td>{item.duration_day}</td>
+                                            //                         <td>{item.booking_by}</td>
+                                            //                         <td>
+                                            //                             {item.status == 1 ? (
+                                            //                                 <button
+                                            //                                     disabled
+                                            //                                     className="btn btn-primary"
+                                            //                                 >
+                                            //                                     Booked
+                                            //                                 </button>
+                                            //                             ) : (
+                                            //                                 <button
+                                            //                                     onClick={() =>
+                                            //                                         booking(item.id)
+                                            //                                     }
+                                            //                                     className="btn btn-danger"
+                                            //                                 >
+                                            //                                     Apply Booking
+                                            //                                 </button>
+                                            //                             )}
+                                            //                             <button
+                                            //                                 onClick={() => { deleteRoom(item?.id) }}
+                                            //                                 className="btn btn-primary ms-2">Delete</button>
+                                            //                         </td>
+                                            //                     </tr>
+                                            //                 ))}
+                                            //             </tbody>
+                                            //         </table>
+                                            //     )}
+                                            // </div>
+
+                                            <div className="table-responsive w-100">
                                                 {filteredRoom.length === 0 ? (
-                                                    <div
-                                                        className="alert alert-warning"
-                                                        role="alert"
-                                                    >
+                                                    <div className="alert alert-warning text-center" role="alert">
                                                         No Data Found
                                                     </div>
                                                 ) : (
-                                                    <table className="table order-4 border">
-                                                        <thead>
+                                                    <table className="table table-striped table-sm w-100 text-center" style={{ fontSize: "12px" }}>
+                                                        <thead className="table-light">
                                                             <tr>
                                                                 <th>SL</th>
                                                                 <th>Date</th>
@@ -239,19 +310,11 @@ const PreBookingDetails = () => {
                                                             </tr>
                                                         </thead>
 
-                                                        <tbody className="table-border-bottom-0">
+                                                        <tbody>
                                                             {filteredRoom.map((item, index) => (
-                                                                <tr
-                                                                    key={index}
-                                                                    style={{
-                                                                        backgroundColor:
-                                                                            index === 0
-                                                                                ? "#dff0d8" // Light green for the latest row
-                                                                                : "transparent",
-                                                                    }}
-                                                                >
+                                                                <tr key={index} className={index === 0 ? "table-success" : ""}>
                                                                     <td>{index + 1}</td>
-                                                                    <td>{formatDateTime(item.date_time)}</td> {/* Display in UTC format */}
+                                                                    <td>{formatDateTime(item.date_time)}</td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.phone}</td>
                                                                     <td>{item.person}</td>
@@ -261,25 +324,23 @@ const PreBookingDetails = () => {
                                                                     <td>{item.booking_by}</td>
                                                                     <td>
                                                                         {item.status == 1 ? (
-                                                                            <button
-                                                                                disabled
-                                                                                className="btn btn-primary"
-                                                                            >
+                                                                            <button disabled className="btn btn-primary btn-sm">
                                                                                 Booked
                                                                             </button>
                                                                         ) : (
                                                                             <button
-                                                                                onClick={() =>
-                                                                                    booking(item.id)
-                                                                                }
-                                                                                className="btn btn-danger"
+                                                                                onClick={() => booking(item.id)}
+                                                                                className="btn btn-danger btn-sm"
                                                                             >
                                                                                 Apply Booking
                                                                             </button>
                                                                         )}
                                                                         <button
-                                                                            onClick={() => { deleteRoom(item?.id) }}
-                                                                            className="btn btn-primary ms-2">Delete</button>
+                                                                            onClick={() => deleteRoom(item?.id)}
+                                                                            className="btn btn-primary btn-sm ms-2"
+                                                                        >
+                                                                            Delete
+                                                                        </button>
                                                                     </td>
                                                                 </tr>
                                                             ))}
@@ -287,6 +348,8 @@ const PreBookingDetails = () => {
                                                     </table>
                                                 )}
                                             </div>
+
+
                                         )}
                                     </div>
                                 </div>

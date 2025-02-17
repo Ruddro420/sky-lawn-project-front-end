@@ -158,7 +158,7 @@ const MainBookingDetails = () => {
                     <div className="col-12">
                         <div className="card mb-4">
                             <div className="card-header d-flex justify-content-between align-items-center">
-                                <h5 className="mb-0">Main Booking Details</h5>
+                                <h5 className="mb-0">Main Check In Details</h5>
                             </div>
                             <div className="card-body">
                                 <div className="row mb-3">
@@ -205,17 +205,127 @@ const MainBookingDetails = () => {
                                     {loading ? (
                                         <p>Loading...</p>
                                     ) : (
-                                        <div className="table-responsive text-nowrap">
+                                        // <div className="table-responsive text-nowrap">
+                                        //     {filteredBooking.length === 0 ? (
+                                        //         <div
+                                        //             className="alert alert-warning"
+                                        //             role="alert"
+                                        //         >
+                                        //             No Data Found
+                                        //         </div>
+                                        //     ) : (
+                                        //         <table className="table order-4 border">
+                                        //             <thead>
+                                        //                 <tr>
+                                        //                     <th>SL</th>
+                                        //                     <th>Name</th>
+                                        //                     <th>Phone</th>
+                                        //                     <th>R.N</th>
+                                        //                     <th>Address</th>
+                                        //                     <th>Check In</th>
+                                        //                     <th>Check Out</th>
+                                        //                     <th>P.S</th>
+                                        //                     <th>Actions</th>
+                                        //                 </tr>
+                                        //             </thead>
+                                        //             <tbody className="table-border-bottom-0">
+                                        //                 {filteredBooking.map((item, index) => {
+                                        //                     const isLatest =
+                                        //                         new Date(item.created_at).getTime() ==
+                                        //                         latestBookingId;
+
+                                        //                     return (
+                                        //                         <tr
+                                        //                             key={index}
+                                        //                             style={{
+                                        //                                 backgroundColor: isLatest
+                                        //                                     ? "#d1f7c4" // Highlight with a light green background
+                                        //                                     : "transparent",
+                                        //                             }}
+                                        //                         >
+                                        //                             <td>{index + 1}</td>
+                                        //                             <td>{item.name}</td>
+                                        //                             <td>{item.mobile}</td>
+                                        //                             <td>{item.room_number}</td>
+                                        //                             <td>{item.address}</td>
+                                        //                             <td>
+                                        //                                 {new Date(
+                                        //                                     item?.checking_date_time
+                                        //                                 ).toLocaleString("en-bd", {
+                                        //                                     dateStyle: "medium",
+                                        //                                     timeStyle: "short",
+                                        //                                 })}
+                                        //                             </td>
+                                        //                             <td>
+                                        //                                 {
+                                        //                                     item?.checkout_date_time == null ? 'Null' : new Date(
+                                        //                                         item?.checkout_date_time
+                                        //                                     ).toLocaleString("en-bd", {
+                                        //                                         dateStyle: "medium",
+                                        //                                         timeStyle: "short",
+                                        //                                     })
+                                        //                                 }
+
+                                        //                             </td>
+
+                                        //                             <td>{item.payment_status}</td>
+                                        //                             <td>
+                                        //                                 {item.check_status == 0 ? (
+                                        //                                     <button
+                                        //                                         disabled
+                                        //                                         onClick={() =>
+                                        //                                             invoiceGenerate(
+                                        //                                                 item.id
+                                        //                                             )
+                                        //                                         }
+                                        //                                         className="btn btn-danger"
+                                        //                                     >
+                                        //                                         Checkout
+                                        //                                     </button>
+                                        //                                 ) : (
+                                        //                                     <button
+                                        //                                         /*  onClick={() =>
+                                        //                                              invoiceGenerate(
+                                        //                                                  item.id
+                                        //                                              )
+                                        //                                          } */
+                                        //                                         className="btn btn-primary"
+                                        //                                         onClick={() => toggleModal(item.id, item.checkout_date_time)}
+                                        //                                     >
+                                        //                                         Invoice
+                                        //                                     </button>
+                                        //                                 )}
+
+                                        //                                 <button
+                                        //                                     onClick={() => {
+                                        //                                         details(item.id);
+                                        //                                     }}
+                                        //                                     className="btn btn-info ms-2"
+                                        //                                 >
+                                        //                                     Details
+                                        //                                 </button>
+                                        //                                 <button
+                                        //                                     onClick={() => { deleteRoom(item?.id) }}
+                                        //                                     className="btn btn-dark ms-2"
+                                        //                                 >
+                                        //                                     Delete
+                                        //                                 </button>
+                                        //                             </td>
+                                        //                         </tr>
+                                        //                     );
+                                        //                 })}
+                                        //             </tbody>
+                                        //         </table>
+                                        //     )}
+                                        // </div>
+                                        <div className="table-responsive w-100">
                                             {filteredBooking.length === 0 ? (
-                                                <div
-                                                    className="alert alert-warning"
-                                                    role="alert"
-                                                >
+                                                <div className="alert alert-warning text-center" role="alert">
                                                     No Data Found
                                                 </div>
                                             ) : (
-                                                <table className="table order-4 border">
-                                                    <thead>
+                                                <table className="table table-striped table-sm w-100 text-center" style={{ fontSize: "12px" }}>
+                                                    <thead className="table-light">
                                                         <tr>
                                                             <th>SL</th>
                                                             <th>Name</th>
@@ -225,23 +335,16 @@ const MainBookingDetails = () => {
                                                             <th>Check In</th>
                                                             <th>Check Out</th>
                                                             <th>P.S</th>
-                                                            <th>Actions</th>
+                                                            <th className="text-center">Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody className="table-border-bottom-0">
+                                                    <tbody>
                                                         {filteredBooking.map((item, index) => {
-                                                            const isLatest =
-                                                                new Date(item.created_at).getTime() ==
-                                                                latestBookingId;
-
+                                                            const isLatest = new Date(item.created_at).getTime() == latestBookingId;
                                                             return (
                                                                 <tr
                                                                     key={index}
-                                                                    style={{
-                                                                        backgroundColor: isLatest
-                                                                            ? "#d1f7c4" // Highlight with a light green background
-                                                                            : "transparent",
-                                                                    }}
+                                                                    className={isLatest ? "table-success" : ""}
                                                                 >
                                                                     <td>{index + 1}</td>
                                                                     <td>{item.name}</td>
@@ -249,64 +352,46 @@ const MainBookingDetails = () => {
                                                                     <td>{item.room_number}</td>
                                                                     <td>{item.address}</td>
                                                                     <td>
-                                                                        {new Date(
-                                                                            item?.checking_date_time
-                                                                        ).toLocaleString("en-bd", {
+                                                                        {new Date(item?.checking_date_time).toLocaleString("en-bd", {
                                                                             dateStyle: "medium",
                                                                             timeStyle: "short",
                                                                         })}
                                                                     </td>
                                                                     <td>
-                                                                        {
-                                                                            item?.checkout_date_time == null ? 'Null' : new Date(
-                                                                                item?.checkout_date_time
-                                                                            ).toLocaleString("en-bd", {
+                                                                        {item?.checkout_date_time == null
+                                                                            ? "Null"
+                                                                            : new Date(item?.checkout_date_time).toLocaleString("en-bd", {
                                                                                 dateStyle: "medium",
                                                                                 timeStyle: "short",
-                                                                            })
-                                                                        }
-
+                                                                            })}
                                                                     </td>
-
                                                                     <td>{item.payment_status}</td>
                                                                     <td>
                                                                         {item.check_status == 0 ? (
                                                                             <button
                                                                                 disabled
-                                                                                onClick={() =>
-                                                                                    invoiceGenerate(
-                                                                                        item.id
-                                                                                    )
-                                                                                }
-                                                                                className="btn btn-danger"
+                                                                                onClick={() => invoiceGenerate(item.id)}
+                                                                                className="btn btn-danger btn-sm"
                                                                             >
                                                                                 Checkout
                                                                             </button>
                                                                         ) : (
                                                                             <button
-                                                                                /*  onClick={() =>
-                                                                                     invoiceGenerate(
-                                                                                         item.id
-                                                                                     )
-                                                                                 } */
-                                                                                className="btn btn-primary"
+                                                                                className="btn btn-primary btn-sm"
                                                                                 onClick={() => toggleModal(item.id, item.checkout_date_time)}
                                                                             >
                                                                                 Invoice
                                                                             </button>
                                                                         )}
-
                                                                         <button
-                                                                            onClick={() => {
-                                                                                details(item.id);
-                                                                            }}
-                                                                            className="btn btn-info ms-2"
+                                                                            onClick={() => details(item.id)}
+                                                                            className="btn btn-info btn-sm ms-2"
                                                                         >
                                                                             Details
                                                                         </button>
                                                                         <button
-                                                                            onClick={() => { deleteRoom(item?.id) }}
-                                                                            className="btn btn-dark ms-2"
+                                                                            onClick={() => deleteRoom(item?.id)}
+                                                                            className="btn btn-dark btn-sm ms-2"
                                                                         >
                                                                             Delete
                                                                         </button>
@@ -318,6 +403,7 @@ const MainBookingDetails = () => {
                                                 </table>
                                             )}
                                         </div>
+
                                     )}
                                 </div>
                             </div>
@@ -352,7 +438,7 @@ const MainBookingDetails = () => {
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="mb-3">
                                         <label className="form-label" htmlFor="basic-default-fullname">
-                                            Check in Date & Time <span className="text-danger">*</span>
+                                            Check Out Date & Time <span className="text-danger">*</span>
                                         </label>
                                         <input
                                             {...register("checkout_date_time", { required: true })}

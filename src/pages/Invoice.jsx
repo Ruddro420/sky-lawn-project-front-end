@@ -17,6 +17,11 @@ const Invoice = () => {
     const [discount, setDiscount] = useState(0);
     const [currentDate, setCurrentDate] = useState(getDate());
     const [totalPrice, setTotalPrice] = useState();
+    const [nightPrice, setNightPrice] = useState(parseInt(
+        getInvoice.person == 1
+            ? getDay.room?.price - 500
+            : getDay.room?.price + (getInvoice.person - 1) * 1000
+    ));
 
 
     // get current data
@@ -38,6 +43,7 @@ const Invoice = () => {
             .then((response) => {
                 setGetInvoice(response.data.data);
                 setGetDay(response.data)
+                setNightPrice(response.data.room.price)
                 setTotalPrice(response.data.data.total_price)
                 setLoading(false);
             })
@@ -260,12 +266,12 @@ const Invoice = () => {
                                                         <thead>
                                                             <tr className='update-bg'>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color">Room No</th>
-                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color">Room Name</th>
-                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color"> P.P.N</th>
+                                                                <th className="tm_width_4 tm_semi_bold tm_primary_color">Room Name</th>
+                                                                <th className="tm_width_4 tm_semi_bold tm_primary_color"> Price Per Night</th>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color">Day</th>
                                                                 <th className="tm
-                                                                _width_2 tm_semi_bold tm_primary_color tm_text_right">R.Price</th>
-                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color tm_text_right">Total</th>
+                                                                _width_2 tm_semi_bold tm_primary_color tm_text_right"></th>
+                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color tm_text_right">Amount</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -273,18 +279,22 @@ const Invoice = () => {
                                                                 <td className="tm_width_2">{getInvoice.room_number}</td>
                                                                 <td className="tm_width_2"> {getDay.room?.room_name}</td>
                                                                 <td id='roomPrice' className="tm_width_2">
-                                                                    {parseInt(
+                                                                    {/* {parseInt(
                                                                         getInvoice.person == 1
                                                                             ? getDay.room?.price - 500
                                                                             : getDay.room?.price + (getInvoice.person - 1) * 1000
-                                                                    )}
+                                                                    )} */}
+                                                                    <input className='custom-input-data custom-input-width text-center'
+                                                                        value={nightPrice}
+                                                                        type="number" onChange={(e) => setNightPrice(e.target.value)} />
                                                                 </td>
                                                                 <td className="tm_width_2"> {getDay.days_difference}</td>
                                                                 {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {getDay.room?.price * getDay.days_difference}</td>
+
                                                                 <td className="tm_width_2 tm_text_right">
-                                                                    <input className='custom-input-data custom-input-width' value={totalPrice} type="number" onChange={(e) => setTotalPrice(e.target.value)} />
+                                                                    {/* <input className='custom-input-data custom-input-width' value={totalPrice} type="number" onChange={(e) => setTotalPrice(e.target.value)} /> */}
                                                                 </td>
+                                                                <td className="tm_width_2 tm_text_right"> ৳ {nightPrice * getDay.days_difference}</td>
                                                             </tr>
                                                             {/*   <tr>
                                                                 <td className="tm_width_2">{getInvoice.room_number}</td>
@@ -326,7 +336,7 @@ const Invoice = () => {
                                                                         onChange={(e) => setDiscount(e.target.value)} />
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            {/* <tr>
                                                                 <td className="tm_width_2">Advanced Payment (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
@@ -336,9 +346,9 @@ const Invoice = () => {
                                                                     <input className='custom-input-data custom-input-width'
                                                                         value={getInvoice.advance ? getInvoice.advance : 0} type="number"
                                                                         readOnly
-                                                                   /*  onChange={(e) => setAdvanced(e.target.value)} */ />
+                                                                    onChange={(e) => setAdvanced(e.target.value)} />
                                                                 </td>
-                                                            </tr>
+                                                            </tr> */}
 
                                                         </tbody>
                                                     </table>
@@ -353,39 +363,48 @@ const Invoice = () => {
                                                     <table className="tm_mb15">
                                                         <tbody>
                                                             <tr className='tm_gray_bg'>
-                                                                <td className="tm_width_3  tm_border_none tm_pt0">Sub Total (৳)</td>
+                                                                <td className="tm_width_3  tm_border_none tm_pt0 tm_primary_color ">Sub Total (৳)</td>
                                                                 <td
 
                                                                     className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right  tm_radius_0_6_6_0">
-                                                                    {(
+                                                                    {/* {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
                                                                         (Number(totalPrice) || 0) -
                                                                         // (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
-                                                                    )}
+                                                                    )} */}
+                                                                    {nightPrice * getDay.days_difference}
                                                                 </td>
+
 
                                                             </tr>
                                                             <tr>
-                                                                <td className="tm_width_3 tm_danger_color tm_border_none tm_pt0">Discount(৳)</td>
-                                                                <td className="tm_width_3 tm_danger_color tm_text_right tm_border_none tm_pt0">{discount}</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_f16 tm_border_none tm_pt0">Discount(৳)</td>
+                                                                <td className="tm_width_3 tm_danger_color tm_f18 tm_text_right tm_border_none tm_pt0">{discount}</td>
                                                             </tr>
+                                                            <tr>
+                                                                <td className="tm_width_3 tm_primary_color tm_f16 tm_border_none tm_pt0">Advanced (৳)</td>
+                                                                <td className="tm_width_3 tm_primary_color tm_f18 tm_text_right tm_border_none tm_pt0">
+                                                                    {getInvoice.advance ? getInvoice.advance : 0}</td>
+                                                            </tr>
+
+
                                                             {/* <tr>
                                                                 <td className="tm_width_3 tm_primary_color tm_border_none tm_pt0">Tax 5%</td>
                                                                 <td className="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_pt0">+ ৳50</td>
                                                             </tr> */}
                                                             <tr>
-                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">
+                                                                <td className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_gray_bg tm_radius_6_0_0_6">
                                                                     Grand Total (৳)
                                                                 </td>
                                                                 <td
                                                                     id='subTotal'
-                                                                    className="tm_width_3 tm_border_top_0 tm_bold tm_f18 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">
+                                                                    className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_text_right tm_gray_bg tm_radius_0_6_6_0">
                                                                     {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
-                                                                        (Number(totalPrice) || 0) -
+                                                                        (Number(nightPrice * getDay.days_difference) || 0) -
                                                                         (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
