@@ -74,10 +74,6 @@ const MainBookingDetails = () => {
     const details = (id) => {
         navigate(`/bookingDetails/${id}`);
     };
-    // Edit Booking data
-    const editDetails = (id) => {
-        navigate(`/editBookingDetails/${id}`);
-    };
 
     // Get invoice
     const invoiceGenerate = (id) => {
@@ -335,7 +331,7 @@ const MainBookingDetails = () => {
                                                             <th>Name</th>
                                                             <th>Phone</th>
                                                             <th>R.N</th>
-                                                            <th>Co.Name</th>
+                                                            <th>Address</th>
                                                             <th>Check In</th>
                                                             <th>Check Out</th>
                                                             <th>P.S</th>
@@ -354,7 +350,7 @@ const MainBookingDetails = () => {
                                                                     <td>{item.name}</td>
                                                                     <td>{item.mobile}</td>
                                                                     <td>{item.room_number}</td>
-                                                                    <td>{item.company}</td>
+                                                                    <td>{item.address}</td>
                                                                     <td>
                                                                         {new Date(item?.checking_date_time).toLocaleString("en-bd", {
                                                                             dateStyle: "medium",
@@ -400,7 +396,7 @@ const MainBookingDetails = () => {
                                                                             Delete
                                                                         </button>
                                                                         <button
-                                                                            onClick={() => editDetails(item.id)}
+                                                                            onClick={() => details(item.id)}
                                                                             className="btn btn-info btn-sm ms-2"
                                                                         >
                                                                             Edit

@@ -357,7 +357,7 @@ const Invoice = () => {
                                             <div className="tm_invoice_footer  tm_mb15">
                                                 <div className="tm_left_footer border-right">
                                                     <p className="tm_mb8   tm_gray_bg  p-1"><b className="tm_primary_color">Payment info:</b></p>
-                                                    <p className="tm_m0 tm_gray_bg  p-1 mb-2"> Name : {getInvoice.name}</p>
+                                                    <p className="tm_m0 tm_gray_bg  p-1"> Name : {getInvoice.name}</p> <br />
                                                     <p className='tm_m0 tm_gray_bg p-1'>Payment Method - {getInvoice.payment_method}</p>
                                                 </div>
                                                 <div className="tm_right_footer ">

@@ -354,7 +354,7 @@ const MainBookingDetails = () => {
                                                                     <td>{item.name}</td>
                                                                     <td>{item.mobile}</td>
                                                                     <td>{item.room_number}</td>
-                                                                    <td>{item.company}</td>
+                                                                    <td>{item.address}</td>
                                                                     <td>
                                                                         {new Date(item?.checking_date_time).toLocaleString("en-bd", {
                                                                             dateStyle: "medium",

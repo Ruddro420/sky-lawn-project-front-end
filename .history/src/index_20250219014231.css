@@ -12,7 +12,6 @@
     /* margin-right: 100px; */
   
 }
-/* Invoice Working */
 
 .tm_table_responsive {
   overflow-x: auto;
@@ -33,15 +32,12 @@
   border: 0px solid white !important;
 }
 thead, tbody, tfoot, tr, td, th {
+  border-color: inherit;
+  border-style: solid;
   border-width: 0;
   color: black;
 }
-.tm_invoice_footer .tm_right_footer {
-  width: 50%;
-  padding: 0px;
-  margin-top: 10px;
-}
-/* Invoice Working */
+  
 
 /* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

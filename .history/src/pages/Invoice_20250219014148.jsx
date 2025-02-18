@@ -284,7 +284,7 @@ const Invoice = () => {
                                                                             ? getDay.room?.price - 500
                                                                             : getDay.room?.price + (getInvoice.person - 1) * 1000
                                                                     )} */}
-                                                                    <input className='custom-input-data custom-input-width text-start'
+                                                                    <input className='custom-input-data custom-input-width text-left'
                                                                         value={nightPrice}
                                                                         type="number" onChange={(e) => setNightPrice(e.target.value)} />
                                                                 </td>
@@ -354,10 +354,10 @@ const Invoice = () => {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div className="tm_invoice_footer  tm_mb15">
+                                            <div className="tm_invoice_footer tm_border_top_0 costom_br costom_border_clr tm_mb15">
                                                 <div className="tm_left_footer border-right">
                                                     <p className="tm_mb8   tm_gray_bg  p-1"><b className="tm_primary_color">Payment info:</b></p>
-                                                    <p className="tm_m0 tm_gray_bg  p-1 mb-2"> Name : {getInvoice.name}</p>
+                                                    <p className="tm_m0 tm_gray_bg  p-1"> Name : {getInvoice.name}</p>
                                                     <p className='tm_m0 tm_gray_bg p-1'>Payment Method - {getInvoice.payment_method}</p>
                                                 </div>
                                                 <div className="tm_right_footer ">
