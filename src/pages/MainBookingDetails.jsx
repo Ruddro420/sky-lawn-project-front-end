@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { IoMdDownload } from "react-icons/io";
+import { Tooltip } from 'bootstrap';
+
 
 const MainBookingDetails = () => {
     const [booking, setBooking] = useState([]);
@@ -16,6 +21,9 @@ const MainBookingDetails = () => {
     const [phoneFilter, setPhoneFilter] = useState("");
     const [roomFilter, setRoomFilter] = useState("");
     const [paymentFilter, setPaymentFilter] = useState("");
+
+    // const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    // [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
 
     // env url
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -371,6 +379,7 @@ const MainBookingDetails = () => {
                                                                     </td>
                                                                     <td>{item.payment_status}</td>
                                                                     <td>
+                                                                        <button className="btn btn-success btn-sm me-1"><IoMdDownload className="fs-6" /></button>
                                                                         {item.check_status == 0 ? (
                                                                             <button
                                                                                 disabled
@@ -381,27 +390,33 @@ const MainBookingDetails = () => {
                                                                             </button>
                                                                         ) : (
                                                                             <button
-                                                                                className="btn btn-primary btn-sm"
+                                                                                className="btn btn-primary btn-sm "
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="Invoice"
                                                                                 onClick={() => toggleModal(item.id, item.checkout_date_time)}
                                                                             >
-                                                                                Invoice
+                                                                                <IoMdCheckboxOutline className="fs-6" />
+
                                                                             </button>
                                                                         )}
                                                                         <button
                                                                             onClick={() => details(item.id)}
-                                                                            className="btn btn-info btn-sm ms-2"
+                                                                            className="btn btn-info btn-sm ms-1"
                                                                         >
                                                                             Details
                                                                         </button>
+
                                                                         <button
                                                                             onClick={() => deleteRoom(item?.id)}
-                                                                            className="btn btn-dark btn-sm ms-2"
+                                                                            className="btn btn-danger btn-sm ms-1"
                                                                         >
-                                                                            Delete
+                                                                            <FaRegTrashAlt className="fs-6" />
+
                                                                         </button>
                                                                         <button
                                                                             onClick={() => editDetails(item.id)}
-                                                                            className="btn btn-info btn-sm ms-2"
+                                                                            className="btn btn-primary btn-sm ms-1"
                                                                         >
                                                                             Edit
                                                                         </button>

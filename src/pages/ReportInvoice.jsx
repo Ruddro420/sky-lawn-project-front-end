@@ -15,6 +15,7 @@ const ReportInvoice = () => {
     const [otheres, setOthers] = useState(0);
     const [food, setFood] = useState(0);
     const [discount, setDiscount] = useState(0);
+    const [advance, setAdvance] = useState(0);
     const [currentDate, setCurrentDate] = useState(getDate());
     const [totalPrice, setTotalPrice] = useState();
 
@@ -25,7 +26,7 @@ const ReportInvoice = () => {
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
         const date = today.getDate();
-        return `${month}/${date}/${year}`;
+        return `${date}/${month}/${year}`;
     }
 
     // env url
@@ -91,6 +92,9 @@ const ReportInvoice = () => {
         if (document.getElementById('discount-cost') && discount == 0) {
             document.getElementById('discount-cost').style.display = 'none';
         }
+        if (document.getElementById('advanced-cost') && advance == 0) {
+            document.getElementById('advanced-cost').style.display = 'none';
+        }
 
 
         // generate pdf
@@ -154,8 +158,8 @@ const ReportInvoice = () => {
                                     <div className="tm_invoice_content">
                                         <div className="tm_invoice_head tm_mb30">
                                             <div className="tm_invoice_left">
-                                                <b className="tm_f30 tm_medium tm_primary_color">Invoice</b>
-                                                <p className="tm_m0">Invoice Number - {getInvoice.id}</p>
+                                                <b className="tm_f35 tm_medium tm_primary_color">Invoice</b>
+                                                {/* <p className="tm_m0">Invoice Number - {getInvoice.id}</p> */}
                                             </div>
                                             <div className="tm_invoice_right tm_text_right">
                                                 <b className="tm_f30 tm_medium tm_primary_color">Date</b>
@@ -179,7 +183,6 @@ const ReportInvoice = () => {
                                             </div>
                                         </div>
                                         <div className="  tm_mb25">
-
                                             <div className="">
                                                 <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in  tm_round_border"
                                                 >
@@ -223,16 +226,16 @@ const ReportInvoice = () => {
 
                                         <div className="tm_table tm_style1">
                                             <div className="tm_round_border">
-                                                <div className="tm_table_responsive">
+                                                <div className="tm_table_responsive invoice-bottom-border">
                                                     <table>
                                                         <thead>
                                                             <tr className='update-bg'>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color">Room No</th>
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color">Room Name</th>
-                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color"> P.P.N</th>
-                                                                <th className="tm_width_2 tm_semi_bold tm_primary_color">Day</th>
-                                                                <th className="tm
-                                                                _width_2 tm_semi_bold tm_primary_color tm_text_right">R.Price</th>
+                                                                <th className="tm_width_4 tm_semi_bold tm_primary_color"> Price Per Night</th>
+                                                                <th className="tm_width_1 tm_semi_bold tm_primary_color">Day</th>
+                                                                {/* <th className="tm
+                                                                _width_2 tm_semi_bold tm_primary_color tm_text_right">R.Price</th> */}
                                                                 <th className="tm_width_2 tm_semi_bold tm_primary_color tm_text_right">Total</th>
                                                             </tr>
                                                         </thead>
@@ -244,17 +247,17 @@ const ReportInvoice = () => {
                                                                 <td className="tm_width_2"> {getInvoice.duration}</td>
                                                                 {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
                                                                 <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td>
-                                                                <td className="tm_width_2 tm_text_right">
+                                                                {/* <td className="tm_width_2 tm_text_right">
                                                                     {getInvoice.final_amount}
-                                                                    
-                                                                </td>
+
+                                                                </td> */}
                                                             </tr>
                                                             <tr id='resturant-cost'>
                                                                 <td className="tm_width_3">Restaurant Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
+                                                                <td className="tm_width_4" contentEditable="true"></td>
                                                                 <td className="tm_width_2" contentEditable="true"></td>
-                                                                <td className="tm_width_2" contentEditable="true"></td>
-                                                                <td className="tm_width_2" contentEditable="true"></td>
+                                                                {/* <td className="tm_width_2" contentEditable="true"></td> */}
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
                                                                     {getInvoice.resturent_cost}
                                                                 </td>
@@ -262,9 +265,9 @@ const ReportInvoice = () => {
                                                             <tr id='other-cost'>
                                                                 <td className="tm_width_2">Others Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
+                                                                <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
+                                                                {/* <td className="tm_width_2" contentEditable="true"> </td> */}
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
                                                                     {getInvoice.other_cost}
                                                                 </td>
@@ -272,21 +275,21 @@ const ReportInvoice = () => {
                                                             <tr id='discount-cost'>
                                                                 <td className="tm_width_2">Discount (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
+                                                                <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
+                                                                {/* <td className="tm_width_2" contentEditable="true"> </td> */}
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
                                                                     {getInvoice.discount}
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr id='advanced-cost'>
                                                                 <td className="tm_width_2">A.Payment (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
+                                                                <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
-                                                                <td className="tm_width_2" contentEditable="true"> </td>
+                                                                {/* <td className="tm_width_2" contentEditable="true"> </td> */}
                                                                 <td className="tm_width_2 tm_text_right inv-inp">
-                                                                   {getInvoice.advance ? getInvoice.advance : 0}
+                                                                    {getInvoice.advance ? getInvoice.advance : 0}
                                                                 </td>
                                                             </tr>
 
@@ -295,9 +298,10 @@ const ReportInvoice = () => {
                                                 </div>
                                             </div>
                                             <div className="tm_invoice_footer tm_mb15">
-                                                <div className="tm_left_footer">
-                                                    <p className="tm_mb2"><b className="tm_primary_color">Payment info:</b></p>
-                                                    <p className="tm_m0">{getInvoice.name} <br />Payment Method - {getInvoice.payment_method}   <br /> </p>
+                                                <div className="tm_left_footer border-right">
+                                                    <p className="tm_mb8   tm_gray_bg  p-1"><b className="tm_primary_color">Payment info:</b></p>
+                                                    <p className="tm_m0 tm_gray_bg  p-1 mb-2"> Name : {getInvoice.name}</p>
+                                                    <p className='tm_m0 tm_gray_bg p-1'>Payment Status - <b className=''>{getInvoice.payment_status}</b></p>
                                                 </div>
                                                 <div className="tm_right_footer">
                                                     <table className="tm_mb15">
@@ -321,6 +325,7 @@ const ReportInvoice = () => {
                                                         </tbody>
                                                     </table>
                                                 </div>
+
                                             </div>
                                             <div className=" flexdisplay  tm_type1">
                                                 <div className="tm_left_footer ">
@@ -347,6 +352,9 @@ const ReportInvoice = () => {
                 </div>
             </div>
         </div>
+
+
+
     );
 };
 
