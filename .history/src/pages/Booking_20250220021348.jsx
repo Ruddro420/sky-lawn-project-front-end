@@ -19,8 +19,8 @@ const Booking = () => {
     const { register, handleSubmit, setValue } = useForm();
     const navigate = useNavigate()
     //const [data,setData] = useState()
-    const { dataId } = useParams();
-
+    const { data } = useParams();
+    console.log(data);
     
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -68,7 +68,7 @@ const Booking = () => {
     // Fetch preBooking data from API
     const fetchRoom = () => {
         axios
-            .get(`${BASE_URL}/prebook-data/show/${dataId}`)
+            .get(`${BASE_URL}/prebook-data/show/${data}`)
             .then((response) => {
                 setPreBook(response.data);
                 // Set form values dynamically
@@ -95,7 +95,7 @@ const Booking = () => {
     // Fetch room data on component mount
     useEffect(() => {
         fetchRoom();
-    }, [dataId]);
+    }, [data]);
 
 
     // file handel nid
@@ -144,7 +144,6 @@ const Booking = () => {
         formData.append("payment_status", data.payment_status);
         formData.append("payment_method", data.payment_method);
         formData.append("booking_by", data.booking_by);
-        formData.append('prebooking_id', dataId);
 
         // Axios POST request with FormData
         axios

@@ -106,6 +106,7 @@ const Invoice = () => {
                 resturent_cost: food,
                 other_cost: otheres,
                 extra_5: subData,
+                bookingId: id
 
 
             })

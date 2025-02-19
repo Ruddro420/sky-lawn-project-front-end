@@ -95,7 +95,7 @@ const Booking = () => {
     // Fetch room data on component mount
     useEffect(() => {
         fetchRoom();
-    }, [dataId]);
+    }, [data]);
 
 
     // file handel nid
@@ -144,7 +144,7 @@ const Booking = () => {
         formData.append("payment_status", data.payment_status);
         formData.append("payment_method", data.payment_method);
         formData.append("booking_by", data.booking_by);
-        formData.append('prebooking_id', dataId);
+        formData.append('prebooking_id', data.prebooking_id);
 
         // Axios POST request with FormData
         axios

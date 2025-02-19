@@ -93,7 +93,7 @@ const Invoice = () => {
                 person: getInvoice.person,
                 comming_from: getInvoice.comming_form,
                 // room_price: getInvoice.room_price,
-                room_price: nightPrice,
+                room_price: roomPrice,
                 duration: getDay.days_difference,
                 total_price: roomPriceUpdate,
                 advance: getInvoice.advance,
@@ -182,7 +182,7 @@ const Invoice = () => {
                                {/*  <span className="tm_btn_icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><circle cx="392" cy="184" r="24" fill='currentColor' /></svg>
                                 </span> */}
-                                <span className="btn btn-primary">Checkout Here</span>
+                                <span className="tm_btn_text">Checkout</span>
                             </button>
 
                         </div>
@@ -217,6 +217,14 @@ const Invoice = () => {
                                             </div>
                                         </div>
                                         <div className="  tm_mb25">
+                                            {/* <div className="tm_invoice_info_left">
+                                                <p className="tm_mb17">
+                                                    <b className="tm_f18 tm_primary_color">SKY LAWN Hotel & Restaurant</b> <br />
+                                                    R. K. Road. Islambag <br />  Rangpur<br />
+                                                    <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="a2cecdd5c7cecee2c5cfc3cbce8cc1cdcf">info@skylawnhotel</a> <br />
+                                                    +88 01326085222
+                                                </p>
+                                            </div> */}
                                             <div className="">
                                                 <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in  tm_round_border"
                                                 >

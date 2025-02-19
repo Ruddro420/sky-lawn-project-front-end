@@ -82,8 +82,8 @@ const PreBookingDetails = () => {
                 ? item.room_price.toString().includes(priceFilter)
                 : true;
             const statusMatch = statusFilter
-                ? (statusFilter == "booked" && item.final_status == 1) ||
-                (statusFilter == "available" && item.final_status != 1)
+                ? (statusFilter == "booked" && item.status == 1) ||
+                (statusFilter == "available" && item.status != 1)
                 : true;
 
             return nameMatch && phoneMatch && roomMatch && priceMatch && statusMatch;
@@ -323,7 +323,7 @@ const PreBookingDetails = () => {
                                                                     <td>{item.duration_day}</td>
                                                                     <td>{item.booking_by}</td>
                                                                     <td>
-                                                                        {item.final_status == 1 ? (
+                                                                        {item.fina_status == 1 ? (
                                                                             <button disabled className="btn btn-primary btn-sm">
                                                                                 Booked
                                                                             </button>

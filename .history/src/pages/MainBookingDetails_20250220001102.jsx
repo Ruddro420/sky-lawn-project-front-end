@@ -21,7 +21,6 @@ const MainBookingDetails = () => {
     const [phoneFilter, setPhoneFilter] = useState("");
     const [roomFilter, setRoomFilter] = useState("");
     const [paymentFilter, setPaymentFilter] = useState("");
-    const [paidDueFilter, setPaidDueFilter] = useState('');
 
     // const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     // [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
@@ -55,25 +54,27 @@ const MainBookingDetails = () => {
     useEffect(() => {
         const filtered = booking.filter((item) => {
             const nameMatch = nameFilter
-                ? (item.name || '').toLowerCase().includes(nameFilter.toLowerCase())
+                ? item.name.toLowerCase().includes(nameFilter.toLowerCase())
                 : true;
             const phoneMatch = phoneFilter
-                ? (item.mobile || '').toLowerCase().includes(phoneFilter.toLowerCase())
+                ? item.mobile.toLowerCase().includes(phoneFilter.toLowerCase())
                 : true;
             const roomMatch = roomFilter
-                ? (item.room_number || '').toString().toLowerCase().includes(roomFilter.toLowerCase())
+                ? item.room_number
+                    .toString()
+                    .toLowerCase()
+                    .includes(roomFilter.toLowerCase())
                 : true;
             const paymentMatch = paymentFilter
-                ? (item.payment_status || '').toLowerCase().includes(paymentFilter.toLowerCase())
+                ? item.payment_status
+                    .toLowerCase()
+                    .includes(paymentFilter.toLowerCase())
                 : true;
-            const paidDueMatch = paidDueFilter
-                ? (item.payment_status || '').toLowerCase() === paidDueFilter.toLowerCase()
-                : true;
-    
-            return nameMatch && phoneMatch && roomMatch && paymentMatch && paidDueMatch;
+
+            return nameMatch && phoneMatch && roomMatch && paymentMatch;
         });
         setFilteredBooking(filtered);
-    }, [nameFilter, phoneFilter, roomFilter, paymentFilter, paidDueFilter, booking]);
+    }, [nameFilter, phoneFilter, roomFilter, paymentFilter, booking]);
 
     const navigate = useNavigate();
 
@@ -207,15 +208,13 @@ const MainBookingDetails = () => {
                                         />
                                     </div>
                                     <div className="col-md-3">
-                                        <select
+                                        <input
+                                            type="text"
+                                            placeholder="Filter by Payment Status"
                                             className="form-control"
-                                            value={paidDueFilter}
-                                            onChange={(e) => setPaidDueFilter(e.target.value)}
-                                        >
-                                            <option value="">All Payment Status</option>
-                                            <option value="Paid">Paid</option>
-                                            <option value="Due">Due</option>
-                                        </select>
+                                            value={paymentFilter}
+                                            onChange={(e) => setPaymentFilter(e.target.value)}
+                                        />
                                     </div>
                                 </div>
 
@@ -385,7 +384,7 @@ const MainBookingDetails = () => {
                                                                     </td>
                                                                     <td>{item.payment_status}</td>
                                                                     <td>
-                                                                        <button onClick={() => handleDownload(item.invoice)} className="btn btn-success btn-sm me-1"><IoMdDownload className="fs-6" /></button>
+                                                                        <button onClick={() => handleDownload(item.id)} className="btn btn-success btn-sm me-1"><IoMdDownload className="fs-6" /></button>
                                                                         {item.check_status == 0 ? (
                                                                             <button
                                                                                 disabled

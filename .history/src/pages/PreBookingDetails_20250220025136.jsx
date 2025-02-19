@@ -312,7 +312,7 @@ const PreBookingDetails = () => {
 
                                                         <tbody>
                                                             {filteredRoom.map((item, index) => (
-                                                                <tr key={index} className={index === 0 ? "table-success" : ""}>
+                                                                <tr key={index} /* className={index === 0 ? "table-success" : ""} */>
                                                                     <td>{index + 1}</td>
                                                                     <td>{formatDateTime(item.date_time)}</td>
                                                                     <td>{item.name}</td>

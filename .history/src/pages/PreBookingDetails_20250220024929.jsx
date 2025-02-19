@@ -70,26 +70,31 @@ const PreBookingDetails = () => {
     useEffect(() => {
         const filtered = room.filter((item) => {
             const nameMatch = nameFilter
-                ? item.name.toLowerCase().includes(nameFilter.toLowerCase())
+                ? (item.name || '').toLowerCase().includes(nameFilter.toLowerCase())
                 : true;
             const phoneMatch = phoneFilter
-                ? item.phone.toLowerCase().includes(phoneFilter.toLowerCase())
+                ? (item.phone || '').toLowerCase().includes(phoneFilter.toLowerCase())
                 : true;
             const roomMatch = roomFilter
-                ? item.room_number.toString().includes(roomFilter)
+                ? (item.room_number || '').toString().includes(roomFilter)
                 : true;
             const priceMatch = priceFilter
-                ? item.room_price.toString().includes(priceFilter)
+                ? (item.room_price || '').toString().includes(priceFilter)
                 : true;
             const statusMatch = statusFilter
-                ? (statusFilter == "booked" && item.final_status == 1) ||
-                (statusFilter == "available" && item.final_status != 1)
+                ? (statusFilter === "booked" && item.final_status === 1) ||
+                  (statusFilter === "available" && item.final_status !== 1)
                 : true;
 
             return nameMatch && phoneMatch && roomMatch && priceMatch && statusMatch;
         });
 
-        setFilteredRoom(filtered);
+        // Sort filtered data by date_time in descending order
+        const sortedFilteredData = filtered.sort(
+            (a, b) => new Date(b.date_time) - new Date(a.date_time)
+        );
+
+        setFilteredRoom(sortedFilteredData);
     }, [nameFilter, phoneFilter, roomFilter, priceFilter, statusFilter, room]);
 
     // Delete a room
@@ -111,41 +116,23 @@ const PreBookingDetails = () => {
 
     // Function to format date as YYYY-MM-DD
     const formatDateTime = (dateTimeString) => {
-        console.log("Input dateTimeString:", dateTimeString); // Debugging line
-
-        // Fallback for invalid or missing input
         if (!dateTimeString || typeof dateTimeString !== "string") {
-            console.error("Invalid dateTimeString:", dateTimeString);
             return "Invalid Date";
         }
 
-        // Ensure the input is in the correct format
-        let isoString;
-        if (dateTimeString.includes("T")) {
-            // If the input is already in ISO format (e.g., "2025-02-08T18:57:00Z")
-            isoString = dateTimeString.endsWith("Z") ? dateTimeString : dateTimeString + "Z";
-        } else {
-            // If the input is in "YYYY-MM-DD HH:mm:ss" format
-            isoString = dateTimeString.replace(" ", "T") + "Z";
-        }
-
-        const date = new Date(isoString);
-        console.log("Parsed Date object:", date); // Debugging line
-
+        const date = new Date(dateTimeString);
         if (isNaN(date.getTime())) {
-            console.error("Invalid Date object created from:", dateTimeString);
             return "Invalid Date";
         }
 
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-        const day = String(date.getUTCDate()).padStart(2, "0");
-        const hours = String(date.getUTCHours()).padStart(2, "0");
-        const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-        const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const seconds = String(date.getSeconds()).padStart(2, "0");
 
-        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`; // Format as "DD-MM-YYYY HH:mm:ss"
-        // return `${day}-${month}-${year}`; // Format as "DD-MM-YYYY HH:mm:ss"
+        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
     };
 
     return (
@@ -214,80 +201,6 @@ const PreBookingDetails = () => {
                                         {loading ? (
                                             <p>Loading...</p>
                                         ) : (
-                                            // <div className="table-responsive text-nowrap">
-                                            //     {filteredRoom.length === 0 ? (
-                                            //         <div
-                                            //             className="alert alert-warning"
-                                            //             role="alert"
-                                            //         >
-                                            //             No Data Found
-                                            //         </div>
-                                            //     ) : (
-                                            //         <table className="table order-4 border">
-                                            //             <thead>
-                                            //                 <tr>
-                                            //                     <th>SL</th>
-                                            //                     <th>Date</th>
-                                            //                     <th>Name</th>
-                                            //                     <th>Phone</th>
-                                            //                     <th>Person</th>
-                                            //                     <th>Room Number</th>
-                                            //                     <th>Price</th>
-                                            //                     <th>D.D</th>
-                                            //                     <th>Booked By</th>
-                                            //                     <th>Actions</th>
-                                            //                 </tr>
-                                            //             </thead>
-
-                                            //             <tbody className="table-border-bottom-0">
-                                            //                 {filteredRoom.map((item, index) => (
-                                            //                     <tr
-                                            //                         key={index}
-                                            //                         style={{
-                                            //                             backgroundColor:
-                                            //                                 index === 0
-                                            //                                     ? "#dff0d8" // Light green for the latest row
-                                            //                                     : "transparent",
-                                            //                         }}
-                                            //                     >
-                                            //                         <td>{index + 1}</td>
-                                            //                         <td>{formatDateTime(item.date_time)}</td> {/* Display in UTC format */}
-                                            //                         <td>{item.name}</td>
-                                            //                         <td>{item.phone}</td>
-                                            //                         <td>{item.person}</td>
-                                            //                         <td>{item.room_number}</td>
-                                            //                         <td>{item.room_price}</td>
-                                            //                         <td>{item.duration_day}</td>
-                                            //                         <td>{item.booking_by}</td>
-                                            //                         <td>
-                                            //                             {item.status == 1 ? (
-                                            //                                 <button
-                                            //                                     disabled
-                                            //                                     className="btn btn-primary"
-                                            //                                 >
-                                            //                                     Booked
-                                            //                                 </button>
-                                            //                             ) : (
-                                            //                                 <button
-                                            //                                     onClick={() =>
-                                            //                                         booking(item.id)
-                                            //                                     }
-                                            //                                     className="btn btn-danger"
-                                            //                                 >
-                                            //                                     Apply Booking
-                                            //                                 </button>
-                                            //                             )}
-                                            //                             <button
-                                            //                                 onClick={() => { deleteRoom(item?.id) }}
-                                            //                                 className="btn btn-primary ms-2">Delete</button>
-                                            //                         </td>
-                                            //                     </tr>
-                                            //                 ))}
-                                            //             </tbody>
-                                            //         </table>
-                                            //     )}
-                                            // </div>
-
                                             <div className="table-responsive w-100">
                                                 {filteredRoom.length === 0 ? (
                                                     <div className="alert alert-warning text-center" role="alert">
@@ -309,7 +222,6 @@ const PreBookingDetails = () => {
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody>
                                                             {filteredRoom.map((item, index) => (
                                                                 <tr key={index} className={index === 0 ? "table-success" : ""}>
@@ -348,8 +260,6 @@ const PreBookingDetails = () => {
                                                     </table>
                                                 )}
                                             </div>
-
-
                                         )}
                                     </div>
                                 </div>

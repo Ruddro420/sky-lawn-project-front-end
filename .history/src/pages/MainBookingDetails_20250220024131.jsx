@@ -207,6 +207,15 @@ const MainBookingDetails = () => {
                                         />
                                     </div>
                                     <div className="col-md-3">
+                                        <input
+                                            type="text"
+                                            placeholder="Filter by Payment Status"
+                                            className="form-control"
+                                            value={paymentFilter}
+                                            onChange={(e) => setPaymentFilter(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-3">
                                         <select
                                             className="form-control"
                                             value={paidDueFilter}

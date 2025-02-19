@@ -93,7 +93,7 @@ const Invoice = () => {
                 person: getInvoice.person,
                 comming_from: getInvoice.comming_form,
                 // room_price: getInvoice.room_price,
-                room_price: nightPrice,
+                room_price: roomPrice,
                 duration: getDay.days_difference,
                 total_price: roomPriceUpdate,
                 advance: getInvoice.advance,
@@ -217,6 +217,14 @@ const Invoice = () => {
                                             </div>
                                         </div>
                                         <div className="  tm_mb25">
+                                            {/* <div className="tm_invoice_info_left">
+                                                <p className="tm_mb17">
+                                                    <b className="tm_f18 tm_primary_color">SKY LAWN Hotel & Restaurant</b> <br />
+                                                    R. K. Road. Islambag <br />  Rangpur<br />
+                                                    <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="a2cecdd5c7cecee2c5cfc3cbce8cc1cdcf">info@skylawnhotel</a> <br />
+                                                    +88 01326085222
+                                                </p>
+                                            </div> */}
                                             <div className="">
                                                 <div className="tm_grid_row tm_col_3 tm_col_2_sm tm_invoice_info_in  tm_round_border"
                                                 >

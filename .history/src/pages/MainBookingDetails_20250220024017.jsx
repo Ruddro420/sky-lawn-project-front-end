@@ -55,25 +55,27 @@ const MainBookingDetails = () => {
     useEffect(() => {
         const filtered = booking.filter((item) => {
             const nameMatch = nameFilter
-                ? (item.name || '').toLowerCase().includes(nameFilter.toLowerCase())
+                ? item.name.toLowerCase().includes(nameFilter.toLowerCase())
                 : true;
             const phoneMatch = phoneFilter
-                ? (item.mobile || '').toLowerCase().includes(phoneFilter.toLowerCase())
+                ? item.mobile.toLowerCase().includes(phoneFilter.toLowerCase())
                 : true;
             const roomMatch = roomFilter
-                ? (item.room_number || '').toString().toLowerCase().includes(roomFilter.toLowerCase())
+                ? item.room_number
+                    .toString()
+                    .toLowerCase()
+                    .includes(roomFilter.toLowerCase())
                 : true;
             const paymentMatch = paymentFilter
-                ? (item.payment_status || '').toLowerCase().includes(paymentFilter.toLowerCase())
+                ? item.payment_status
+                    .toLowerCase()
+                    .includes(paymentFilter.toLowerCase())
                 : true;
-            const paidDueMatch = paidDueFilter
-                ? (item.payment_status || '').toLowerCase() === paidDueFilter.toLowerCase()
-                : true;
-    
-            return nameMatch && phoneMatch && roomMatch && paymentMatch && paidDueMatch;
+
+            return nameMatch && phoneMatch && roomMatch && paymentMatch;
         });
         setFilteredBooking(filtered);
-    }, [nameFilter, phoneFilter, roomFilter, paymentFilter, paidDueFilter, booking]);
+    }, [nameFilter, phoneFilter, roomFilter, paymentFilter, booking]);
 
     const navigate = useNavigate();
 
@@ -204,6 +206,15 @@ const MainBookingDetails = () => {
                                             className="form-control"
                                             value={roomFilter}
                                             onChange={(e) => setRoomFilter(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-md-3">
+                                        <input
+                                            type="text"
+                                            placeholder="Filter by Payment Status"
+                                            className="form-control"
+                                            value={paymentFilter}
+                                            onChange={(e) => setPaymentFilter(e.target.value)}
                                         />
                                     </div>
                                     <div className="col-md-3">
