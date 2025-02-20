@@ -69,7 +69,7 @@ const MainBookingDetails = () => {
             const paidDueMatch = paidDueFilter
                 ? (item.payment_status || '').toLowerCase() === paidDueFilter.toLowerCase()
                 : true;
-    
+
             return nameMatch && phoneMatch && roomMatch && paymentMatch && paidDueMatch;
         });
         setFilteredBooking(filtered);
@@ -420,12 +420,23 @@ const MainBookingDetails = () => {
                                                                             <FaRegTrashAlt className="fs-6" />
 
                                                                         </button>
-                                                                        <button
-                                                                            onClick={() => editDetails(item.id)}
-                                                                            className="btn btn-primary btn-sm ms-1"
-                                                                        >
-                                                                            Edit
-                                                                        </button>
+                                                                        {
+                                                                            item?.check_status == 0 ? (
+                                                                                <button
+                                                                                    onClick={() => editDetails(item.id)}
+                                                                                    className="btn btn-primary btn-sm ms-1"
+                                                                                    disabled
+                                                                                >
+                                                                                    Edit
+                                                                                </button>
+                                                                            ) :
+                                                                                <button
+                                                                                    onClick={() => editDetails(item.id)}
+                                                                                    className="btn btn-primary btn-sm ms-1"
+                                                                                >
+                                                                                    Edit
+                                                                                </button>
+                                                                        }
                                                                     </td>
                                                                 </tr>
                                                             );

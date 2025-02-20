@@ -32,3 +32,11 @@
 .nav-item {
     padding: 10px 15px;
 }
+
+
+@media (min-width: 992px) { 
+    .custom-dropdown {
+      left: auto !important;
+      right: -24px !important; 
+    }
+  }

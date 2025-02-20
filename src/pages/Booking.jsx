@@ -21,20 +21,20 @@ const Booking = () => {
     //const [data,setData] = useState()
     const { dataId } = useParams();
 
-    
+
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-     // Function to format date as YYYY-MM-DD
-     const formatDateTime = (dateTimeString) => {
+    // Function to format date as YYYY-MM-DD
+    const formatDateTime = (dateTimeString) => {
         console.log("Input dateTimeString:", dateTimeString); // Debugging line
-    
+
         // Fallback for invalid or missing input
         if (!dateTimeString || typeof dateTimeString !== "string") {
             console.error("Invalid dateTimeString:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         // Ensure the input is in the correct format
         let isoString;
         if (dateTimeString.includes("T")) {
@@ -44,22 +44,22 @@ const Booking = () => {
             // If the input is in "YYYY-MM-DD HH:mm:ss" format
             isoString = dateTimeString.replace(" ", "T") + "Z";
         }
-    
+
         const date = new Date(isoString);
         console.log("Parsed Date object:", date); // Debugging line
-    
+
         if (isNaN(date.getTime())) {
             console.error("Invalid Date object created from:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         const year = date.getUTCFullYear();
         const month = String(date.getUTCMonth() + 1).padStart(2, "0");
         const day = String(date.getUTCDate()).padStart(2, "0");
         const hours = String(date.getUTCHours()).padStart(2, "0");
         const minutes = String(date.getUTCMinutes()).padStart(2, "0");
         const seconds = String(date.getUTCSeconds()).padStart(2, "0");
-    
+
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; // Format as "DD-MM-YYYY HH:mm:ss"
         //`${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;; // Format as "DD-MM-YYYY HH:mm:ss"
     };
@@ -85,7 +85,7 @@ const Booking = () => {
                 setValue("total_price", response.data.room_price);
                 setValue("booking_by", response.data.booking_by);
                 setValue("date_time", formatDateTime(response.data.date_time));
-                
+
             })
             .catch((error) => {
                 console.log(error);
@@ -529,7 +529,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status
+                                                        Payment Method
                                                         {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <select
