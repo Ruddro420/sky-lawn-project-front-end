@@ -246,7 +246,7 @@ const ReportInvoice = () => {
                                                                 <td className="tm_width_2"> {getInvoice.room_price}</td>
                                                                 <td className="tm_width_2"> {getInvoice.duration}</td>
                                                                 <td className="tm_width_2 tm_text_right"> {getInvoice.total_price}</td>
-                                                              {/*   <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td> */}
+                                                                {/*   <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td> */}
                                                                 {/* <td className="tm_width_2 tm_text_right">
                                                                     {getInvoice.final_amount}
 
@@ -306,14 +306,14 @@ const ReportInvoice = () => {
                                                 <div className="tm_right_footer ">
                                                     <table className="tm_mb15  ">
                                                         <tbody>
-                                                        <tr className='costom_border_clr'>
+                                                            <tr className='costom_border_clr'>
                                                                 <td className="tm_width_3 tm_primary_color tm_f16 tm_pt1  ">Sub Total (৳)</td>
                                                                 <td id='subTotalUpdate' className="tm_width_3 tm_primary_color tm_f18 tm_text_right tm_border_none tm_pt1 border">
-                                                                {getInvoice.extra_5}
+                                                                    {getInvoice.extra_5}
                                                                 </td>
                                                             </tr>
 
-                                                           {/*  <tr className='tm_gray_bg  costom_border_clr  '>
+                                                            {/*  <tr className='tm_gray_bg  costom_border_clr  '>
                                                                 <td className="tm_width_3 tm_f16 tm_pt1  ">Sub Total (৳)</td>
                                                                 <td id='subTotalUpdate' className="tm_width_3 tm_primary_color tm_bold  tm_f18 tm_text_right tm_border_none tm_pt1 border">
                                                                    {getInvoice.extra_5}
@@ -326,7 +326,7 @@ const ReportInvoice = () => {
                                                             <tr className='costom_border_clr'>
                                                                 <td className="tm_width_3 tm_primary_color tm_f16 tm_pt1  ">Advanced (৳)</td>
                                                                 <td className="tm_width_3 tm_primary_color tm_f18 tm_text_right tm_border_none tm_pt1 border">
-                                                                { getInvoice.advance != null ? getInvoice.advance : 0}
+                                                                    {getInvoice.advance != null ? getInvoice.advance : 0}
                                                                 </td>
                                                             </tr>
                                                             <tr className='costom_border_clr costom_border_bottom'>
@@ -334,7 +334,7 @@ const ReportInvoice = () => {
                                                                     Grand Total (৳)
                                                                 </td>
                                                                 <td id='subTotal' className="tm_width_3 tm_border_top_0 tm_bold tm_f20 tm_primary_color tm_text_right  tm_radius_0_6_6_0   costom_border_bottom">
-                                                                   {getInvoice.final_amount}
+                                                                    {getInvoice.final_amount}
                                                                 </td>
                                                             </tr>
                                                         </tbody>

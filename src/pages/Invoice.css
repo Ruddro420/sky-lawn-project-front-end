@@ -1116,6 +1116,7 @@ hr {
   background: #fff;
   border-radius: 10px;
   padding: 50px;
+  margin-right: 20px;
 }
 
 .tm_invoice_footer {
@@ -1139,7 +1140,7 @@ hr {
 .flexdisplay{
   display: flex;
   padding: 10px;
-  padding-top: 25px;
+  padding-top: 15px;
   margin-left: 80px;
   margin-right: 100px;
 
@@ -2087,6 +2088,8 @@ hr {
   .tm_invoice.tm_style2 .tm_invoice_head .tm_text_right {
     text-align: left;
   }
+
+  .
   .tm_invoice.tm_style2 .tm_invoice_info {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
