@@ -298,10 +298,10 @@ const ReportInvoice = () => {
                                                 </div>
                                             </div>
                                             <div className="tm_invoice_footer tm_mb15">
-                                                <div className="tm_left_footer border-right">
-                                                    <p className="tm_mb8   tm_gray_bg  p-1"><b className="tm_primary_color">Payment info:</b></p>
-                                                    <p className="tm_m0 tm_gray_bg  p-1 mb-2"> Name : {getInvoice.name}</p>
-                                                    <p className='tm_m0 tm_gray_bg p-1'>Payment Status - <b className=''>{getInvoice.payment_status}</b></p>
+                                                <div className="tm_left_footer border-right ">
+                                                    <p className="tm_mb8   tm_gray_bg bgpayment  p-1"><b className="tm_primary_color">Payment info:</b></p>
+                                                    <p className="tm_m0 tm_gray_bg bgpayment p-1 mb-2"> Name : {getInvoice.name}</p>
+                                                    <p className='tm_m0 tm_gray_bg bgpayment p-1'>Payment Status - <b className=''>{getInvoice.payment_status}</b></p>
                                                 </div>
                                                 <div className="tm_right_footer ">
                                                     <table className="tm_mb15  ">

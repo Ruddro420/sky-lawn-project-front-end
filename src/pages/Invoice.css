@@ -2712,4 +2712,8 @@ hr {
   border-radius: 4px;
 }
 
+.bgpayment{
+  background-color: rgb(217,245,255);
+  color: #111;
+}
 
