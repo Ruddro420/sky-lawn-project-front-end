@@ -64,7 +64,8 @@ const EditBookingDetails = () => {
             })
             .catch((error) => {
                 console.error("Error updating booking:", error);
-                alert("Error updating booking. Please try again.");
+                toast.error('The file size should be less than 15 MB')
+                // alert("Error updating booking. Please try again.");
             });
     };
 
@@ -82,7 +83,7 @@ const EditBookingDetails = () => {
                             {/* Check-in Date & Time */}
                             <div className="w-full">
                                 <div className="mb-3">
-                                    <label className="form-label" htmlFor="checking_date_time">
+                                    <label className="form-label" htmlFor="checking_date_time" >
                                         Check-in Date & Time
                                     </label>
                                     <input
@@ -90,6 +91,7 @@ const EditBookingDetails = () => {
                                         type="datetime-local"
                                         className="form-control"
                                         id="checking_date_time"
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -354,6 +356,7 @@ const EditBookingDetails = () => {
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="Check Out"
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -368,7 +371,7 @@ const EditBookingDetails = () => {
                                     <input
                                         {...register("nid_no", { required: false })}
                                         name="nid_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="NID No"
@@ -383,7 +386,7 @@ const EditBookingDetails = () => {
                                     <input
                                         {...register("passport_no", { required: false })}
                                         name="passport_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="Passport No"
@@ -398,7 +401,7 @@ const EditBookingDetails = () => {
                                     <input
                                         {...register("visa_no", { required: false })}
                                         name="visa_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="Visa No"
@@ -484,7 +487,7 @@ const EditBookingDetails = () => {
                             <div className="col-lg-6">
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="nid_doc">
-                                        NID Documents
+                                        NID Documents <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                     </label>
                                     <input
                                         {...register("nid_doc")}
@@ -500,6 +503,7 @@ const EditBookingDetails = () => {
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="couple_doc">
                                         Couple Documents
+                                        <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                     </label>
                                     <input
                                         {...register("couple_doc")}
@@ -515,6 +519,7 @@ const EditBookingDetails = () => {
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="visa_doc">
                                         Visa Documents
+                                        <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                     </label>
                                     <input
                                         {...register("visa_doc")}
@@ -530,6 +535,7 @@ const EditBookingDetails = () => {
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="other_doc">
                                         Other Documents
+                                        <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                     </label>
                                     <input
                                         {...register("other_doc")}

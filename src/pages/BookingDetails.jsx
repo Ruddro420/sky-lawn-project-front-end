@@ -87,6 +87,7 @@ const BookingDetails = () => {
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="Booking by reference"
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -102,6 +103,7 @@ const BookingDetails = () => {
                                         className="form-control"
                                         id="basic-default-fullname"
                                         placeholder="Person Name"
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -117,7 +119,7 @@ const BookingDetails = () => {
                                         name="room_number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Room Number"
+                                        placeholder="Room Number" disabled
                                     />
                                 </div>
                             </div>
@@ -133,7 +135,7 @@ const BookingDetails = () => {
                                         name="room_category"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Room Category"
+                                        placeholder="Room Category" disabled
                                     />
                                 </div>
                             </div>
@@ -149,7 +151,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Nationality"
+                                        placeholder="Nationality" disabled
                                     />
                                 </div>
                             </div>
@@ -165,7 +167,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Company Name"
+                                        placeholder="Company Name" disabled
                                     />
                                 </div>
                             </div>
@@ -181,7 +183,7 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Mobile"
+                                        placeholder="Mobile" disabled
                                     />
                                 </div>
                             </div>
@@ -197,7 +199,7 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Person"
+                                        placeholder="Person" disabled
                                     />
                                 </div>
                             </div>
@@ -213,7 +215,7 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Duration of Stay"
+                                        placeholder="Duration of Stay" disabled
                                     />
                                 </div>
                             </div>
@@ -229,7 +231,7 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Price"
+                                        placeholder="Price" disabled
                                     />
                                 </div>
                             </div>
@@ -247,7 +249,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Father's Name"
+                                        placeholder="Father's Name" disabled
                                     />
                                 </div>
                             </div>
@@ -262,7 +264,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Mother's Name"
+                                        placeholder="Mother's Name" disabled
                                     />
                                 </div>
                             </div>
@@ -277,7 +279,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Address"
+                                        placeholder="Address" disabled
                                     />
                                 </div>
                             </div>
@@ -292,7 +294,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Profession"
+                                        placeholder="Profession" disabled
                                     />
                                 </div>
                             </div>
@@ -307,7 +309,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Comming Form"
+                                        placeholder="Comming Form" disabled
                                     />
                                 </div>
                             </div>
@@ -322,7 +324,7 @@ const BookingDetails = () => {
                                         type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Booking Purpose"
+                                        placeholder="Booking Purpose" disabled
                                     />
                                 </div>
                             </div>
@@ -337,7 +339,7 @@ const BookingDetails = () => {
                                         type="datetime-local"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Check Out"
+                                        placeholder="Check Out" disabled
                                     />
                                 </div>
                             </div>
@@ -352,10 +354,10 @@ const BookingDetails = () => {
                                     <input
                                         {...register("nid_no", { required: false })}
                                         name="nid_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="NID No"
+                                        placeholder="NID No" disabled
                                     />
                                 </div>
                             </div>
@@ -367,10 +369,10 @@ const BookingDetails = () => {
                                     <input
                                         {...register("passport_no", { required: false })}
                                         name="passport_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Passport No"
+                                        placeholder="Passport No" disabled
                                     />
                                 </div>
                             </div>
@@ -382,10 +384,10 @@ const BookingDetails = () => {
                                     <input
                                         {...register("visa_no", { required: false })}
                                         name="visa_no"
-                                        type="number"
+                                        type="text"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Visa No"
+                                        placeholder="Visa No" disabled
                                     />
                                 </div>
                             </div>
@@ -401,7 +403,7 @@ const BookingDetails = () => {
                                         {...register("payment_status", { required: false })}
                                         name="payment_status"
                                         className="form-control"
-                                        type="text"
+                                        type="text" disabled
                                     >
                                         {/* <option value="">Select Payment Status</option>
                                         <option value="Paid">Paid</option>
@@ -418,7 +420,7 @@ const BookingDetails = () => {
                                         {...register("payment_method", { required: false })}
                                         name="payment_method"
                                         className="form-control"
-                                        type="text"
+                                        type="text" disabled
                                     >
                                         {/* <option value="">Select Payment Method</option>
                                         <option value="Cash">Cash</option>
@@ -441,11 +443,11 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Total Price"
+                                        placeholder="Total Price" disabled
                                     />
                                 </div>
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 bg-light">
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="basic-default-fullname">
                                         Advanced Payment
@@ -456,7 +458,7 @@ const BookingDetails = () => {
                                         type="number"
                                         className="form-control"
                                         id="basic-default-fullname"
-                                        placeholder="Total Price"
+                                        placeholder="Total Price" disabled
                                     />
                                 </div>
                             </div>
@@ -503,7 +505,7 @@ const BookingDetails = () => {
 
                                 {/* Couple Documents */}
                                 <div className="col-lg-6">
-                                    <div className="mb-3">
+                                    <div className="mb-3 ms-2">
                                         <label className="form-label">Couple Documents</label>
                                         {booking && booking.couple_doc ? (
                                             <table className="table table-bordered text-center">
@@ -537,7 +539,7 @@ const BookingDetails = () => {
                                 </div>
 
                                 {/* Passport Documents */}
-                                <div className="col-lg-6">
+                                {/* <div className="col-lg-6">
                                     <div className="mb-3">
                                         <label className="form-label">Passport Documents</label>
                                         {booking && booking.passport_doc ? (
@@ -569,7 +571,7 @@ const BookingDetails = () => {
                                             <p>No Passport Document Available</p>
                                         )}
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Visa Documents */}
                                 <div className="col-lg-6">
@@ -608,7 +610,7 @@ const BookingDetails = () => {
 
                                 {/* Other Documents */}
                                 <div className="col-lg-6">
-                                    <div className="mb-3">
+                                    <div className="mb-3 ms-2">
                                         <label className="form-label">Other Documents</label>
                                         {booking && booking.other_doc ? (
                                             <table className="table table-bordered text-center">

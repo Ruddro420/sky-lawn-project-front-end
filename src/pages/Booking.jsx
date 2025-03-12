@@ -162,7 +162,7 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("The file size should be less than 15 MB!");
             });
     };
 
@@ -446,10 +446,10 @@ const Booking = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Check Out Date & Time
-                                                        {/* <span className="text-danger">*</span> */}
+                                                        <span className="text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        {...register("checkout_date_time", { required: false })}
+                                                        {...register("checkout_date_time", { required: true })}
                                                         name="checkout_date_time"
                                                         type="datetime-local"
                                                         className="form-control"
@@ -585,7 +585,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        NID Doc
+                                                        NID Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         type="file"
@@ -599,7 +599,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Couple Doc
+                                                        Couple Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("couple_doc", { required: false })}
@@ -616,7 +616,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Visa Doc
+                                                        Visa Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("visa_doc", { required: false })}
@@ -633,7 +633,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Others Doc
+                                                        Others Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("other_doc", { required: false })}
