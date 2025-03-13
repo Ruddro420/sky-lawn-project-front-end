@@ -70,7 +70,7 @@ const ReportInvoice = () => {
         fetchInvoice()
     }, []);
 
-    console.log(getInvoice);
+    console.log(getInvoice.duration);
 
 
 
@@ -206,7 +206,7 @@ const ReportInvoice = () => {
                                                     </div>
                                                     <div>
                                                         <span>Total Day:</span> <br />
-                                                        <b className="tm_primary_color">{getInvoice.duration}</b>
+                                                        <b className="tm_primary_color">{getInvoice.duration == 0 ? 1 : getInvoice.duration}</b>
                                                     </div>
                                                     <div>
                                                         <span>Person:</span> <br />
@@ -244,7 +244,7 @@ const ReportInvoice = () => {
                                                                 <td className="tm_width_2">{getInvoice.room_type}</td>
                                                                 <td className="tm_width_2"> {getInvoice.room_name}</td>
                                                                 <td className="tm_width_2"> {getInvoice.room_price}</td>
-                                                                <td className="tm_width_2"> {getInvoice.duration}</td>
+                                                                <td className="tm_width_2"> {getInvoice.duration == 0 ? 1 : getInvoice.duration}</td>
                                                                 <td className="tm_width_2 tm_text_right"> {getInvoice.total_price}</td>
                                                                 {/*   <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td> */}
                                                                 {/* <td className="tm_width_2 tm_text_right">

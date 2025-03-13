@@ -171,6 +171,8 @@ const Invoice = () => {
         // });
     };
 
+    console.log(getDay)
+
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -179,7 +181,7 @@ const Invoice = () => {
                         <div className="tm_invoice_btns tm_hide_print">
 
                             <button onClick={handleDownloadPDF} className="tm_invoice_btn invoiceprintbtn tm_color1">
-                               {/*  <span className="tm_btn_icon">
+                                {/*  <span className="tm_btn_icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32" /><circle cx="392" cy="184" r="24" fill='currentColor' /></svg>
                                 </span> */}
                                 <span className="btn btn-primary">Checkout Here</span>
@@ -240,7 +242,7 @@ const Invoice = () => {
                                                     </div>
                                                     <div>
                                                         <span>Total Day:</span> <br />
-                                                        <b className="tm_primary_color">{getDay.days_difference}</b>
+                                                        <b className="tm_primary_color">{getDay.days_difference === 0 ? 1 : getDay.days_difference}</b>
                                                     </div>
                                                     <div>
                                                         <span>Person:</span> <br />
@@ -282,10 +284,10 @@ const Invoice = () => {
                                                                         value={nightPrice}
                                                                         type="number" onChange={(e) => setNightPrice(e.target.value)} />
                                                                 </td>
-                                                                <td className="tm_width_2"> {getDay.days_difference}</td>
+                                                                <td className="tm_width_2"> {getDay.days_difference === 0 ? 1 : getDay.days_difference}</td>
                                                                 <td className="tm_width_2 tm_text_right">
                                                                 </td>
-                                                                <td id='roomPriceUpdate' className="tm_width_2 tm_text_right"> ৳ {nightPrice * getDay.days_difference}</td>
+                                                                <td id='roomPriceUpdate' className="tm_width_2 tm_text_right"> ৳ {(nightPrice) * (getDay.days_difference === 0 ? 1 : getDay.days_difference)}</td>
                                                             </tr>
                                                             <tr id='resturant-cost'>
                                                                 <td className="tm_width_3">Restaurant Cost (৳)</td>
@@ -339,7 +341,7 @@ const Invoice = () => {
                                                                     {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
-                                                                        (Number(nightPrice * getDay.days_difference) || 0)
+                                                                        (Number((nightPrice) * (getDay.days_difference === 0 ? 1 : getDay.days_difference)) || 0)
                                                                     )}
                                                                 </td>
                                                             </tr>
@@ -361,7 +363,7 @@ const Invoice = () => {
                                                                     {(
                                                                         (Number(food) || 0) +
                                                                         (Number(otheres) || 0) +
-                                                                        (Number(nightPrice * getDay.days_difference) || 0) -
+                                                                        (Number((nightPrice) * (getDay.days_difference === 0 ? 1 : getDay.days_difference)) || 0) -
                                                                         (Number(discount) || 0) -
                                                                         (Number(getInvoice?.advance) || 0)
                                                                     )}
