@@ -284,17 +284,7 @@ const Invoice = () => {
                                                                         value={nightPrice}
                                                                         type="number" onChange={(e) => setNightPrice(e.target.value)} />
                                                                 </td>
-<<<<<<< HEAD
-                                                                <td className="tm_width_2"> {getDay.days_difference}</td>
-                                                                {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {(parseInt(
-                                                                    getInvoice.person == 1
-                                                                        ? getDay.room?.price - 500
-                                                                        : getDay.room?.price + (getInvoice.person - 1) * 1000
-                                                                )) * getDay.days_difference}</td>
-=======
                                                                 <td className="tm_width_2"> {getDay.days_difference === 0 ? 1 : getDay.days_difference}</td>
->>>>>>> 12743aaf4ad4f70670fa85361c85ecd7c2291487
                                                                 <td className="tm_width_2 tm_text_right">
                                                                 </td>
                                                                 <td id='roomPriceUpdate' className="tm_width_2 tm_text_right"> ৳ {(nightPrice) * (getDay.days_difference === 0 ? 1 : getDay.days_difference)}</td>

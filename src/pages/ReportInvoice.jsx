@@ -83,17 +83,17 @@ const ReportInvoice = () => {
         let totalAmount = document.getElementById('subTotal').innerText;
 
         // check discount and food bill is emty not showing in my pdf file
-        if (document.getElementById('resturant-cost') && food == 0) {
-            document.getElementById('resturant-cost').style.display = 'none';
+        if (getInvoice.resturent_cost == 0) {
+            document.getElementById('resturant-cost-section').style.display = 'none';
         }
-        if (document.getElementById('other-cost') && otheres == 0) {
-            document.getElementById('other-cost').style.display = 'none';
+        if (getInvoice.other_cost == 0) {
+            document.getElementById('other-cost-section').style.display = 'none';
         }
-        if (document.getElementById('discount-cost') && discount == 0) {
-            document.getElementById('discount-cost').style.display = 'none';
+        if (getInvoice.discount == 0) {
+            document.getElementById('discount-cost-section').style.display = 'none';
         }
-        if (document.getElementById('advanced-cost') && advance == 0) {
-            document.getElementById('advanced-cost').style.display = 'none';
+        if (getInvoice.advance == 0 || getInvoice.advance == null) {
+            document.getElementById('advanced-cost-section').style.display = 'none';
         }
 
 
@@ -111,7 +111,7 @@ const ReportInvoice = () => {
             input.parentNode.replaceChild(span, input);
         });
 
-        html2canvas(element, { scale: 1 }).then((canvas) => {
+        html2canvas(element, { scale: 0.8 }).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
             // const pdf = new jsPDF("p", "mm", "a4");
             const pdf = new jsPDF({
@@ -246,50 +246,50 @@ const ReportInvoice = () => {
                                                                 <td className="tm_width_2"> {getInvoice.room_price}</td>
                                                                 <td className="tm_width_2"> {getInvoice.duration == 0 ? 1 : getInvoice.duration}</td>
                                                                 <td className="tm_width_2 tm_text_right"> {getInvoice.total_price}</td>
-                                                                {/*   <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.room_price * (parseInt(getInvoice.duration))}</td> */}
-                                                                {/* <td className="tm_width_2 tm_text_right">
-                                                                    {getInvoice.final_amount}
-
-                                                                </td> */}
                                                             </tr>
-                                                            <tr id='resturant-cost'>
+                                                            <tr id='resturant-cost-section'>
                                                                 <td className="tm_width_3">Restaurant Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_4" contentEditable="true"></td>
                                                                 <td className="tm_width_2" contentEditable="true"></td>
                                                                 {/* <td className="tm_width_2" contentEditable="true"></td> */}
-                                                                <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    {getInvoice.resturent_cost}
+                                                                <td id='resturant-cost' className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input disabled className='custom-input-data custom-input-width' value={getInvoice.resturent_cost} type="number" onChange={(e) => setFood(e.target.value)} />
                                                                 </td>
                                                             </tr>
-                                                            <tr id='other-cost'>
+                                                            <tr id='other-cost-section'>
                                                                 <td className="tm_width_2">Others Cost (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 {/* <td className="tm_width_2" contentEditable="true"> </td> */}
-                                                                <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    {getInvoice.other_cost}
+                                                                <td id='other-cost' className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input disabled className='custom-input-data custom-input-width' value={getInvoice.other_cost} type="number" onChange={(e) => setOthers(e.target.value)} />
                                                                 </td>
                                                             </tr>
-                                                            <tr id='discount-cost'>
+                                                            <tr id='discount-cost-section'>
                                                                 <td className="tm_width_2">Discount (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 {/* <td className="tm_width_2" contentEditable="true"> </td> */}
-                                                                <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    {getInvoice.discount}
+                                                                <td id='discount-cost' className="tm_width_2 tm_text_right inv-inp">
+                                                                    <input disabled className='custom-input-data custom-input-width'
+                                                                        value={getInvoice.discount} type="number"
+                                                                        onChange={(e) => setDiscount(e.target.value)} />
                                                                 </td>
                                                             </tr>
-                                                            <tr id='advanced-cost'>
+                                                            <tr id='advanced-cost-section'>
                                                                 <td className="tm_width_2">A.Payment (৳)</td>
                                                                 <td contentEditable="true" className="tm_width_2"> </td>
                                                                 <td className="tm_width_4" contentEditable="true"> </td>
                                                                 <td className="tm_width_2" contentEditable="true"> </td>
                                                                 {/* <td className="tm_width_2" contentEditable="true"> </td> */}
-                                                                <td className="tm_width_2 tm_text_right inv-inp">
-                                                                    {getInvoice.advance ? getInvoice.advance : 0}
+                                                                <td id='advanced-cost' className="tm_width_2 tm_text_right inv-inp">
+                                                                    {/*                                                                     {getInvoice.advance ? getInvoice.advance : 0} */}
+                                                                    <input disabled className='custom-input-data custom-input-width'
+                                                                        value={getInvoice.advance ? getInvoice.advance : 0} type="number"
+                                                                        onChange={(e) => setAdvance(e.target.value)} />
                                                                 </td>
                                                             </tr>
 
