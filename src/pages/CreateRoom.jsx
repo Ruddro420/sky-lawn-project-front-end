@@ -19,43 +19,43 @@ const CreateRoom = () => {
     const fetchCategories = () => {
         setLoading(true);
         axios
-          .get(`${BASE_URL}/room-category`)
-          .then((response) => {
-            setCategory(response.data || []); // Handle null response
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error("Error fetching categories:", error);
-            setLoading(false);
-          });
-      };
-      
-      const fetchRoom = () => {
+            .get(`${BASE_URL}/room-category`)
+            .then((response) => {
+                setCategory(response.data || []); // Handle null response
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching categories:", error);
+                setLoading(false);
+            });
+    };
+
+    const fetchRoom = () => {
         setLoading(true);
         axios
-          .get(`${BASE_URL}/room/data`)
-          .then((response) => {
-            setRoom(response.data || []); // Handle null response
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error("Error fetching rooms:", error);
-            setLoading(false);
-          });
-      };
-      
-      useEffect(() => {
+            .get(`${BASE_URL}/room/data`)
+            .then((response) => {
+                setRoom(response.data || []); // Handle null response
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching rooms:", error);
+                setLoading(false);
+            });
+    };
+
+    useEffect(() => {
         fetchCategories();
         fetchRoom();
-       
-      }, []);
-      
 
-      
+    }, []);
+
+
+
     // get form data
     const onSubmit = (data) => {
         console.log(data);
-        
+
         axios
             .post(`${BASE_URL}/room/add`, {
                 room_number: data.room_number,
@@ -119,43 +119,43 @@ const CreateRoom = () => {
     }
 
     // get update room 
-   /*  const updateRoom = (id) => {
-        const data = room.find(item => item.id == id)
-        setGetUpdateRoom(data);
-        setValue("room_name", data.room_name);
-        setValue("room_number", data.room_number);
-        setValue("price", data.price);
-        setValue("feature", data.feature);
-        setValue("room_category_id", data.room_category_id);
-    } */
+    /*  const updateRoom = (id) => {
+         const data = room.find(item => item.id == id)
+         setGetUpdateRoom(data);
+         setValue("room_name", data.room_name);
+         setValue("room_number", data.room_number);
+         setValue("price", data.price);
+         setValue("feature", data.feature);
+         setValue("room_category_id", data.room_category_id);
+     } */
     // update room 
-   /*  const onUpdateSubmit = (data) => {
-        console.log(data);
-        
-        // Create FormData object for file uploads
-        const formData = new FormData();
-
-        // Append all fields to FormData
-        formData.append("id", getUpdateRoom.id);
-        formData.append("room_name", data.rname);
-        formData.append("room_number", data.rnumber);
-        formData.append("price", data.rprice);
-        formData.append("feature", data.rfeature);
-        formData.append("room_category_id", data.rcategory);
-        // call api
-        axios
-            .post(`${BASE_URL}/room/update`, formData)
-            .then(() => {
-                toast.success("Update successfully!");
-                //setGetCategory("");
-                fetchCategories(); // Refresh the category list
-                fetchRoom();
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error("Something Went Wrong!");
-            });
-    } */
+    /*  const onUpdateSubmit = (data) => {
+         console.log(data);
+         
+         // Create FormData object for file uploads
+         const formData = new FormData();
+ 
+         // Append all fields to FormData
+         formData.append("id", getUpdateRoom.id);
+         formData.append("room_name", data.rname);
+         formData.append("room_number", data.rnumber);
+         formData.append("price", data.rprice);
+         formData.append("feature", data.rfeature);
+         formData.append("room_category_id", data.rcategory);
+         // call api
+         axios
+             .post(`${BASE_URL}/room/update`, formData)
+             .then(() => {
+                 toast.success("Update successfully!");
+                 //setGetCategory("");
+                 fetchCategories(); // Refresh the category list
+                 fetchRoom();
+             })
+             .catch((error) => {
+                 console.log(error);
+                 toast.error("Something Went Wrong!");
+             });
+     } */
 
 
 
@@ -264,7 +264,7 @@ const CreateRoom = () => {
                         </div>
 
                         {/* Room Table  */}
-                         <div className="col-12">
+                        <div className="col-12">
                             <div className="card mb-4">
                                 <div className="card-body">
                                     <div className="col-12">
@@ -276,11 +276,11 @@ const CreateRoom = () => {
                                                 {loading ? (
                                                     <p>Loading...</p>
                                                 ) : (
-                                                    <div className="table-responsive text-nowrap">
+                                                    <div className="table-responsive text-nowrap w-100">
                                                         {
                                                             category?.length == 0 ? <div className="alert alert-warning" role="alert">
                                                                 No Data Found
-                                                            </div> : <table className="table order-4 border">
+                                                            </div> : <table className="table order-4 border w-100 table-sm">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>SL</th>
@@ -297,7 +297,7 @@ const CreateRoom = () => {
                                                                 <tbody className="table-border-bottom-0">
                                                                     {room?.map((item, index) => (
                                                                         <tr key={index}>
-                                                                            <td>{index+1} </td>
+                                                                            <td>{index + 1} </td>
                                                                             <td>{item?.room_number} </td>
                                                                             <td>{item?.room_name} </td>
                                                                             <td>{item?.category.name} </td>
@@ -305,9 +305,9 @@ const CreateRoom = () => {
                                                                             <td>{item?.feature} </td>
                                                                             <td>{item?.status} </td>
                                                                             <td>
-                                                                                <button onClick={() => { editRoom(item?.id) }} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-                                                                                <button onClick={() => { deleteRoom(item?.id) }} className="btn btn-danger ms-2">Delete</button>
-                                                                               
+                                                                                <button onClick={() => { editRoom(item?.id) }} type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                                                                                <button onClick={() => { deleteRoom(item?.id) }} className="btn btn-sm btn-danger ms-2">Delete</button>
+
                                                                             </td>
                                                                         </tr>
                                                                     ))}

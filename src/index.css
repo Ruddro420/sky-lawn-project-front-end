@@ -12,9 +12,36 @@
     /* margin-right: 100px; */
   
 }
+/* Invoice Working */
 
-
-  
+.tm_table_responsive {
+  overflow-x: auto;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #5D93E3;
+  border-radius: 4px;
+}
+.tm_gray_bg {
+  background: #f5f6fa;
+  padding: 15px !important;
+  border-radius: 10px;
+  margin-top: 7px;
+}
+.tm_invoice_footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 0px solid white !important;
+}
+thead, tbody, tfoot, tr, td, th {
+  border-width: 0;
+  color: black;
+}
+.tm_invoice_footer .tm_right_footer {
+  width: 50%;
+  padding: 0px;
+  margin-top: 10px;
+}
+/* Invoice Working */
 
 /* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -442,7 +442,16 @@ th {
 }
 
 td {
-  border-top: 1px solid #dbdfea;
+  border-top: 1px solid #5990e2;
+}
+.costom_border_clr{
+  border-top: 1px solid #5990e2 !important; 
+  border-right: 1px solid #5990e2 !important;
+  border-left: 1px solid #5990e2 !important;
+}
+
+.costom_border_bottom{
+  border-bottom: 1px solid #5990e2 !important ;
 }
 
 td {
@@ -574,6 +583,11 @@ ul {
 
 .tm_f30 {
   font-size: 30px;
+}
+
+
+.tm_f35{
+  font-size: 33px;
 }
 
 .tm_f40 {
@@ -825,9 +839,24 @@ ul {
 }
 
 .tm_round_border {
-  border: 1px solid #dbdfea;
+  border: 1px solid #5990e2;
+ 
   overflow: hidden;
   border-radius: 6px;
+}
+
+.costom_bt{
+  border-left: 1px solid #5990e2 !important;
+  border-right: 1px solid #5990e2 !important;
+  border-top: 1px solid #5990e2 !important;
+  border-radius: 6px !important;
+}
+
+.costom_br{
+  border-left: 1px solid #5990e2 !important;
+  border-right: 1px solid #5990e2 !important;
+  border-bottom: 1px solid #5990e2 !important;
+  border-radius: 6px !important;
 }
 
 .tm_accent_color,
@@ -946,7 +975,7 @@ ul {
 }
 
 .tm_border_color {
-  border-color: #dbdfea;
+  border-color: #6e86c7;
 }
 
 .tm_border_1 {
@@ -1087,6 +1116,7 @@ hr {
   background: #fff;
   border-radius: 10px;
   padding: 50px;
+  margin-right: 20px;
 }
 
 .tm_invoice_footer {
@@ -1110,7 +1140,7 @@ hr {
 .flexdisplay{
   display: flex;
   padding: 10px;
-  padding-top: 25px;
+  padding-top: 1px;
   margin-left: 80px;
   margin-right: 100px;
 
@@ -1859,7 +1889,8 @@ hr {
   }
   .tm_invoice_btn .tm_btn_text {
     position: absolute;
-    left: 100%;
+    /* left: 100%; */
+    right: 100%;
     background-color: #111;
     color: #fff;
     padding: 3px 12px;
@@ -1888,7 +1919,7 @@ hr {
     background-color: #111;
     -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
-    left: -3px;
+    right: -3px;
     top: 50%;
     margin-top: -6px;
     border-radius: 2px;
@@ -2057,6 +2088,8 @@ hr {
   .tm_invoice.tm_style2 .tm_invoice_head .tm_text_right {
     text-align: left;
   }
+
+  .
   .tm_invoice.tm_style2 .tm_invoice_info {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -2667,4 +2700,24 @@ hr {
 
 .font_size{
   font-size: 20px;
+}
+/* 
+.custom-input-width{
+  width: 100px;
+} */
+
+.invoice-bottom-border{
+  margin-bottom: 0px;
+  border-bottom: none;
+  border-radius: 4px;
+}
+
+.bgpayment{
+  background-color: rgb(217,245,255);
+  color: #111;
+}
+
+.mtsigna{
+  padding: 0px !important;
+  margin: 0px !important;
 }

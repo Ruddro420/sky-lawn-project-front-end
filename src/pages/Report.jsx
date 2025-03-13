@@ -176,7 +176,7 @@ const Report = () => {
                                                 <td>{item.room_type}</td>
                                                 <td>{item.room_price}</td>
                                                 <td>{item.final_amount}</td>
-                                                <td> <button onClick={() => handleDownload(item.id)} className="btn btn-primary">downloadPDF</button> </td>
+                                                <td> <button onClick={() => handleDownload(item.invoice)} className="btn btn-primary">downloadPDF</button> </td>
                                             </tr>
                                         )
                                     })

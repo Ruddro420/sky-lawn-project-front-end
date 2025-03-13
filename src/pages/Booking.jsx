@@ -19,20 +19,22 @@ const Booking = () => {
     const { register, handleSubmit, setValue } = useForm();
     const navigate = useNavigate()
     //const [data,setData] = useState()
-    const { data } = useParams();
+    const { dataId } = useParams();
+
+
     // fetch data
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-     // Function to format date as YYYY-MM-DD
-     const formatDateTime = (dateTimeString) => {
+    // Function to format date as YYYY-MM-DD
+    const formatDateTime = (dateTimeString) => {
         console.log("Input dateTimeString:", dateTimeString); // Debugging line
-    
+
         // Fallback for invalid or missing input
         if (!dateTimeString || typeof dateTimeString !== "string") {
             console.error("Invalid dateTimeString:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         // Ensure the input is in the correct format
         let isoString;
         if (dateTimeString.includes("T")) {
@@ -42,22 +44,22 @@ const Booking = () => {
             // If the input is in "YYYY-MM-DD HH:mm:ss" format
             isoString = dateTimeString.replace(" ", "T") + "Z";
         }
-    
+
         const date = new Date(isoString);
         console.log("Parsed Date object:", date); // Debugging line
-    
+
         if (isNaN(date.getTime())) {
             console.error("Invalid Date object created from:", dateTimeString);
             return "Invalid Date";
         }
-    
+
         const year = date.getUTCFullYear();
         const month = String(date.getUTCMonth() + 1).padStart(2, "0");
         const day = String(date.getUTCDate()).padStart(2, "0");
         const hours = String(date.getUTCHours()).padStart(2, "0");
         const minutes = String(date.getUTCMinutes()).padStart(2, "0");
         const seconds = String(date.getUTCSeconds()).padStart(2, "0");
-    
+
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; // Format as "DD-MM-YYYY HH:mm:ss"
         //`${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;; // Format as "DD-MM-YYYY HH:mm:ss"
     };
@@ -66,7 +68,7 @@ const Booking = () => {
     // Fetch preBooking data from API
     const fetchRoom = () => {
         axios
-            .get(`${BASE_URL}/prebook-data/show/${data}`)
+            .get(`${BASE_URL}/prebook-data/show/${dataId}`)
             .then((response) => {
                 setPreBook(response.data);
                 // Set form values dynamically
@@ -83,7 +85,7 @@ const Booking = () => {
                 setValue("total_price", response.data.room_price);
                 setValue("booking_by", response.data.booking_by);
                 setValue("date_time", formatDateTime(response.data.date_time));
-                
+
             })
             .catch((error) => {
                 console.log(error);
@@ -93,7 +95,7 @@ const Booking = () => {
     // Fetch room data on component mount
     useEffect(() => {
         fetchRoom();
-    }, [data]);
+    }, [dataId]);
 
 
     // file handel nid
@@ -142,6 +144,7 @@ const Booking = () => {
         formData.append("payment_status", data.payment_status);
         formData.append("payment_method", data.payment_method);
         formData.append("booking_by", data.booking_by);
+        formData.append('prebooking_id', dataId);
 
         // Axios POST request with FormData
         axios
@@ -159,7 +162,7 @@ const Booking = () => {
             })
             .catch((error) => {
                 console.error("Error:", error.response?.data || error.message);
-                toast.error("Already booking this date!");
+                toast.error("The file size should be less than 15 MB!");
             });
     };
 
@@ -443,10 +446,10 @@ const Booking = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
                                                         Check Out Date & Time
-                                                        {/* <span className="text-danger">*</span> */}
+                                                        <span className="text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        {...register("checkout_date_time", { required: false })}
+                                                        {...register("checkout_date_time", { required: true })}
                                                         name="checkout_date_time"
                                                         type="datetime-local"
                                                         className="form-control"
@@ -519,14 +522,14 @@ const Booking = () => {
                                                     >
                                                         <option value="">Select Payment Status</option>
                                                         <option value="Paid">Paid</option>
-                                                        <option value="Pending">Pending</option>
+                                                        <option value="Due">Due</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Payment Status
+                                                        Payment Method
                                                         {/* <span className="text-danger">*</span> */}
                                                     </label>
                                                     <select
@@ -582,7 +585,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        NID Doc
+                                                        NID Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         type="file"
@@ -596,7 +599,7 @@ const Booking = () => {
                                             <div className="col-lg-6 mt-3">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Couple Doc
+                                                        Couple Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("couple_doc", { required: false })}
@@ -613,7 +616,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Visa Doc
+                                                        Visa Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("visa_doc", { required: false })}
@@ -630,7 +633,7 @@ const Booking = () => {
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" htmlFor="basic-default-fullname">
-                                                        Others Doc
+                                                        Others Doc <span className="text-danger"> (* The file size should be less than 15 MB *)</span>
                                                     </label>
                                                     <input
                                                         {...register("other_doc", { required: false })}

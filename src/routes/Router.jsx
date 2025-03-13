@@ -21,6 +21,7 @@ import BookingDetails from "../pages/BookingDetails";
 import MainBookingDetails from "../pages/MainBookingDetails";
 import Invoice from "../pages/Invoice";
 import ReportInvoice from "../pages/ReportInvoice";
+import EditBookingDetails from "../pages/EditBookingDetails";
 
 const Router = createBrowserRouter([
     {
@@ -78,7 +79,7 @@ const Router = createBrowserRouter([
                 element: <PreBookingDetails />
             },
             {
-                path: '/booking/:data',
+                path: '/booking/:dataId',
                 element: <Booking />
             },
             {
@@ -88,6 +89,10 @@ const Router = createBrowserRouter([
             {
                 path: '/bookingDetails/:id',
                 element: <BookingDetails />
+            },
+            {
+                path: '/editBookingDetails/:id',
+                element: <EditBookingDetails />
             },
             {
                 path: '/invoice/:id',
