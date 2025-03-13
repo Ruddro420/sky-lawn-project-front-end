@@ -36,7 +36,10 @@ const MainContent = () => {
       });
   };
 
-  //console.log(weeklyData);
+  // console.log(weeklyData);
+  console.log(monthlyData);
+
+  console.log(room);
 
   // get preBookdata details
   const fetchRoom = () => {
@@ -74,6 +77,7 @@ const MainContent = () => {
     Promise.all([fetchRoom(), bookingData(), fetchMonthlyData(), fetchWeeklyData()])
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
+    
   }, []);
 
  

@@ -281,7 +281,11 @@ const Invoice = () => {
                                                                 </td>
                                                                 <td className="tm_width_2"> {getDay.days_difference}</td>
                                                                 {/* <td className="tm_width_2 tm_text_right"> ৳ {getInvoice.total_price}</td> */}
-                                                                <td className="tm_width_2 tm_text_right"> ৳ {getDay.room?.price * getDay.days_difference}</td>
+                                                                <td className="tm_width_2 tm_text_right"> ৳ {(parseInt(
+                                                                    getInvoice.person == 1
+                                                                        ? getDay.room?.price - 500
+                                                                        : getDay.room?.price + (getInvoice.person - 1) * 1000
+                                                                )) * getDay.days_difference}</td>
                                                                 <td className="tm_width_2 tm_text_right">
                                                                     <input className='custom-input-data custom-input-width' value={totalPrice} type="number" onChange={(e) => setTotalPrice(e.target.value)} />
                                                                 </td>
