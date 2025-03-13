@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const { register, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
-     // fetch data
-     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const [showPassword, setShowPassword] = useState(false);
+    // fetch data
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const onSubmit = (data) => {
-        
+
 
         axios
             .post(`${BASE_URL}/user/check`, {
@@ -18,7 +20,7 @@ const Login = () => {
                 password: data.password,
             })
             .then((response) => {
-                
+
                 if (response.data.status === "success") {
                     localStorage.setItem("isLoggedIn", "true");
                     localStorage.setItem("userData", JSON.stringify(response.data.data));
@@ -35,6 +37,8 @@ const Login = () => {
                 toast.error("Something Went Wrong");
             });
     };
+
+
 
     return (
         <div className="container-xxl">
@@ -72,15 +76,18 @@ const Login = () => {
                                 <div className="input-group input-group-merge">
                                     <input
                                         {...register("password", { required: true })}
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         className="form-control"
                                         name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        placeholder="password"
                                         aria-describedby="password"
                                         required
                                     />
-                                    <span className="input-group-text cursor-pointer">
-                                        <i className="bx bx-hide"></i>
+                                    <span
+                                        className="input-group-text cursor-pointer"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        <i className={showPassword ? "bx bx-show" : "bx bx-hide"}></i>
                                     </span>
                                 </div>
                             </div>
